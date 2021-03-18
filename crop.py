@@ -59,7 +59,7 @@ for S1 in os.listdir('/home/heido/NDVI_data/big_input_S1_images/'):
   S1='/home/heido/NDVI_data/big_input_S1_images/'+S1
   S1_img=Image.open(S1)
   S1_cropped=first_crop(S1_img)
-  S1_cropped.save('cropped_examples/'+S1)
+  S1_cropped.save('/home/heido/NDVI_data/cropped_examples/'+S1)
   
 '''
 
