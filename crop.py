@@ -4,13 +4,15 @@ from PIL import Image
 
 #im_crop = im.crop((left, upper, right, lower))
 
+Image.MAX_IMAGE_PIXELS = None
+
 def crop_up(img):
   img_o=img
   img=img.load()
   pixels_to_be_cropped=[]
-  for i in range(img.width):
+  for i in range(img_o.width):
     greatest_from_column=0
-    for j in range(img.height):
+    for j in range(img_o.height):
       if(img[j][i][3]==0):
         greatest_from_column=j
     pixels_to_be_cropped.append(greatest_from_column)
@@ -21,9 +23,9 @@ def crop_bottom(img):
   img_o=img
   img=img.load()
   pixels_to_be_cropped=[]
-  for i in range(img.width):
+  for i in range(img_o.width):
     greatest_from_column=0
-    for j in range(img.height):
+    for j in range(img_o.height):
       if(img[img.height-j][i][3]==0):
         greatest_from_column=j
     pixels_to_be_cropped.append(greatest_from_column)
@@ -34,9 +36,9 @@ def crop_left(img):
   img_o=img
   img=img.load()
   pixels_to_be_cropped=[]
-  for i in range(img.height):
+  for i in range(img_o.height):
     greatest_from_row=0
-    for j in range(img.width):
+    for j in range(img_o.width):
       if(img[i][j][3]==0):
         greatest_from_row=j
     pixels_to_be_cropped.append(greatest_from_row)
@@ -47,9 +49,9 @@ def crop_right(img):
   img_o=img
   img=img.load()
   pixels_to_be_cropped=[]
-  for i in range(img.height):
+  for i in range(img_o.height):
     greatest_from_row=0
-    for j in range(img.width):
+    for j in range(img_o.width):
       if(img[i][img.width-j][3]==0):
         greatest_from_row=j
     pixels_to_be_cropped.append(greatest_from_row)
