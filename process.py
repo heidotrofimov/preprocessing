@@ -91,17 +91,17 @@ for S2_SAFE in os.listdir('s2_zip'):
     print('s2_zip/'+S2_SAFE+'/GRANULE/output.dim')
 
     print("Bands:       %s" % (list(band_names)))
-    red = S2_product.getBand('B04')
-    green = S2_product.getBand('B03')
-    blue = S2_product.getBand('B02')
+    red = S2_product.getBand('B4')
+    green = S2_product.getBand('B3')
+    blue = S2_product.getBand('B2')
     write_rgb_image([red, green, blue], date+'.png', 'png')
     shutil.move(date+'.png','/home/heido/projects/NDVI_data/S2_RGB')
     
     width = S2_product.getSceneRasterWidth()
     height = S2_product.getSceneRasterHeight()
     
-    b4 = product.getBand('B04')
-    b8 = product.getBand('B08')
+    b4 = S2_product.getBand('B4')
+    b8 = S2_product.getBand('B8')
     
     newProduct = Product('NDVI', 'NDVI', width, height)
     newBand = newProduct.addBand('ndvi', ProductData.TYPE_FLOAT32)
