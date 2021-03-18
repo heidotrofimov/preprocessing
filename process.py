@@ -45,7 +45,7 @@ newProduct.writeHeader('VHVV.dim')
 rVH = np.zeros(width, dtype=np.float32)
 rVV = np.zeros(width, dtype=np.float32)
 
-for y in range(height2):
+for y in range(height):
     print("processing line ", y, " of ", height)
     rVH = VH.readPixels(0, y, width, 1, rVH)
     rVV = VV.readPixels(0, y, width, 1, rVH)
@@ -58,7 +58,6 @@ newProduct.closeIO()
 ###
 
 product2 = ProductIO.readProduct('VHVV.dim')
-VHVV= product2.getBand('vhvv')
 
 def write_rgb_image(bands, filename, format):
     image_info = ProductUtils.createImageInfo(bands, True, ProgressMonitor.NULL)
@@ -67,6 +66,6 @@ def write_rgb_image(bands, filename, format):
 
 red = product.getBand('Amplitude_VH_S')
 green = product.getBand('Amplitude_VV_S')
-blue = product2.getBand('ndvi')
+blue = product2.getBand('vhvv')
 write_rgb_image([red, green, blue], 'RGB.png', 'png')
 
