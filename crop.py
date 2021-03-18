@@ -13,7 +13,7 @@ def crop_up(img):
   for i in range(img_o.width):
     greatest_from_column=0
     for j in range(img_o.height):
-      if(img[j,i][3]==0):
+      if(img[i,j][3]==0):
         greatest_from_column=j
     pixels_to_be_cropped.append(greatest_from_column)
   cropped_img=img_o.crop((0,min(pixels_to_be_cropped),0,0))
@@ -68,6 +68,7 @@ def first_crop(img):
   return img
   
 for S1 in os.listdir('/home/heido/NDVI_data/big_input_S1_images/'):
+  print(S1)
   S1='/home/heido/NDVI_data/big_input_S1_images/'+S1
   S1_img=Image.open(S1)
   S1_cropped=first_crop(S1_img)
