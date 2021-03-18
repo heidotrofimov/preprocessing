@@ -28,31 +28,11 @@ height = product.getSceneRasterHeight()
 VH = product.getBand('Amplitude_VH_S')
 VV = product.getBand('Amplitude_VV_S')
 
-#Get new band, Vh+VV
-GPF.getDefaultInstance().getOperatorSpiRegistry().loadOperatorSpis()
-BandDescriptor = jpy.get_type('org.esa.snap.core.gpf.common.BandMathsOp$BandDescriptor')
-
-targetBand1 = BandDescriptor()
-targetBand1.name = 'VHVV'
-targetBand1.type = 'float32'
-targetBand1.expression = '(Amplitude_VH_S + Amplitude_VV_S)'
-
-targetBands = jpy.array('org.esa.snap.core.gpf.common.BandMathsOp$BandDescriptor', 2)
-targetBands[0] = targetBand1
-
-parameters = HashMap()
-parameters.put('targetBands', targetBands)
-
-result = GPF.createProduct('BandMaths', parameters, product)
-
-print("Writing new product")
-
-ProductIO.writeProduct(result, 'snappy_bmaths_output.dim', 'BEAM-DIMAP')
+product2 = ProductIO.readProduct('VHVV.dim')
+VHVV= product2.getBand('ndvi')
 
 
-#New band done
 
-'''
 def write_rgb_image(bands, filename, format):
     image_info = ProductUtils.createImageInfo(bands, True, ProgressMonitor.NULL)
     im = ImageManager.getInstance().createColoredBandImage(bands, image_info, 0)
@@ -60,6 +40,6 @@ def write_rgb_image(bands, filename, format):
 
 red = product.getBand('Amplitude_VH_S')
 green = product.getBand('Amplitude_VV_S')
-blue = product.getBand('VHVVBand')
+blue = product2.getBand('ndvi')
 write_rgb_image([red, green, blue], 'gamma_export', 'png')
-'''
+
