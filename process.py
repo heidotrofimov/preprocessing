@@ -87,8 +87,8 @@ for S2_SAFE in os.listdir('s2_zip'):
     print(S2_SAFE)
     date=S2_SAFE.split("_")[2].split("T")[0]
     S2_product=ProductIO.readProduct('s2_zip/'+S2_SAFE+'/GRANULE/output.dim')
-    band_names = product.getBandNames()
-
+    band_names = S2_product.getBandNames()
+    print('s2_zip/'+S2_SAFE+'/GRANULE/output.dim')
 
     print("Bands:       %s" % (list(band_names)))
     red = S2_product.getBand('B04')
