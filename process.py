@@ -16,7 +16,7 @@ jpy = snappy.jpy
 ImageManager = jpy.get_type('org.esa.snap.core.image.ImageManager')
 JAI = jpy.get_type('javax.media.jai.JAI')
 
-product = ProductIO.readProduct('collocated/S1B_IW_GRDH_1SDV_20200504T160332_20200504T160357_021434_028B14_D650.dim')
+product = ProductIO.readProduct('/home/heido/projects/heido_test/collocated/S1B_IW_GRDH_1SDV_20200504T160332_20200504T160357_021434_028B14_D650.dim')
 
 width = product.getSceneRasterWidth()
 height = product.getSceneRasterHeight()
