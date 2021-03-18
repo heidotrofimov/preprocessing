@@ -28,10 +28,37 @@ height = product.getSceneRasterHeight()
 VH = product.getBand('Amplitude_VH_S')
 VV = product.getBand('Amplitude_VV_S')
 
+###
+name = product.getName()
+description = product.getDescription()
+band_names = product.getBandNames()
+
+newProduct = Product('VHVV', 'VHVV', width, height)
+newBand = newProduct.addBand('vhvv', ProductData.TYPE_FLOAT32)
+writer = ProductIO.getProductWriter('BEAM-DIMAP')
+
+ProductUtils.copyGeoCoding(product, newProduct)
+
+newProduct.setProductWriter(writer)
+newProduct.writeHeader('VHVV.dim')
+
+rVH = numpy.zeros(width, dtype=numpy.float32)
+rVV = numpy.zeros(width, dtype=numpy.float32)
+
+for y in range(height2):
+    print("processing line ", y, " of ", height)
+    rVH = VH.readPixels(0, y, width, 1, rVH)
+    rVV = VV.readPixels(0, y, width, 1, rVH)
+
+    VHVV = (rVH + rVV)
+    newBand.writePixels(0, y, width, 1, VHVV)
+
+newProduct.closeIO()
+
+###
+
 product2 = ProductIO.readProduct('VHVV.dim')
-VHVV= product2.getBand('ndvi')
-
-
+VHVV= product2.getBand('vhvv')
 
 def write_rgb_image(bands, filename, format):
     image_info = ProductUtils.createImageInfo(bands, True, ProgressMonitor.NULL)
@@ -41,5 +68,5 @@ def write_rgb_image(bands, filename, format):
 red = product.getBand('Amplitude_VH_S')
 green = product.getBand('Amplitude_VV_S')
 blue = product2.getBand('ndvi')
-write_rgb_image([red, green, blue], 'gamma_export', 'png')
+write_rgb_image([red, green, blue], 'RGB.png', 'png')
 
