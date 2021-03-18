@@ -34,7 +34,7 @@ BandDescriptor = jpy.get_type('org.esa.snap.core.gpf.common.BandMathsOp$BandDesc
 targetBand1 = BandDescriptor()
 targetBand1.name = 'VHVV'
 targetBand1.type = 'float32'
-targetBand1.expression = 'Amplitude_VH_S + Amplitude_VV_S'
+targetBand1.expression = '(Amplitude_VH_S + Amplitude_VV_S)'
 
 targetBands = jpy.array('org.esa.snap.core.gpf.common.BandMathsOp$BandDescriptor', 2)
 targetBands[0] = targetBand1
