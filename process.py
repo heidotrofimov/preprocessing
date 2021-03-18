@@ -30,7 +30,7 @@ def write_rgb_image(bands, filename, format):
 def write_image(band, filename, format):
     im = ImageManager.getInstance().createColoredBandImage([band], band.getImageInfo(), 0)
     JAI.create("filestore", im, filename, format)
-
+'''
 for product in os.listdir('/home/heido/projects/heido_test/collocated/'):
     if(".dim" in product):
         print(product)
@@ -82,8 +82,8 @@ for product in os.listdir('/home/heido/projects/heido_test/collocated/'):
         os.remove('VHVV.dim')
         shutil.rmtree('VHVV.data')
         shutil.move(date+'.png','/home/heido/projects/NDVI_data/S1')
-
-for S2_SAFE in os.listdir('s2'):
+'''
+for S2_SAFE in os.listdir('s2_zip'):
     print(S2_SAFE)
     date=S2_SAFE.split("_")[2].split("T")[0]
     S2_product=ProductIO.readProduct('s2/'+S2_SAFE+'/GRANULE/output.dim')
