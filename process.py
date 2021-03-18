@@ -61,7 +61,6 @@ for product in os.listdir('/home/heido/projects/heido_test/collocated/'):
         rVV = np.zeros(width, dtype=np.float32)
 
         for y in range(height):
-            print("processing line ", y, " of ", height)
             rVH = VH.readPixels(0, y, width, 1, rVH)
             rVV = VV.readPixels(0, y, width, 1, rVH)
 
