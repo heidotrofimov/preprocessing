@@ -86,7 +86,7 @@ for product in os.listdir('/home/heido/projects/heido_test/collocated/'):
 for S2_SAFE in os.listdir('s2_zip'):
     print(S2_SAFE)
     date=S2_SAFE.split("_")[2].split("T")[0]
-    S2_product=ProductIO.readProduct('s2/'+S2_SAFE+'/GRANULE/output.dim')
+    S2_product=ProductIO.readProduct('s2_zip/'+S2_SAFE+'/GRANULE/output.dim')
     red = S2_product.getBand('B04')
     green = S2_product.getBand('B03')
     blue = S2_product2.getBand('B02')
