@@ -17,6 +17,7 @@ def crop_up(img):
         greatest_from_column=j
     pixels_to_be_cropped.append(greatest_from_column)
   cropped_img=img_o.crop((0,min(pixels_to_be_cropped),0,0))
+  print(min(pixels_to_be_cropped))
   return cropped_img
 
 def crop_bottom(img):
