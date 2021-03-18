@@ -89,7 +89,7 @@ for S2_SAFE in os.listdir('s2_zip'):
     S2_product=ProductIO.readProduct('s2_zip/'+S2_SAFE+'/GRANULE/output.dim')
     red = S2_product.getBand('B04')
     green = S2_product.getBand('B03')
-    blue = S2_product2.getBand('B02')
+    blue = S2_product.getBand('B02')
     write_rgb_image([red, green, blue], date+'.png', 'png')
     shutil.move(date+'.png','/home/heido/projects/NDVI_data/S2_RGB')
     
