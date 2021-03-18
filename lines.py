@@ -2,7 +2,7 @@ import os
 import sys
 
 if(sys.argv[1]=="S2"):
-  f=open("lines_for_gpt.txt","w")
+  f=open("/home/heido/projects/heido_test/preprocessing/lines_for_gpt.txt","w")
   for S2_product in os.listdir('/home/heido/projects/heido_test/s2_zip'):
     for filename in os.listdir('/home/heido/projects/heido_test/s2_zip/'+S2_product+'/GRANULE/'):
       if("L2" in filename):
