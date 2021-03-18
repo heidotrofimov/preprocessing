@@ -1,4 +1,7 @@
 import sys
+sys.path.append('/home/heido/jpy/build/lib.linux-x86_64-3.6')
+sys.path.append('/home/heido/.snap/snap-python')
+import snappy
 
 import numpy
 from snappy import Product
@@ -28,8 +31,8 @@ print("End time:    " + str(product.getEndTime()))
 print("Bands:       %s" % (list(band_names)))
 
 
-b7 = product.getBand('radiance_7')
-b10 = product.getBand('radiance_10')
+b7 = product.getBand('Amplitude_VH_S')
+b10 = product.getBand('Amplitude_VV_S)
 ndviProduct = Product('NDVI', 'NDVI', width, height)
 ndviBand = ndviProduct.addBand('ndvi', ProductData.TYPE_FLOAT32)
 ndviFlagsBand = ndviProduct.addBand('ndvi_flags', ProductData.TYPE_UINT8)
