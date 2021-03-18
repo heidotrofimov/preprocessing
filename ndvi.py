@@ -50,7 +50,7 @@ group.add(ndviFlagCoding)
 ndviFlagsBand.setSampleCoding(ndviFlagCoding)
 
 ndviProduct.setProductWriter(writer)
-ndviProduct.writeHeader('snappy_ndvi_output.dim')
+ndviProduct.writeHeader('VHVV.dim')
 
 r7 = numpy.zeros(width, dtype=numpy.float32)
 r10 = numpy.zeros(width, dtype=numpy.float32)
@@ -62,7 +62,7 @@ for y in range(height):
     r7 = b7.readPixels(0, y, width, 1, r7)
     r10 = b10.readPixels(0, y, width, 1, r10)
 
-    ndvi = (r10 - r7) / (r10 + r7)
+    ndvi = (r10 + r7)
     ndviBand.writePixels(0, y, width, 1, ndvi)
     ndviLow = ndvi < 0.0
     ndviHigh = ndvi > 1.0
