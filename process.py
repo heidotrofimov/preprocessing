@@ -29,7 +29,7 @@ VV = product.getBand('Amplitude_VV_S')
 #Get new band, Vh+VV
 BandDescriptor = jpy.get_type('org.esa.snap.core.gpf.common.BandMathsOp$BandDescriptor')
 
-targetBand = BandDescriptor()
+targetBand1 = BandDescriptor()
 targetBand1.name = 'VHVV'
 targetBand1.type = 'float32'
 targetBand1.expression = 'Amplitude_VH_S + Amplitude_VV_S'
