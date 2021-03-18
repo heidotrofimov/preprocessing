@@ -32,7 +32,7 @@ def crop_bottom(img):
   for i in range(img_o.width):
     greatest_from_column=0
     for j in range(img_o.height):
-      if(img[i,img_o.height-j][3]==0):
+      if(img[i,img_o.height-j-1][3]==0):
         greatest_from_column=j
     pixels_to_be_cropped.append(greatest_from_column)
   cropped_img=img_o.crop((0,0,img_o.width,img_o.height-min(pixels_to_be_cropped)))
@@ -58,7 +58,7 @@ def crop_right(img):
   for i in range(img_o.height):
     greatest_from_row=0
     for j in range(img_o.width):
-      if(img[img_o.width-j,i][3]==0):
+      if(img[img_o.width-j-1,i][3]==0):
         greatest_from_row=j
     pixels_to_be_cropped.append(greatest_from_row)
   cropped_img=img_o.crop((0,0,img_o.width-min(pixels_to_be_cropped),img_o.height))
