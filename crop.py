@@ -34,6 +34,8 @@ def crop_bottom(img):
     for j in range(img_o.height):
       if(img[i,img_o.height-j-1][3]==0):
         greatest_from_column=j
+      else:
+        break
     pixels_to_be_cropped.append(greatest_from_column)
   cropped_img=img_o.crop((0,0,img_o.width,img_o.height-min(pixels_to_be_cropped)))
   return cropped_img
@@ -47,6 +49,8 @@ def crop_left(img):
     for j in range(img_o.width):
       if(img[j,i][3]==0):
         greatest_from_row=j
+      else:
+        break
     pixels_to_be_cropped.append(greatest_from_row)
   cropped_img=img_o.crop((min(pixels_to_be_cropped),0,img_o.width,img_o.height))
   return cropped_img
@@ -60,6 +64,8 @@ def crop_right(img):
     for j in range(img_o.width):
       if(img[img_o.width-j-1,i][3]==0):
         greatest_from_row=j
+      else:
+        break
     pixels_to_be_cropped.append(greatest_from_row)
   cropped_img=img_o.crop((0,0,img_o.width-min(pixels_to_be_cropped),img_o.height))
   return cropped_img
@@ -74,10 +80,11 @@ def first_crop(img):
   
 for S1 in os.listdir('/home/heido/NDVI_data/big_input_S1_images/'):
   print(S1)
+  S1_o=S1
   S1='/home/heido/NDVI_data/big_input_S1_images/'+S1
   S1_img=Image.open(S1)
   S1_cropped=first_crop(S1_img)
-  S1_cropped.save('/home/heido/NDVI_data/cropped_examples/'+S1)
+  S1_cropped.save('/home/heido/NDVI_data/cropped_examples/'+S1_o)
   
 '''
 
