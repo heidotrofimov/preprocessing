@@ -32,58 +32,60 @@ def write_image(band, filename, format):
     JAI.create("filestore", im, filename, format)
 
 for product in os.listdir('/home/heido/projects/heido_test/collocated/'):
-    
-    date=product.split("_")[-4]
-    
-    product=ProductIO.readProduct('/home/heido/projects/heido_test/collocated/'+product)
+    if(".dim" in product):
+        print(product)
+        date=product.split("_")[-4]
 
-    width = product.getSceneRasterWidth()
-    height = product.getSceneRasterHeight()
+        product=ProductIO.readProduct('/home/heido/projects/heido_test/collocated/'+product)
 
-    VH = product.getBand('Amplitude_VH_S')
-    VV = product.getBand('Amplitude_VV_S')
+        width = product.getSceneRasterWidth()
+        height = product.getSceneRasterHeight()
 
-    name = product.getName()
-    description = product.getDescription()
-    band_names = product.getBandNames()
+        VH = product.getBand('Amplitude_VH_S')
+        VV = product.getBand('Amplitude_VV_S')
 
-    newProduct = Product('VHVV', 'VHVV', width, height)
-    newBand = newProduct.addBand('vhvv', ProductData.TYPE_FLOAT32)
-    writer = ProductIO.getProductWriter('BEAM-DIMAP')
+        name = product.getName()
+        description = product.getDescription()
+        band_names = product.getBandNames()
 
-    ProductUtils.copyGeoCoding(product, newProduct)
+        newProduct = Product('VHVV', 'VHVV', width, height)
+        newBand = newProduct.addBand('vhvv', ProductData.TYPE_FLOAT32)
+        writer = ProductIO.getProductWriter('BEAM-DIMAP')
 
-    newProduct.setProductWriter(writer)
-    newProduct.writeHeader('VHVV.dim')
+        ProductUtils.copyGeoCoding(product, newProduct)
 
-    rVH = np.zeros(width, dtype=np.float32)
-    rVV = np.zeros(width, dtype=np.float32)
+        newProduct.setProductWriter(writer)
+        newProduct.writeHeader('VHVV.dim')
 
-    for y in range(height):
-        print("processing line ", y, " of ", height)
-        rVH = VH.readPixels(0, y, width, 1, rVH)
-        rVV = VV.readPixels(0, y, width, 1, rVH)
+        rVH = np.zeros(width, dtype=np.float32)
+        rVV = np.zeros(width, dtype=np.float32)
 
-        VHVV = (rVH + rVV)
-        newBand.writePixels(0, y, width, 1, VHVV)
+        for y in range(height):
+            print("processing line ", y, " of ", height)
+            rVH = VH.readPixels(0, y, width, 1, rVH)
+            rVV = VV.readPixels(0, y, width, 1, rVH)
 
-    newProduct.closeIO()
+            VHVV = (rVH + rVV)
+            newBand.writePixels(0, y, width, 1, VHVV)
 
-    product2 = ProductIO.readProduct('VHVV.dim')
+        newProduct.closeIO()
 
-    red = product.getBand('Amplitude_VH_S')
-    green = product.getBand('Amplitude_VV_S')
-    blue = product2.getBand('vhvv')
-    write_rgb_image([red, green, blue], date+'.png', 'png')
-    
-    
-    
-    
-    os.remove('VHVV.dim')
-    shutil.rmtree('VHVV.data')
-    shutil.move(date+'.png','/home/heido/projects/NDVI_data/S1')
+        product2 = ProductIO.readProduct('VHVV.dim')
+
+        red = product.getBand('Amplitude_VH_S')
+        green = product.getBand('Amplitude_VV_S')
+        blue = product2.getBand('vhvv')
+        write_rgb_image([red, green, blue], date+'.png', 'png')
+
+
+
+
+        os.remove('VHVV.dim')
+        shutil.rmtree('VHVV.data')
+        shutil.move(date+'.png','/home/heido/projects/NDVI_data/S1')
 
 for S2_SAFE in os.listdir('s2'):
+    print(S2_SAFE)
     date=S2_SAFE.split("_")[2].split("T")[0]
     S2_product=ProductIO.readProduct('s2/'+S2_SAFE+'/GRANULE/output.dim')
     red = S2_product.getBand('B04')
