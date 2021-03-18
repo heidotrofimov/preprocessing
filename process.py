@@ -46,7 +46,7 @@ def write_rgb_image(bands, filename, format):
 
 red = product.getBand('Amplitude_VH_S')
 green = product.getBand('Amplitude_VV_S')
-blue = product.getBand('Amplitude_VH_S')
+blue = product.getBand('VHVVBand')
 write_rgb_image([red, green, blue], 'gamma_export', 'png')
 
 '''
