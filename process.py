@@ -29,6 +29,7 @@ VH = product.getBand('Amplitude_VH_S')
 VV = product.getBand('Amplitude_VV_S')
 
 #Get new band, Vh+VV
+GPF.getDefaultInstance().getOperatorSpiRegistry().loadOperatorSpis()
 BandDescriptor = jpy.get_type('org.esa.snap.core.gpf.common.BandMathsOp$BandDescriptor')
 
 targetBand1 = BandDescriptor()
