@@ -1,5 +1,5 @@
 import os
-
+import sys
 
 if(sys.argv[1]=="S2"):
   f=open("lines_for_gpt.txt","w")
