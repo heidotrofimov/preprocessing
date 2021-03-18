@@ -9,7 +9,7 @@ if(sys.argv[1]=="S2"):
         if(os.path.exists("/home/heido/projects/heido_test/s2_zip/"+S2_product+"/GRANULE/output.dim")==False):
           line="/snap/snap8/bin/gpt Write -Ssource=\'/home/heido/projects/heido_test/s2_zip/"+S2_product+"/GRANULE/"+filename+"/\' -Pfile=\'/home/heido/projects/heido_test/s2_zip/"+S2_product+"/GRANULE/output.dim"
           print(line)
-          f.write(line)
+          f.write(line+"\n")
         
   f.close()
   
