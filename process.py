@@ -90,7 +90,6 @@ for S2_SAFE in os.listdir('s2_zip'):
     band_names = S2_product.getBandNames()
     print('s2_zip/'+S2_SAFE+'/GRANULE/output.dim')
 
-    print("Bands:       %s" % (list(band_names)))
     red = S2_product.getBand('B4')
     green = S2_product.getBand('B3')
     blue = S2_product.getBand('B2')
