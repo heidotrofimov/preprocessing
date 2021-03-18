@@ -1,5 +1,6 @@
 import os
 import numpy as np
+from PIL import Image
 
 #im_crop = im.crop((left, upper, right, lower))
 
