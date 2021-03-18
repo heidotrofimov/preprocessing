@@ -42,8 +42,8 @@ ProductUtils.copyGeoCoding(product, newProduct)
 newProduct.setProductWriter(writer)
 newProduct.writeHeader('VHVV.dim')
 
-rVH = numpy.zeros(width, dtype=numpy.float32)
-rVV = numpy.zeros(width, dtype=numpy.float32)
+rVH = np.zeros(width, dtype=np.float32)
+rVV = np.zeros(width, dtype=np.float32)
 
 for y in range(height2):
     print("processing line ", y, " of ", height)
