@@ -3,6 +3,10 @@ import numpy as np
 from PIL import Image
 
 #im_crop = im.crop((left, upper, right, lower))
+#pixels from left
+#pixel from up
+# pixels from left UNTIL right
+#pixels from up UNTIL bottom
 
 Image.MAX_IMAGE_PIXELS = None
 
@@ -18,23 +22,20 @@ def crop_up(img):
       else:
         break
     pixels_to_be_cropped.append(greatest_from_column)
-  cropped_img=img_o.crop((0,min(pixels_to_be_cropped),0,0))
-  print(min(pixels_to_be_cropped))
+  cropped_img=img_o.crop((0,min(pixels_to_be_cropped),img_o.width,img_o.height))
   return cropped_img
 
 def crop_bottom(img):
-  print(img.width)
-  print(img.height)
   img_o=img
   img=img.load()
   pixels_to_be_cropped=[]
   for i in range(img_o.width):
     greatest_from_column=0
     for j in range(img_o.height):
-      if(img[img.height-j,i][3]==0):
+      if(img[i,img.height-j][3]==0):
         greatest_from_column=j
     pixels_to_be_cropped.append(greatest_from_column)
-  cropped_img=img_o.crop((0,0,0,min(pixels_to_be_cropped)))
+  cropped_img=img_o.crop((0,0,img_o.width,img_o.height-min(pixels_to_be_cropped)))
   return cropped_img
 
 def crop_left(img):
@@ -44,10 +45,10 @@ def crop_left(img):
   for i in range(img_o.height):
     greatest_from_row=0
     for j in range(img_o.width):
-      if(img[i,j][3]==0):
+      if(img[j,i][3]==0):
         greatest_from_row=j
     pixels_to_be_cropped.append(greatest_from_row)
-  cropped_img=img_o.crop((min(pixels_to_be_cropped),0,0,0))
+  cropped_img=img_o.crop((min(pixels_to_be_cropped),0,img_o.width,img_o.height))
   return cropped_img
 
 def crop_right(img):
@@ -57,10 +58,10 @@ def crop_right(img):
   for i in range(img_o.height):
     greatest_from_row=0
     for j in range(img_o.width):
-      if(img[i,img.width-j][3]==0):
+      if(img[img.width-j,i][3]==0):
         greatest_from_row=j
     pixels_to_be_cropped.append(greatest_from_row)
-  cropped_img=img_o.crop((0,0,min(pixels_to_be_cropped),0))
+  cropped_img=img_o.crop((0,0,img_o.width-min(pixels_to_be_cropped),img_o.height))
   return cropped_img
 
 
