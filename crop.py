@@ -23,6 +23,8 @@ def crop_up(img):
   return cropped_img
 
 def crop_bottom(img):
+  print(img.width)
+  print(img.height)
   img_o=img
   img=img.load()
   pixels_to_be_cropped=[]
