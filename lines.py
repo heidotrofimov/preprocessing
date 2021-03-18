@@ -7,7 +7,7 @@ if(sys.argv[1]=="S2"):
     for filename in os.listdir('s2_zip/'+S2_product+'/GRANULE/'):
       if("L2" in filename):
         if(os.path.exists('s2_zip/'+S2_product+"/GRANULE/output.dim")==False):
-          line="/snap/snap8/bin/gpt Write -Ssource=\"s2_zip/"+S2_product+"/GRANULE/"+filename+"/\" -Pfile=\"s2_zip/"+S2_product+"/GRANULE/output.dim\""
+          line="/snap/snap8/bin/gpt Write -Ssource=s2_zip/"+S2_product+"/GRANULE/"+filename+"/ -Pfile=s2_zip/"+S2_product+"/GRANULE/output.dim"
           f.write(line+"\n")
         
   f.close()
