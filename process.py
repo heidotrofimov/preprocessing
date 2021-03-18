@@ -13,6 +13,8 @@ from snappy import ProductUtils
 from snappy import ProgressMonitor
 from snappy import Product
 from snappy import FlagCoding
+from snappy import GPF
+from snappy import HashMap
 
 jpy = snappy.jpy
 ImageManager = jpy.get_type('org.esa.snap.core.image.ImageManager')
