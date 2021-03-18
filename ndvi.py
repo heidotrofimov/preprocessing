@@ -32,7 +32,7 @@ print("Bands:       %s" % (list(band_names)))
 
 
 b7 = product.getBand('Amplitude_VH_S')
-b10 = product.getBand('Amplitude_VV_S)
+b10 = product.getBand('Amplitude_VV_S')
 ndviProduct = Product('NDVI', 'NDVI', width, height)
 ndviBand = ndviProduct.addBand('ndvi', ProductData.TYPE_FLOAT32)
 ndviFlagsBand = ndviProduct.addBand('ndvi_flags', ProductData.TYPE_UINT8)
