@@ -32,7 +32,7 @@ def save(im1,im2,im3,date,tile):
     dst.save(merged_tiles_NDVI+"/"+date+"_"+tile+".png")
     im1.save(S1_tiles+"/"+date+"_"+tile+".png")
     im2.save(S2_RGB_tiles+"/"+date+"_"+tile+".png")
-    im3.save(S2_NDVI_tiles"/"+date+"_"+tile+".png")
+    im3.save(S2_NDVI_tiles+"/"+date+"_"+tile+".png")
 
 for S2 in os.listdir('/home/heido/projects/NDVI_data/S2_RGB/'):
   date=S2.split(".png")[0]
