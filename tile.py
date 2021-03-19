@@ -42,8 +42,8 @@ for S2 in os.listdir('/home/heido/projects/NDVI_data/S2_RGB/'):
       print(S1)
       #Oleme leidnud paari!
       S1='/home/heido/projects/NDVI_data/S1/'+S1
-      S2='/home/heido/projects/NDVI_data/S2_RGB/'+S2
       S2_ndvi='/home/heido/projects/NDVI_data/S2_NDVI/'+S2
+      S2='/home/heido/projects/NDVI_data/S2_RGB/'+S2
       S1_img=Image.open(S1)
       S2_img=Image.open(S2)
       S2_NDVI_img=Image.open(S2_ndvi)
