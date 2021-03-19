@@ -44,9 +44,9 @@ for S2 in os.listdir('/home/heido/projects/NDVI_data/S2_RGB/'):
       S1='/home/heido/projects/NDVI_data/S1/'+S1
       S2_ndvi='/home/heido/projects/NDVI_data/S2_NDVI/'+S2
       S2='/home/heido/projects/NDVI_data/S2_RGB/'+S2
-      S1_img=Image.open(S1)
-      S2_img=Image.open(S2)
-      S2_NDVI_img=Image.open(S2_ndvi)
+      S1_im=Image.open(S1)
+      S2_im=Image.open(S2)
+      S2_NDVI_im=Image.open(S2_ndvi)
       
       tiles_x=int(S1_img.width/tile_size)
       tiles_y=int(S1_img.height/tile_size)
