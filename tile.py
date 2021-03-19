@@ -48,8 +48,8 @@ for S2 in os.listdir('/home/heido/projects/NDVI_data/S2_RGB/'):
       S2_im=Image.open(S2)
       S2_NDVI_im=Image.open(S2_ndvi)
       
-      tiles_x=int(S1_img.width/tile_size)
-      tiles_y=int(S1_img.height/tile_size)
+      tiles_x=int(S1_im.width/tile_size)
+      tiles_y=int(S1_im.height/tile_size)
       for i in range(0,tiles_x):
           for j in range(0,tiles_y):
               tile=str(i)+"_"+str(j)
@@ -58,7 +58,7 @@ for S2 in os.listdir('/home/heido/projects/NDVI_data/S2_RGB/'):
               im_tile_S2_ndvi=S2_NDVI_im.crop((i*tile_size,j*tile_size,tile_size*(i+1),tile_size*(j+1)))
               if(check_data(im_tile_S1) and check_data(im_tile_S2)):
                   save(im_tile_S1,im_tile_S2,im_tile_S2_ndvi,date,tile)
-      if(im_S1.width>tiles_x*tile_size):
+      if(S1_im.width>tiles_x*tile_size):
           for j in range(0,tiles_y):
               tile=str(tiles_x)+"_"+str(j)
               im_tile_S1=S1_im.crop((S1_im.width-tile_size,j*tile_size,S1_im.width,tile_size*(j+1)))
@@ -66,7 +66,7 @@ for S2 in os.listdir('/home/heido/projects/NDVI_data/S2_RGB/'):
               im_tile_S2_ndvi=S2_NDVI_im.crop((S2_NDVI_im.width-tile_size,j*tile_size,S2_NDVI_im.width,tile_size*(j+1)))
               if(check_data(im_tile_S1) and check_data(im_tile_S2)):
                   save(im_tile_S1,im_tile_S2,im_tile_S2_ndvi,date,tile)
-      if(im_S1.height>tiles_y*tile_size):
+      if(S1_im.height>tiles_y*tile_size):
           for i in range(0,tiles_x):
               tile=str(i)+"_"+str(tiles_y)
               im_tile_S1=S1_im.crop((i*tile_size,S1_im.height-tile_size,(i+1)*tile_size,S1_im.height))
@@ -74,7 +74,7 @@ for S2 in os.listdir('/home/heido/projects/NDVI_data/S2_RGB/'):
               im_tile_S2_ndvi=S2_NDVI_im.crop((i*tile_size,S2_NDVI_im.height-tile_size,(i+1)*tile_size,S2_NDVI_im.height))
               if(check_data(im_tile_S1) and check_data(im_tile_S2)):
                   save(im_tile_S1,im_tile_S2,im_tile_S2_ndvi,date,tile)
-          if(im_S1.width>tiles_x*tile_size):
+          if(S1_im.width>tiles_x*tile_size):
               tile=str(tiles_x)+"_"+str(tiles_y)
               im_tile_S1=S1_im.crop((S1_im.width-tile_size,S1_im.height-tile_size,S1_im.width,S1_im.height))
               im_tile_S2=S2_im.crop((S2_im.width-tile_size,S2_im.height-tile_size,S2_im.width,S2_im.height))
