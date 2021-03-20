@@ -22,6 +22,7 @@ for S2 in os.listdir("/home/heido/projects/NDVI_data/S2_RGB_tiles"):
 
 for merged in os.listdir("/home/heido/projects/NDVI_data/merged_tiles_RGB"):
   S1date=merged.split("_")[0]+"T"+merged.split("_")[1].split(".")[0]
+  print(S1date)
   date=merged.split("_")[0]
   tile=merged.split("_")[-2]+"_"+merged.split("_")[-1].split(".")[0]
   for S1file in os.listdir("/home/heido/projects/heido_test/s1_zip"):
