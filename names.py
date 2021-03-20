@@ -1,4 +1,4 @@
-
+import os
 
 S2_zip="S2_zip"
 S1_zip="/home/heido/projects/heido_test/S1_zip"
