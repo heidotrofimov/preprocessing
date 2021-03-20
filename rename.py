@@ -32,8 +32,9 @@ for merged in os.listdir("/home/heido/projects/NDVI_data/merged_tiles_RGB"):
     if(S2safe.split("_")[2].split("T")[0]==date):
       S2name=S2_short(S2safe)
   newname=S2name+"_"+S1name+"_"+tile+".png"
-  print(merged)
-  print(newname)
+  os.rename("/home/heido/projects/NDVI_data/merged_tiles_RGB/"+merged,"/home/heido/projects/NDVI_data/merged_tiles_RGB/"+newname)
+  os.rename("/home/heido/projects/NDVI_data/merged_tiles_NDVI/"+merged,"/home/heido/projects/NDVI_data/merged_tiles_NDVI/"+newname)
+  
     
     
       
