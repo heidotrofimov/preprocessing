@@ -1,7 +1,7 @@
 import os
 
-S2_zip="S2_zip"
-S1_zip="/home/heido/projects/heido_test/S1_zip"
+S2_zip="s2_zip"
+S1_zip="/home/heido/projects/heido_test/s1_zip"
 
 def S1_short(S1):
   if("." in S1.split("_")[-1]):
