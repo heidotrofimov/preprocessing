@@ -26,7 +26,7 @@ for merged in os.listdir("/home/heido/projects/NDVI_data/merged_tiles_RGB"):
   date=merged.split("_")[0]
   tile=merged.split("_")[-2]+"_"+merged.split("_")[-1].split(".")[0]
   for S1file in os.listdir("/home/heido/projects/heido_test/s1_zip"):
-    if(S1file.split("_")[4]==S1date):
+    if(S1file.split("_")[5]==S1date):
       S1name=S1_short(S1file)
   for S2safe in os.listdir("s2_zip"):
     if(S2safe.split("_")[2].split("T")[0]==date):
