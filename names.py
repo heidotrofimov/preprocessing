@@ -16,9 +16,9 @@ f = open("full_names.txt","w")
 
 for S2 in os.listdir(S2_zip):
   date=S2.split("_")[2].split("T")[0]
-  f.write(S2+"\n")
+  f.write(S2_short(S2)+": "+S2+"\n")
   for S1 in os.listdir(S1_zip):
     if(S1.split("_")[4].split("T")[0]==date):
-      f.write(S1+"\n")
+      f.write(S1_short(S1)+": "+S1+"\n")
       
 f.close()
