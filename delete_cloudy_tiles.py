@@ -4,4 +4,4 @@ import shutil
 f=open("cloudless_tiles.txt","r")
 
 for line in f.readlines():
-  print(line)
+  print(line.rstrip())
