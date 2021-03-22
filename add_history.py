@@ -7,7 +7,7 @@ for filename in os.listdir("/home/heido/projects/NDVI_data/merged_tiles_RGB/"):
     S2_date=datetime.strptime(S2_date_str, '%Y%m%d').date()
     
     tile_nr=filename.split("_")[-2]+"_"+filename.split("_")[-1]
-    for filename2 is os.listdir("/home/heido/projects/NDVI_data/S2_RGB_tiles/"):
+    for filename2 in os.listdir("/home/heido/projects/NDVI_data/S2_RGB_tiles/"):
         history_date_str=filename2.split("_")[1].split("T")[0]
         history_date=datetime.strptime(history_date_str, '%Y%m%d').date()
         
