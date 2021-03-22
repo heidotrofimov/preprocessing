@@ -15,3 +15,9 @@ for filename in os.listdir("/home/heido/projects/NDVI_data/S2_RGB_tiles"):
 for filename in os.listdir("/home/heido/projects/NDVI_data/S2_NDVI_tiles"):
   if(filename not in cloudless_tiles):
     os.remove("/home/heido/projects/NDVI_data/S2_NDVI_tiles/"+filename)
+    
+for filename in os.listdir("/home/heido/projects/NDVI_data/merged_tiles_RGB"):
+  filename2=filename.split("_")[0]+"_"+filename.split("_")[1]+filename.split("_")[4]+filename.split("_")[5]
+  print(filename2)
+  if(filename2 not in cloudless_tiles):
+    os.remove("/home/heido/projects/NDVI_data/merged_tiles_RGB/"+filename)
