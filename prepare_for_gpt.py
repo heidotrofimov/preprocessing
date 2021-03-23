@@ -14,6 +14,13 @@ for folder in os.listdir('s1_zip'):
             S1='/home/heido/projects/heido_test/s1_zip/'+folder+'/manifest.safe'
             targetpath='/home/heido/projects/heido_test/collocated/'+folder.split(".")[0]+".dim"
             f.write("/snap/snap8/bin/gpt collocation.xml -PB02=\""+B02+"\" -PS1=\""+S1+"\" -PB02name=\""+B02name+"\" -Ptargetpath=\""+targetpath+"\"\n")
-
-
+            
+           
+for S2_product in os.listdir('s2_zip'):
+  for filename in os.listdir('s2_zip/'+S2_product+'/GRANULE/'):
+    if("L2" in filename):
+      if(os.path.exists('s2_zip/'+S2_product+"/GRANULE/output.dim")==False):
+        line="/snap/snap8/bin/gpt Write -Ssource=s2_zip/"+S2_product+"/GRANULE/"+filename+"/ -Pfile=s2_zip/"+S2_product+"/GRANULE/output.dim"
+        f.write(line+"\n")
+        
 f.close()
