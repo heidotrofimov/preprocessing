@@ -17,6 +17,6 @@ from snappy import HashMap
 
 for dim in os.listdir('/home/heido/projects/heido_test/s1_iq/'):
   if('.dim' in dim):
-    product=ProductIO.readProduct('/home/heido/projects/heido_test/s1_iq/'+dim):
-      print(product.getMetadataRoot())
+    product=ProductIO.readProduct('/home/heido/projects/heido_test/s1_iq/'+dim)
+    print(product.getMetadataRoot())
     
