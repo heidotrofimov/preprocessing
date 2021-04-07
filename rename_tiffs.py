@@ -1,4 +1,5 @@
 import os
+import sys
 sys.path.append('/home/heido/jpy/build/lib.linux-x86_64-3.6')
 sys.path.append('/home/heido/.snap/snap-python')
 import snappy
