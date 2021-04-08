@@ -23,6 +23,7 @@ for folder in os.listdir('s1_tif_final'):
         day=int(date_str[6:8])
         date_S2=datetime.datetime(year,month,day)
         days_between_tmp=np.abs((date_S2-date_S1).days)
+        print(days_between_tmp)
         if(days_between_tmp<days_between):
             days_between=days_between_tmp
             chosen=folder2
