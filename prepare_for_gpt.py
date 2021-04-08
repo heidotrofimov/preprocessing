@@ -5,7 +5,9 @@ f=open('lines_for_gpt.txt','w')
 
 S1=[]
 S2=[]
-
+B02_list=[]
+B02name_list=[]
+targetpath_list=[]
 
 for folder in os.listdir('s1_tif_final'):
     date_str=folder.split("_")[5].split("T")[0]
@@ -15,6 +17,9 @@ for folder in os.listdir('s1_tif_final'):
     date_S1=datetime.datetime(year,month,day)
     days_between=2
     chosen_S2=""
+    B02=""
+    B02name=""
+    targetpath=""
     for folder2 in os.listdir('s2_zip'):
         date_str=folder2.split("_")[-1].split("T")[0]
         year=int(date_str[0:4])
@@ -22,17 +27,30 @@ for folder in os.listdir('s1_tif_final'):
         day=int(date_str[6:8])
         date_S2=datetime.datetime(year,month,day)
         days_between_tmp=np.abs((date_S2-date_S1).days)
-
+        for folder3 in os.listdir('s2_zip/'+folder2+'/GRANULE/'):
+            for filename in os.listdir('s2_zip/'+folder2+'/GRANULE/'+folder3+'/IMG_DATA/R10m/'):
+                if('B02_10m.jp2' in filename):
+                    B02_tmp='/home/heido/projects/preprocessing/s2_zip/'+folder2+'/GRANULE/'+folder3+'/IMG_DATA/R10m/'+filename
+                    B02name_tmp=filename
+        targetpath_tmp='/home/heido/projects/preprocessing/collocated/'+folder.split(".")[0]+".dim"
         if(days_between_tmp<days_between):
             days_between=days_between_tmp
             chosen_S2=folder2
+            B02=B02_tmp
+            B02name=B02name_tmp
+            targetpath=targetpath_tmp
     if(chosen_S2!=""):
-        
-        S1.append(folder)
+        S1.append("/home/heido/projects/preprocessing/s1_tif_final/"+folder)
         S2.append(chosen_S2)
-print(S1)
-print(S2)
+        B02_list.append(B02)
+        B02name_list.append(B02name)
+        targetpath_list.append(targetpath)
+        
 
+        
+for i in range(len(S1)):
+    f.write("/snap/snap8/bin/gpt collocation.xml -PB02=\""+B02_list[i]+"\" -PS1=\""+S1[i]+"\" -PB02name=\""+B02name[i]+"\" -Ptargetpath=\""+targetpath[i]+"\"\n")
+f.close()
 '''
 for folder in os.listdir('s1_zip'):
     date=folder.split("_")[4].split("T")[0]
