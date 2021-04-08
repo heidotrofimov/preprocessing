@@ -13,6 +13,7 @@ for folder in os.listdir('s1_tif_final'):
     month=int(date_str[4:6])
     day=int(date_str[6:8])
     date_S1=datetime.datetime(year,month,day)
+    print(str(date_S1))
     days_between=2
     chosen_S2=""
     for folder2 in os.listdir('s2_zip'):
