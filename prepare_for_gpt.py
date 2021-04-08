@@ -17,8 +17,8 @@ for folder in os.listdir('s1_tif_final'):
     for folder2 in os.listdir('s2_zip'):
         date_str=folder2.split("_")[-1].split("T")[0]
         year=int(date_str[0:4])
-        month=int(date_str[4:2])
-        day=int(date_str[6:2])
+        month=int(date_str[4:6])
+        day=int(date_str[6:8])
         date_S2=datetime.datetime(year,month,day)
         days_between_tmp=np.abs((date_S2-date_S1).days)
         if(days_between_tmp<days_between):
