@@ -7,7 +7,6 @@ S2=[]
 
 
 for folder in os.listdir('s1_tif_final'):
-    S1.append(folder)
     date_str=folder.split("_")[4].split("T")[0]
     year=int(date_str[0:4])
     month=int(date_str[4:2])
@@ -25,7 +24,11 @@ for folder in os.listdir('s1_tif_final'):
         if(days_between_tmp<days_between):
             days_between=days_between_tmp
             chosen=folder2
-   S2.append(chosen_S2)
+   if(chosen_S2!=""):
+    S1.append(folder)
+    S2.append(chosen_S2)
+print(S1)
+print(S2)
 
 '''
 for folder in os.listdir('s1_zip'):
