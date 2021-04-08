@@ -49,7 +49,7 @@ for folder in os.listdir('s1_tif_final'):
 
         
 for i in range(len(S1)):
-    f.write("/snap/snap8/bin/gpt collocation.xml -PB02=\""+B02_list[i]+"\" -PS1=\""+S1[i]+"\" -PB02name=\""+B02name[i]+"\" -Ptargetpath=\""+targetpath[i]+"\"\n")
+    f.write("/snap/snap8/bin/gpt collocation.xml -PB02=\""+B02_list[i]+"\" -PS1=\""+S1[i]+"\" -PB02name=\""+B02name_list[i]+"\" -Ptargetpath=\""+targetpath_list[i]+"\"\n")
 f.close()
 '''
 for folder in os.listdir('s1_zip'):
