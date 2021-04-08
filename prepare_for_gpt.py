@@ -1,5 +1,6 @@
 import os
 import datetime
+import numpy as np
 f=open('lines_for_gpt.txt','w')
 
 S1=[]
