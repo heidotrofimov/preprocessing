@@ -1,6 +1,33 @@
 import os
+import datetime
 f=open('lines_for_gpt.txt','w')
 
+S1=[]
+S2=[]
+
+
+for folder in os.listdir('s1_tif_final'):
+    S1.append(folder)
+    date_str=folder.split("_")[4].split("T")[0]
+    year=int(date_str[0:4])
+    month=int(date_str[4:2])
+    day=int(date_str[6:2])
+    date_S1=datetime.datetime(year,month,day)
+    days_between=2
+    chosen_S2=""
+    for folder2 in os.listdir('s2_zip'):
+        date_str=folder.split("_")[4].split("T")[0]
+        year=int(date_str[0:4])
+        month=int(date_str[4:2])
+        day=int(date_str[6:2])
+        date_S2=datetime.datetime(year,month,day)
+        days_between_tmp=np.abs((date_S2-date_S1).days)
+        if(days_between_tmp<days_between):
+            days_between=days_between_tmp
+            chosen=folder2
+   S2.append(chosen_S2)
+
+'''
 for folder in os.listdir('s1_zip'):
     date=folder.split("_")[4].split("T")[0]
     for folder2 in os.listdir('s2_zip'):
@@ -24,3 +51,4 @@ for S2_product in os.listdir('s2_zip'):
         f.write(line+"\n")
         
 f.close()
+'''
