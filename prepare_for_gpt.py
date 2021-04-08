@@ -7,7 +7,7 @@ S2=[]
 
 
 for folder in os.listdir('s1_tif_final'):
-    date_str=folder.split("_")[4].split("T")[0]
+    date_str=folder.split("_")[5].split("T")[0]
     year=int(date_str[0:4])
     month=int(date_str[4:2])
     day=int(date_str[6:2])
