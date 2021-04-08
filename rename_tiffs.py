@@ -14,12 +14,16 @@ from snappy import Product
 from snappy import FlagCoding
 from snappy import GPF
 from snappy import HashMap
+from shutil import copyfile
 
 
-for dim in os.listdir('/home/heido/projects/heido_test/s1_iq/'):
+for dim in os.listdir('s1_iq/'):
   if('.dim' in dim):
     identity=dim.split('.')[0]
-    product=ProductIO.readProduct('/home/heido/projects/heido_test/s1_iq/'+dim)
+    product=ProductIO.readProduct('s1_iq/'+dim)
     name=str(product.getMetadataRoot().getElement('Abstracted_Metadata').getAttribute('PRODUCT').getData())
-    os.rename('/home/heido/projects/heido_test/s1_iq/'+identity+'.tif','/home/heido/projects/heido_test/s1_iq/'+name+'.tif')
+    #os.rename('/home/heido/projects/heido_test/s1_iq/'+identity+'.tif','/home/heido/projects/heido_test/s1_iq/'+name+'.tif')
+    copyfile('s1_iq/'+identity+'.tif','s1_tif/'+name+'.tif')
+
+    
     
