@@ -39,6 +39,7 @@ for raster_file in *.tif; do
 
     # virtual raster to bind all the separate bands into a single file
     gdalbuildvrt -q -separate $prefix.vrt $band1 $band2 $band3 $band4 $band5
+    echo $prefix.tif
     rm $prefix.tif
     gdal_translate $prefix.vrt $prefix.tif
 done
