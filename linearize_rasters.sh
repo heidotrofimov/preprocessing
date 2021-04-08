@@ -41,7 +41,7 @@ for raster_file in *.tif; do
     gdalbuildvrt -q -separate $prefix.vrt $band1 $band2 $band3 $band4 $band5
     echo $raster_file
     #rm $raster_file
-    gdal_translate $prefix.vrt $raster_file
+    gdal_translate $datadir/$filename.vrt $datadir/$raster_file
 done
 
 mv $outdir/* .
