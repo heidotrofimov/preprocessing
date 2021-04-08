@@ -24,9 +24,10 @@ for folder in os.listdir('s1_tif_final'):
         if(days_between_tmp<days_between):
             days_between=days_between_tmp
             chosen=folder2
-   if(chosen_S2!=""):
-    S1.append(folder)
-    S2.append(chosen_S2)
+    if(chosen_S2!=""):
+        
+        S1.append(folder)
+        S2.append(chosen_S2)
 print(S1)
 print(S2)
 
