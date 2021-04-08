@@ -1,9 +1,6 @@
-import cv2
+from PIL import Image
+import numpy 
 
-image = cv2.imread('s1_iq/combined.tiff', cv2.IMREAD_UNCHANGED)
-print(image.shape)
-
-channels = cv2.split(image)
-
-print(channels[0])
-
+im = Image.open('s1_iq/combined.tif') 
+imarray = numpy.array(im) 
+print(imarray.shape)
