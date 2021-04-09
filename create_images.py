@@ -17,6 +17,61 @@ import os
 import shutil
 from datetime import datetime
 
+
+S1_big_images="/home/heido/projects/NDVI_data_2/S1"
+S2_RGB_big_images="/home/heido/projects/NDVI_data_2/S2_RGB"
+S2_NDVI_big_images="/home/heido/projects/NDVI_data_2/S2_NDVI"
+
+def S2_short(S2):
+  return S2.split("_")[5]+"_"+S2.split("_")[2]
+
+def S1_short(S1):
+  if("." in S1.split("_")[-1]):
+    return S1.split("_")[4]+"_"+S1.split("_")[-1].split(".")[0]
+  else:
+    return S1.split("_")[4]+"_"+S1.split("_")[-1]
+  
+#Save the full names
+
+S2_zip="s2_zip"
+S1_zip="s1_zip"
+
+f = open("full_names.txt","a")
+
+for S2 in os.listdir(S2_zip):
+  date=S2.split("_")[2].split("T")[0]
+  f.write(S2_short(S2)+": "+S2+"\n")
+  for S1 in os.listdir(S1_zip):
+    if(S1.split("_")[4].split("T")[0]==date):
+      f.write(S1_short(S1)+": "+S1+"\n")
+      
+f.close()
+
+
+jpy = snappy.jpy
+ImageManager = jpy.get_type('org.esa.snap.core.image.ImageManager')
+JAI = jpy.get_type('javax.media.jai.JAI')
+
+def write_rgb_image(bands, filename, format):
+    image_info = ProductUtils.createImageInfo(bands, True, ProgressMonitor.NULL)
+    im = ImageManager.getInstance().createColoredBandImage(bands, image_info, 0)
+    JAI.create("filestore", im, filename, format)
+    
+def write_image(band, filename, format):
+    im = ImageManager.getInstance().createColoredBandImage([band], band.getImageInfo(), 0)
+    JAI.create("filestore", im, filename, format)
+
+for product in os.listdir('/home/heido/projects/preprocessing/collocated/'):
+    if(".dim" in product):
+        date=S1_short(product)
+        product=ProductIO.readProduct('/home/heido/projects/preprocessing/collocated/'+product)
+        band_names = product.getBandNames()
+        print(band_names)
+        
+
+
+
+'''
 S1_big_images="/home/heido/projects/NDVI_data/S1"
 S2_RGB_big_images="/home/heido/projects/NDVI_data/S2_RGB"
 S2_NDVI_big_images="/home/heido/projects/NDVI_data/S2_NDVI"
@@ -45,6 +100,8 @@ for S2 in os.listdir(S2_zip):
       f.write(S1_short(S1)+": "+S1+"\n")
       
 f.close()
+
+
 
 jpy = snappy.jpy
 ImageManager = jpy.get_type('org.esa.snap.core.image.ImageManager')
@@ -227,3 +284,4 @@ for S2 in os.listdir(S2_RGB_big_images):
               im_tile_S2_ndvi=S2_NDVI_im.crop((S2_NDVI_im.width-tile_size,S2_NDVI_im.height-tile_size,S2_NDVI_im.width,S2_NDVI_im.height))
               if(check_data(im_tile_S1) and check_data(im_tile_S2)):
                   save(im_tile_S1,im_tile_S2,im_tile_S2_ndvi,date,tile,S1_end)
+'''
