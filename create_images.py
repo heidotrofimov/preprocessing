@@ -51,9 +51,12 @@ for product in os.listdir('/home/heido/projects/preprocessing/collocated/'):
     if(".dim" in product):
         date=S1_short(product)
         product=ProductIO.readProduct('/home/heido/projects/preprocessing/collocated/'+product)
-        band_names = product.getBandNames()
-        description = product.getDescription()
-        print(description)
+        band_1 = product.getBand('band_1_S')
+        band_2 = product.getBand('band_2_S')
+        band_3 = product2.getBand('band_3_S')
+        band_4 = product2.getBand('band_4_S')
+        band_5 = product2.getBand('band_5_S')
+        write_rgb_image([band_1, band_2, band_3,band_4,band_5], date+'.tif', 'tif')
         
 
 
