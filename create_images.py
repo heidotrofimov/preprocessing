@@ -33,20 +33,6 @@ def S1_short(S1):
   
 #Save the full names
 
-S2_zip="s2_zip"
-S1_zip="s1_zip"
-
-f = open("full_names.txt","a")
-
-for S2 in os.listdir(S2_zip):
-  date=S2.split("_")[2].split("T")[0]
-  f.write(S2_short(S2)+": "+S2+"\n")
-  for S1 in os.listdir(S1_zip):
-    if(S1.split("_")[4].split("T")[0]==date):
-      f.write(S1_short(S1)+": "+S1+"\n")
-      
-f.close()
-
 
 jpy = snappy.jpy
 ImageManager = jpy.get_type('org.esa.snap.core.image.ImageManager')
@@ -66,7 +52,8 @@ for product in os.listdir('/home/heido/projects/preprocessing/collocated/'):
         date=S1_short(product)
         product=ProductIO.readProduct('/home/heido/projects/preprocessing/collocated/'+product)
         band_names = product.getBandNames()
-        print(band_names)
+        description = product.getDescription()
+        print(description)
         
 
 
