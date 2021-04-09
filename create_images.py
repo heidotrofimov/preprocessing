@@ -56,7 +56,7 @@ for product in os.listdir('/home/heido/projects/preprocessing/collocated/'):
         band_3 = product.getBand('band_3_S')
         band_4 = product.getBand('band_4_S')
         band_5 = product.getBand('band_5_S')
-        write_rgb_image([band_1, band_2, band_3,band_4,band_5], date+'.tif', 'tif')
+        write_image(band_1, date+'.tif', 'tif')
         
 
 
