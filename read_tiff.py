@@ -1,6 +1,7 @@
 from PIL import Image
 import numpy as np
 from skimage import io
+import os
 
 for tif_file in os.listdir('s1_iq'):
   if('.tif' in tif_file):
