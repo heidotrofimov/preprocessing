@@ -18,11 +18,15 @@ from shutil import copyfile
 
 for dim in os.listdir('s1_iq/'):
   if('.dim' in dim):
-    identity=dim.split('.')[0]
-    product=ProductIO.readProduct('s1_iq/'+dim)
-    name=str(product.getMetadataRoot().getElement('Abstracted_Metadata').getAttribute('PRODUCT').getData())
-    os.rename('/home/heido/projects/preprocessing/s1_iq/'+identity+'.tif','/home/heido/projects/preprocessing/s1_iq/'+name+'.tif')
-    copyfile('s1_iq/'+identity+'.tif','s1_tif/'+name+'.tif')
+    try:
+      identity=dim.split('.')[0]
+      product=ProductIO.readProduct('s1_iq/'+dim)
+      name=str(product.getMetadataRoot().getElement('Abstracted_Metadata').getAttribute('PRODUCT').getData())
+      os.rename('/home/heido/projects/preprocessing/s1_iq/'+identity+'.tif','/home/heido/projects/preprocessing/s1_iq/'+name+'.tif')
+      print(identity+'.tif -> '+name+'.tif')
+      copyfile('s1_iq/'+identity+'.tif','s1_tif/'+name+'.tif')
+    except:
+      print("No tiff: "+dim)
 '''
 
 for tif in os.listdir('s1_iq'):
