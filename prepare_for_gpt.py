@@ -28,10 +28,11 @@ for folder in os.listdir('s1_tif_final'):
         date_S2=datetime.datetime(year,month,day)
         days_between_tmp=np.abs((date_S2-date_S1).days)
         for folder3 in os.listdir('s2_zip/'+folder2+'/GRANULE/'):
-            for filename in os.listdir('s2_zip/'+folder2+'/GRANULE/'+folder3+'/IMG_DATA/R10m/'):
-                if('B02_10m.jp2' in filename):
-                    B02_tmp='/home/heido/projects/preprocessing/s2_zip/'+folder2+'/GRANULE/'+folder3+'/IMG_DATA/R10m/'+filename
-                    B02name_tmp=filename
+            if("L2" in folder3):
+                for filename in os.listdir('s2_zip/'+folder2+'/GRANULE/'+folder3+'/IMG_DATA/R10m/'):
+                    if('B02_10m.jp2' in filename):
+                        B02_tmp='/home/heido/projects/preprocessing/s2_zip/'+folder2+'/GRANULE/'+folder3+'/IMG_DATA/R10m/'+filename
+                        B02name_tmp=filename
         targetpath_tmp='/home/heido/projects/preprocessing/collocated/'+folder.split(".")[0]+".dim"
         if(days_between_tmp<days_between):
             days_between=days_between_tmp
