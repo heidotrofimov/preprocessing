@@ -15,7 +15,7 @@ from snappy import FlagCoding
 from snappy import GPF
 from snappy import HashMap
 from shutil import copyfile
-
+'''
 for dim in os.listdir('s1_iq/'):
   if('.dim' in dim):
     try:
@@ -24,7 +24,7 @@ for dim in os.listdir('s1_iq/'):
       name=str(product.getMetadataRoot().getElement('Abstracted_Metadata').getAttribute('PRODUCT').getData())
       os.rename('/home/heido/projects/preprocessing/s1_iq/'+identity+'.tif','/home/heido/projects/preprocessing/s1_iq/'+name+'.tif')
       print(identity+'.tif -> '+name+'.tif')
-      copyfile('s1_iq/'+identity+'.tif','s1_tif/'+name+'.tif')
+      copyfile('s1_iq/'+name+'.tif','s1_tif/'+name+'.tif')
     except:
       print("No tiff: "+dim)
 '''
@@ -32,5 +32,5 @@ for dim in os.listdir('s1_iq/'):
 for tif in os.listdir('s1_iq'):
   if('.tif' in tif and 'cohv' not in tif and 'linc' not in tif and 's0v' not in tif):
     copyfile('s1_iq/'+tif,'s1_tif/'+tif)
-'''
+
     
