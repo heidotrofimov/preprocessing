@@ -9,7 +9,7 @@ B02_list=[]
 B02name_list=[]
 targetpath_list=[]
 
-for folder in os.listdir('s1_tif_final'):
+for folder in os.listdir('s1_tif_final_2'):
     date_str=folder.split("_")[5].split("T")[0]
     year=int(date_str[0:4])
     month=int(date_str[4:6])
@@ -33,7 +33,7 @@ for folder in os.listdir('s1_tif_final'):
                     if('B02_10m.jp2' in filename):
                         B02_tmp='/home/heido/projects/preprocessing/s2_zip/'+folder2+'/GRANULE/'+folder3+'/IMG_DATA/R10m/'+filename
                         B02name_tmp=filename
-        targetpath_tmp='/home/heido/projects/preprocessing/collocated/'+folder.split(".")[0]+".dim"
+        targetpath_tmp='/home/heido/projects/preprocessing/collocated_2/'+folder.split(".")[0]+".dim"
         if(days_between_tmp<days_between):
             days_between=days_between_tmp
             chosen_S2=folder2
