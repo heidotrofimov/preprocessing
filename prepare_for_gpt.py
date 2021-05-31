@@ -41,7 +41,7 @@ for folder in os.listdir('s1_tif_final_2'):
             B02name=B02name_tmp
             targetpath=targetpath_tmp
     if(chosen_S2!=""):
-        S1.append("/home/heido/projects/preprocessing/s1_tif_final/"+folder)
+        S1.append("/home/heido/projects/preprocessing/s1_tif_final_2/"+folder)
         S2.append(chosen_S2)
         B02_list.append(B02)
         B02name_list.append(B02name)
