@@ -7,8 +7,9 @@
 
 import os
 from osgeo import gdal
+import sys
 
-inputPath = "S1B_IW_SLC__1SDV_20200525T042550_20200525T042617_021733_0293FD_F865.tif"
+inputPath = sys.argv[1]
 inputTiff = gdal.Open(inputPath)
 
 output_tile_name = "tile"
@@ -25,7 +26,7 @@ yRange = (inputTiff.RasterYSize // tile_height) + 1
 images_created = list()
 for y_tiles in range(yRange):
     for x_tiles in range(xRange):
-        outputPath = f"{output_tile_name}_{tile_count}"
+        outputPath = "s1_tiles/"+f"{output_tile_name}_{tile_count}"
         com_string = "gdal_translate -of GTIFF -srcwin " + str(xOffset)+ ", " + str(yOffset) + ", " + str(tile_width) + ", " + str(tile_height) + " " + str(inputPath) + " " + str(outputPath) + ".tif"
         os.system(com_string)
         
