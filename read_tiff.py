@@ -10,5 +10,5 @@ for filename in os.listdir('collocated_tifs/'):
   if(i==0):
     S1_im=TIFF.open('collocated_tifs/'+filename)
     imarray=S1_im.read_image()
-    print(imarray.shape)
+    print(imarray.dtype)
   i=i+1
