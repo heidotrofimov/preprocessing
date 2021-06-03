@@ -30,7 +30,7 @@ for filename in os.listdir(inputdir):
     images_created = list()
     for y_tiles in range(yRange):
         for x_tiles in range(xRange):
-            outputPath = "s1_tiles/"+filename+"_"+str(x_tiles)+"_"+str(y_tiles)
+            outputPath = "s1_tiles/"+filename.split(".tif")[0]+"_"+str(x_tiles)+"_"+str(y_tiles)
             com_string = "gdal_translate -of GTIFF -srcwin " + str(xOffset)+ ", " + str(yOffset) + ", " + str(tile_width) + ", " + str(tile_height) + " " + str(inputPath) + " " + str(outputPath) + ".tif"
             os.system(com_string)
 
@@ -49,7 +49,6 @@ for filename in os.listdir(inputdir):
 print("cleaning data")
 
 for filename in os.listdir("s1_tiles"):
-  discard=[]
   print(filename)
   path="s1_tiles/"+filename
   S1_im=TIFF.open(path)
@@ -66,7 +65,6 @@ for filename in os.listdir("s1_tiles"):
         break
     if(condition==False):
       break
-  print("Number of discared tiles: "+str(len(discard)))
 
         
 
