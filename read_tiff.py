@@ -8,7 +8,7 @@ import sys
 i=0
 
 
-S1_im=TIFF.open(sys.argv[1])
+S1_im=TIFF.open(str(sys.argv[1]))
 imarray=S1_im.read_image()
 print(imarray)
 
