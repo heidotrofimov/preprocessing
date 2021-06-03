@@ -21,6 +21,7 @@ for filename in os.listdir("s1_tiles"):
         if(path not in discard):
           discard.append(path)
           copyfile(path,'s1_tiles_not/'+filename)
+          os.remove(path)
         break
     if(condition==False):
       break
