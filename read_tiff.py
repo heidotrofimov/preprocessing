@@ -3,6 +3,7 @@ import numpy as np
 from skimage import io
 import os
 from libtiff import TIFF
+import sys
 
 i=0
 
