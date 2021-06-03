@@ -11,5 +11,5 @@ input=sys.argv[1]
 
 S1_im=TIFF.open(input)
 imarray=S1_im.read_image()
-print(imarray)
+print(imarray[0][0])
 
