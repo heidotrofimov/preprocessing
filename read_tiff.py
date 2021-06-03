@@ -21,7 +21,7 @@ for filename in os.listdir("s1_tiles"):
   condition=True
   for j in range(len(imarray)):
     for i in range(len(imarray[j])):
-      if(imarray[j][i][0]==0 or imarray[j][i][1]==-32768 or imarray[j][i][2]==-32768 or imarray[j][i][3]==-32768 or imarray[j][i][4]==-32768):
+      if(imarray[j][i][0]==0 or (imarray[j][i][1]==-32768 and imarray[j][i][2]==-32768 and imarray[j][i][3]==-32768 and imarray[j][i][4]==-32768)):
         condition=False
         if(path not in discard):
           discard.append(path)
