@@ -64,7 +64,7 @@ for S2_SAFE in os.listdir('s2_zip'):
     green = S2_product.getBand('B3')
     blue = S2_product.getBand('B2')
     write_rgb_image([red, green, blue], RGB_im, 'png')
-    shutil.move(RGB_im,S2_images)
+    shutil.move(RGB_im,'S2_images')
     
     width = S2_product.getSceneRasterWidth()
     height = S2_product.getSceneRasterHeight()
@@ -91,7 +91,7 @@ for S2_SAFE in os.listdir('s2_zip'):
     ndvi_band=product2.getBand('ndvi')
     image_format = 'PNG'
     write_image(ndvi_band, NDVI_im, image_format)
-    shutil.move(NDVI_im,S2_images)
+    shutil.move(NDVI_im,'S2_images')
     os.remove('NDVI.dim')
     shutil.rmtree('NDVI.data')
     
