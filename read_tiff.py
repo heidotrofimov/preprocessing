@@ -4,6 +4,7 @@ from skimage import io
 import os
 from libtiff import TIFF
 import sys
+from shutil import copyfile
 
 
 discard=[]
@@ -17,8 +18,9 @@ for filename in os.listdir("s1_tiles"):
     for i in range(len(imarray[j])):
       if(imarray[j][i][0]==0):
         condition=False
-        if(S1_im not in discard):
-          discard.append(S1_im)
+        if(path not in discard):
+          discard.append(path)
+          copyfile(path,'s1_tiles_not/'+filename)
         break
     if(condition==False):
       break
