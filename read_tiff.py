@@ -7,6 +7,11 @@ import sys
 from shutil import copyfile
 
 
+S1_im=TIFF.open('s1_tiles/tile_376.tif')
+imarray=S1_im.read_image()
+print(imarray)
+
+'''
 discard=[]
 
 for filename in os.listdir("s1_tiles"):
@@ -28,4 +33,4 @@ for filename in os.listdir("s1_tiles"):
         
       
 print(len(discard))
-
+'''
