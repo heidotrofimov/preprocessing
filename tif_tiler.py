@@ -8,40 +8,65 @@
 import os
 from osgeo import gdal
 import sys
+from libtiff import TIFF
+from shutil import copyfile
 
-inputPath = sys.argv[1]
-inputTiff = gdal.Open(inputPath)
+inputdir="collocated_tifs"
+for filename in os.listdir(inputdir):
+    print(filename)
+    inputPath = inputdir+"/"+filename
+    inputTiff = gdal.Open(inputPath)
 
-output_tile_name = "tile"
-tile_count = 1
-tile_width = 512
-tile_height = 512
 
-xOffset = 0
-yOffset = 0
+    tile_width = 512
+    tile_height = 512
 
-xRange = (inputTiff.RasterXSize // tile_width) + 1
-yRange = (inputTiff.RasterYSize // tile_height) + 1
-
-images_created = list()
-for y_tiles in range(yRange):
-    for x_tiles in range(xRange):
-        outputPath = "s1_tiles/"+f"{output_tile_name}_{tile_count}"
-        com_string = "gdal_translate -of GTIFF -srcwin " + str(xOffset)+ ", " + str(yOffset) + ", " + str(tile_width) + ", " + str(tile_height) + " " + str(inputPath) + " " + str(outputPath) + ".tif"
-        os.system(com_string)
-        
-        if inputTiff.RasterXSize - xOffset > 512:
-            xOffset += 512
-        else:
-            xOffset  = inputTiff.RasterXSize - 512
-        
-        tile_count += 1
-    
     xOffset = 0
-    
-    if inputTiff.RasterYSize - yOffset > 512:
-        yOffset += 512
-    else:
-        yOffset  = inputTiff.RasterYSize - 512 
+    yOffset = 0
+
+    xRange = (inputTiff.RasterXSize // tile_width) + 1
+    yRange = (inputTiff.RasterYSize // tile_height) + 1
+
+    images_created = list()
+    for y_tiles in range(yRange):
+        for x_tiles in range(xRange):
+            outputPath = "s1_tiles/"+filename+"_"+str(x_tiles)+"_"+str(y_tiles)
+            com_string = "gdal_translate -of GTIFF -srcwin " + str(xOffset)+ ", " + str(yOffset) + ", " + str(tile_width) + ", " + str(tile_height) + " " + str(inputPath) + " " + str(outputPath) + ".tif"
+            os.system(com_string)
+
+            if inputTiff.RasterXSize - xOffset > 512:
+                xOffset += 512
+            else:
+                xOffset  = inputTiff.RasterXSize - 512
+
+        xOffset = 0
+
+        if inputTiff.RasterYSize - yOffset > 512:
+            yOffset += 512
+        else:
+            yOffset  = inputTiff.RasterYSize - 512
+            
+print("cleaning data")
+
+for filename in os.listdir("s1_tiles"):
+  discard=[]
+  print(filename)
+  path="s1_tiles/"+filename
+  S1_im=TIFF.open(path)
+  imarray=S1_im.read_image()
+  condition=True
+  for j in range(len(imarray)):
+    for i in range(len(imarray[j])):
+      if(imarray[j][i][0]==0 or (imarray[j][i][1]==-32768 and imarray[j][i][2]==-32768 and imarray[j][i][3]==-32768 and imarray[j][i][4]==-32768)):
+        condition=False
+        if(path not in discard):
+          discard.append(path)
+          copyfile(path,'s1_tiles_not/'+filename)
+          os.remove(path)
+        break
+    if(condition==False):
+      break
+  print("Number of discared tiles: "+str(len(discard)))
+
         
 
