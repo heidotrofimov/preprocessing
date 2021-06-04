@@ -30,7 +30,7 @@ for line in lines:
   name=S2+"_"+S1
   for filename in os.listdir("S2_images"):
     if(S2 in filename):
-      which=filename.split(".png")[0].split("_")[1]
+      which=filename.split(".png")[0].split("_")[-1]
       im_S2 = Image.open("S2_images/"+filename)
       tiles_x=int(im_S2.width/tile_size)
       tiles_y=int(im_S2.height/tile_size)
