@@ -32,8 +32,8 @@ for line in lines:
     if(S2 in filename):
       which=filename.split(".png")[0].split("_")[1]
       im_S2 = Image.open("S2_images/"+filename)
-      tiles_x=int(im_S1.width/tile_size)
-      tiles_y=int(im_S1.height/tile_size)
+      tiles_x=int(im_S2.width/tile_size)
+      tiles_y=int(im_S2.height/tile_size)
       for i in range(0,tiles_x):
         for j in range(0,tiles_y):
           tile="_"+str(i)+"_"+str(j)
