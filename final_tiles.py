@@ -3,14 +3,20 @@ import sys
 import os
 from shutil import copyfile
 
-def check_data(img):
+def check_data(img,which):
   img_o=img
   img=img.load()
   for i in range(img_o.width):
     for j in range(img_o.height):
-      if(img[i,j][3]==0):
+      if("which"="RGB"):
+        if(img[i,j][3]==0):
+          return False
+      else:
+        if(img[i,j][1]==0):
         return False
   return True
+
+
 
 Image.MAX_IMAGE_PIXELS = None
 
@@ -44,7 +50,7 @@ for line in lines:
               break
           if(S1_exists):
             im_tile_S2=im_S2.crop((i*tile_size,j*tile_size,tile_size*(i+1),tile_size*(j+1)))
-            if(check_data(im_tile_S2)):
+            if(check_data(im_tile_S2,which)):
                im_tile_S2.save("s2_"+which+"/"+name+tile+".png")
                if(os.path.isfile("s1_final_tiles/"+name+tile+".tif")==False):
                  copyfile("s1_tiles/"+full_S1+tile+".tif","s1_final_tiles/"+name+tile+".tif")
@@ -58,7 +64,7 @@ for line in lines:
               break
           if(S1_exists):
             im_tile_S2=im_S2.crop((im_S2.width-tile_size,j*tile_size,im_S2.width,tile_size*(j+1)))
-            if(check_data(im_tile_S2)):
+            if(check_data(im_tile_S2, which)):
                im_tile_S2.save("s2_"+which+"/"+name+".png")
                if(os.path.isfile("s1_final_tiles/"+name+tile+".tif")==False):
                  copyfile("s1_tiles/"+full_S1+tile+".tif","s1_final_tiles/"+name+tile+".tif")
@@ -72,7 +78,7 @@ for line in lines:
               break
           if(S1_exists):
             im_tile_S2=im_S2.crop((i*tile_size,im_S2.height-tile_size,tile_size*(i),im_S2.height))
-            if(check_data(im_tile_S2)):
+            if(check_data(im_tile_S2,which)):
                im_tile_S2.save("s2_"+which+"/"+name+".png")
                if(os.path.isfile("s1_final_tiles/"+name+tile+".tif")==False):
                  copyfile("s1_tiles/"+full_S1+tile+".tif","s1_final_tiles/"+name+tile+".tif")
@@ -85,7 +91,7 @@ for line in lines:
               break
           if(S1_exists):
             im_tile_S2=im_S2.crop((im_S2.width-tile_size,im_S2.height-tile_size,im_S2.width,im_S2.height))
-            if(check_data(im_tile_S2)):
+            if(check_data(im_tile_S2,which)):
               im_tile_S2.save("s2_"+which+"/"+name+".png")
               if(os.path.isfile("s1_final_tiles/"+name+tile+".tif")==False):
                 copyfile("s1_tiles/"+full_S1+tile+".tif","s1_final_tiles/"+name+tile+".tif")
