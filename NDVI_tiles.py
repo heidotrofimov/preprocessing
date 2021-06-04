@@ -4,17 +4,20 @@ import os
 from shutil import copyfile
 
 tile_size=512
+Image.MAX_IMAGE_PIXELS = None
 
 for filename in os.listdir("S2_images"):
   if("NDVI" in filename):
     S2=filename.split("_NDVI")[0]
+    print("Searching for "+S2)
     condition=False
     for filename2 in os.listdir("s2_RGB_cloudfree"):
       if(S2 in filename2):
+        print("Found: "+filename2)
         condition=True
         break
     if(condition):
-      print(filename)
+      print("Original name: "+filename)
       im_S2 = Image.open("S2_images/"+filename)
       tiles_x=int(im_S2.width/tile_size)
       tiles_y=int(im_S2.height/tile_size)
