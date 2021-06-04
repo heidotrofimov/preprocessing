@@ -60,7 +60,7 @@ for line in Lines:
             im_tile_S2=im_S2.crop((im_S2.width-tile_size,j*tile_size,im_S2.width,tile_size*(j+1)))
             if(check_data(im_tile_S2)):
                im_tile_S2.save("s2_"+which+"/"+name+".png")
-               if(os.path.isfile("s1_final_tiles/"+name+tile".tif")==False):
+               if(os.path.isfile("s1_final_tiles/"+name+tile+".tif")==False):
                  copyfile("s1_tiles/"+full_S1+tile+".tif","s1_final_tiles/"+name+tile+".tif")
       if(im_S2.height>tiles_y*tile_size):
         for i in range(0,tiles_x):
@@ -74,7 +74,7 @@ for line in Lines:
             im_tile_S2=im_S2.crop((i*tile_size,im_S2.height-tile_size,tile_size*(i),im_S2.height))
             if(check_data(im_tile_S2)):
                im_tile_S2.save("s2_"+which+"/"+name+".png")
-               if(os.path.isfile("s1_final_tiles/"+name+tile".tif")==False):
+               if(os.path.isfile("s1_final_tiles/"+name+tile+".tif")==False):
                  copyfile("s1_tiles/"+full_S1+tile+".tif","s1_final_tiles/"+name+tile+".tif")
         if(im_S2.height>tiles_y*tile_size and im_S2.width>tiles_x*tile_size):
           tile="_"+str(tiles_x)+"_"+str(tiles_y)
@@ -86,7 +86,7 @@ for line in Lines:
           im_tile_S2=im_S2.crop((im_S2.width-tile_size,im_S2.height-tile_size,im_S2.width,im_S2.height))
           if(check_data(im_tile_S2)):
             im_tile_S2.save("s2_"+which+"/"+name+".png")
-            if(os.path.isfile("s1_final_tiles/"+name+tile".tif")==False):
+            if(os.path.isfile("s1_final_tiles/"+name+tile+".tif")==False):
               copyfile("s1_tiles/"+full_S1+tile+".tif","s1_final_tiles/"+name+tile+".tif")
           
 file1.close()
