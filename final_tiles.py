@@ -20,7 +20,7 @@ file1 = open('lines_for_gpt.txt', 'r')
 file2 = open("full_product_names","w")
 lines = file1.readlines()
 
-for line in Lines:
+for line in lines:
   full_S2=line.split("s2_zip/")[1].split(".SAFE")[0]
   full_S1=line.split(".dim")[0].split("collocated_2/")[1]
   S2=line.split("B02name=\"")[1].split("_B02")[0]
