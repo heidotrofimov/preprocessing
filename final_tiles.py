@@ -13,7 +13,7 @@ def check_data(img,which):
           return False
       else:
         if(img[i,j][1]==0):
-        return False
+          return False
   return True
 
 
