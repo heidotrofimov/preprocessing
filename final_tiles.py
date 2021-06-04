@@ -40,9 +40,9 @@ for line in lines:
           S1_exists=False
           for filename2 in os.listdir("s1_tiles"):
             if(full_S1 in filename2 and tile in filename2):
-              S1_exist=True
+              S1_exists=True
               break
-          if(S1_exist):
+          if(S1_exists):
             im_tile_S2=im_S2.crop((i*tile_size,j*tile_size,tile_size*(i+1),tile_size*(j+1)))
             if(check_data(im_tile_S2)):
                im_tile_S2.save("s2_"+which+"/"+name+tile+".png")
@@ -54,9 +54,9 @@ for line in lines:
           S1_exists=False
           for filename2 in os.listdir("s1_tiles"):
             if(full_S1 in filename2 and tile in filename2):
-              S1_exist=True
+              S1_exists=True
               break
-          if(S1_exist):
+          if(S1_exists):
             im_tile_S2=im_S2.crop((im_S2.width-tile_size,j*tile_size,im_S2.width,tile_size*(j+1)))
             if(check_data(im_tile_S2)):
                im_tile_S2.save("s2_"+which+"/"+name+".png")
@@ -68,9 +68,9 @@ for line in lines:
           S1_exists=False
           for filename2 in os.listdir("s1_tiles"):
             if(full_S1 in filename2 and tile in filename2):
-              S1_exist=True
+              S1_exists=True
               break
-          if(S1_exist):
+          if(S1_exists):
             im_tile_S2=im_S2.crop((i*tile_size,im_S2.height-tile_size,tile_size*(i),im_S2.height))
             if(check_data(im_tile_S2)):
                im_tile_S2.save("s2_"+which+"/"+name+".png")
@@ -81,13 +81,14 @@ for line in lines:
           S1_exists=False
           for filename2 in os.listdir("s1_tiles"):
             if(full_S1 in filename2 and tile in filename2):
-              S1_exist=True
+              S1_exists=True
               break
-          im_tile_S2=im_S2.crop((im_S2.width-tile_size,im_S2.height-tile_size,im_S2.width,im_S2.height))
-          if(check_data(im_tile_S2)):
-            im_tile_S2.save("s2_"+which+"/"+name+".png")
-            if(os.path.isfile("s1_final_tiles/"+name+tile+".tif")==False):
-              copyfile("s1_tiles/"+full_S1+tile+".tif","s1_final_tiles/"+name+tile+".tif")
+          if(S1_exists):
+            im_tile_S2=im_S2.crop((im_S2.width-tile_size,im_S2.height-tile_size,im_S2.width,im_S2.height))
+            if(check_data(im_tile_S2)):
+              im_tile_S2.save("s2_"+which+"/"+name+".png")
+              if(os.path.isfile("s1_final_tiles/"+name+tile+".tif")==False):
+                copyfile("s1_tiles/"+full_S1+tile+".tif","s1_final_tiles/"+name+tile+".tif")
           
 file1.close()
 file2.close()
