@@ -39,7 +39,7 @@ for line in lines:
           tile="_"+str(i)+"_"+str(j)
           S1_exists=False
           for filename2 in os.listdir("s1_tiles"):
-            if(full_S1+tile in filename2):
+            if(full_S1+tile+".tif" in filename2):
               S1_exists=True
               break
           if(S1_exists):
