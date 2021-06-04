@@ -8,7 +8,7 @@ def check_data(img,which):
   img=img.load()
   for i in range(img_o.width):
     for j in range(img_o.height):
-      if("which"="RGB"):
+      if(which=="RGB"):
         if(img[i,j][3]==0):
           return False
       else:
