@@ -62,7 +62,7 @@ for RGB_im in os.listdir("S2_images"):
         if("tile" in tile2):
             tile3=tile2.split("ile")[1]
             if(tile==tile3):
-              clear=Image.open("/home/heido/projects/cm_predict/prediction/"+name+"/"+tile2+"/predict_CLEAR.png")
+              clear=Image.open("/home/heido/projects/cm_predict/prediction/"+name+"/"+tile2+"/prediction.png")
               cm=np.array(clear,dtype=np.float)
               print(cm)
               
