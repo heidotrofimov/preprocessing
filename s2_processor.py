@@ -63,6 +63,6 @@ for RGB_im in os.listdir("S2_images"):
         if(tile==tile3):
           clear=Image.open("/home/heido/projects/cm_predict/prediction/"+name+"/"+tile2+"/predict_CLEAR.png")
           cm=np.array(clear,dtype=np.float)
-          print(m)
+          print(cm)
               
   
