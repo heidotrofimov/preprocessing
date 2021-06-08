@@ -58,10 +58,10 @@ for RGB_im in os.listdir("S2_images"):
     for j in range(0,tiles_y):
       tile="_"+str(i)+"_"+str(j)
       #Is this tile cloudfree?
-      for tile2 in os.listdir("home/heido/projects/cm_predict/prediction/"+name):
+      for tile2 in os.listdir("/home/heido/projects/cm_predict/prediction/"+name):
         tile3=tile2.split("ile")[1]
         if(tile==tile3):
-          clear=Image.open("home/heido/projects/cm_predict/prediction/"+name+"/"+tile2+"/predict_CLEAR.png")
+          clear=Image.open("/home/heido/projects/cm_predict/prediction/"+name+"/"+tile2+"/predict_CLEAR.png")
           cm=np.array(clear,dtype=np.float)
           print(m)
               
