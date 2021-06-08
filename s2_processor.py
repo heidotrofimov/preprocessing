@@ -48,7 +48,8 @@ for S2_SAFE in os.listdir('s2_zip'):
       write_rgb_image([red, green, blue], RGB_im, 'png')
       shutil.move(RGB_im,'S2_images')
     
-
+tile_size=512
+    
 for RGB_im in os.listdir("S2_images"):
   name=RGB_im.split(".")[0]
   im_S2 = Image.open("S2_images/"+RGB_im)
