@@ -1,5 +1,23 @@
 #!/bin/bash
 
+/home/heido/miniconda3/envs/biomass/bin/python rename_tiffs.py
+
+#delete unneccessary tifss in this step
+
+sh ./linearize_rasters.sh s1_tif
+
+sh ./combine_tiffs.sh s1_tif
+
+python prepare_for_gpt.py
+
+#Run collocation lines
+
+python save_tifs.py
+
+#Run the lines you get
+
+python tif_tiler.py
+
 #Before this file is run: download data to s2_zip, s1_zip
 
 #python delete_unnecessary_data.py before
