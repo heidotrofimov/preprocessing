@@ -44,7 +44,7 @@ for S2_SAFE in os.listdir('s2_zip'):
         red = S2_product.getBand('B4')
         green = S2_product.getBand('B3')
         blue = S2_product.getBand('B2')
-        write_rgb_image([red, green, blue], RGB_im, 'png')
+        write_rgb_image([red, green, blue], RGB_im+".png", 'png')
         shutil.move(RGB_im+".png",'S2_images/')
     
 tile_size=512
