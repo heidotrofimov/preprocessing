@@ -8,6 +8,8 @@ from datetime import datetime
 
 #Biomass environment for this script!
 
+Image.MAX_IMAGE_PIXELS = None
+
 def write_rgb_image(bands, filename, format):
     image_info = ProductUtils.createImageInfo(bands, True, ProgressMonitor.NULL)
     im = ImageManager.getInstance().createColoredBandImage(bands, image_info, 0)
@@ -20,6 +22,15 @@ def write_image(band, filename, format):
 def S2_short(S2_full):
     S2=S2_full.split(".")[0].split("_")
     return S2[0]+"_"+S2[2]+"_"+S2[5]
+
+def check_data(img):
+  img_o=img
+  img=img.load()
+  for i in range(img_o.width):
+    for j in range(img_o.height):
+      if(img[i,j][3]==0):
+        return False
+  return True
   
   
 for S2_SAFE in os.listdir('s2_zip'):
@@ -64,25 +75,31 @@ for RGB_im in os.listdir("S2_images"):
     for j in range(0,tiles_y):
       mask_tile=mask.crop((i*tile_size,j*tile_size,tile_size*(i+1),tile_size*(j+1)))
       mask_array=np.array(mask_tile,dtype=np.float)
-      print(mask_array)
       if(not any(255 in b for b in mask_array) and not any(192 in b for b in mask_array) and not any(129 in b for b in mask_array)):
-          o=o+1
-      tile="_"+str(i)+"_"+str(j)
-      #Is this tile cloudfree?
-      for tile2 in os.listdir("/home/heido/projects/cm_predict/prediction/"+name):
-        if("tile" in tile2):
-            tile3=tile2.split("ile")[1]
-            if(tile==tile3):
-              prediction=Image.open("/home/heido/projects/cm_predict/prediction/"+name+"/"+tile2+"/prediction.png")
-              clear=Image.open("/home/heido/projects/cm_predict/prediction/"+name+"/"+tile2+"/predict_CLEAR.png")
-              pm=np.array(prediction,dtype=np.float)
-              cm=np.array(clear,dtype=np.float)
-              if(not any(255 in b for b in pm) and not any(192 in b for b in pm) and not any(129 in b for b in pm)):
-                s=s+1
-              if(np.all(cm>=200)):
-                #print(cm)
-                l=l+1
-
-print(o)
-print(s)
-print(l) 
+          RGB_tile=im_S2.crop((i*tile_size,j*tile_size,tile_size*(i+1),tile_size*(j+1)))
+          if(check_data(RGB_tile)):
+            RGB_tile.save("s2_RGB/"+s2name+"_"+str(i)+"_"+str(j)+".png")
+  if(im_S2.width>tiles_x*tile_size):
+    for j in range(0,tiles_y):
+      mask_tile=mask.crop((mask.width-tile_size,j*tile_size,mask.width,tile_size*(j+1)))
+      mask_array=np.array(mask_tile,dtype=np.float)
+      if(not any(255 in b for b in mask_array) and not any(192 in b for b in mask_array) and not any(129 in b for b in mask_array)):
+        RGB_tile=im_S2.crop((im_S2.width-tile_size,j*tile_size,im_S2.width,tile_size*(j+1)))
+        if(check_data(RGB_tile)):
+          RGB_tile.save("s2_RGB/"+s2name+"_"+str(tiles_x)+"_"+str(j)+".png")
+  if(im_S2.height>tiles_y*tile_size):
+    for i in range(0,tiles_x):
+      mask_tile=mask.crop((i*tile_size,mask.height-tile_size,tile_size*(i),mask.height))
+      mask_array=np.array(mask_tile,dtype=np.float)
+      if(not any(255 in b for b in mask_array) and not any(192 in b for b in mask_array) and not any(129 in b for b in mask_array)):
+        RGB_tile=im_S2.crop((i*tile_size,im_S2.height-tile_size,tile_size*(i),im_S2.height))
+        if(check_data(RGB_tile)):
+          RGB_tile.save("s2_RGB/"+s2name+"_"+str(i)+"_"+str(tiles_y)+".png")
+  if(im_S2.height>tiles_y*tile_size and im_S2.width>tiles_x*tile_size):
+    mask_tile=mask.crop((mask.width-tile_size,mask.height-tile_size,mask.width,mask.height))
+    mask_array=np.array(mask_tile,dtype=np.float)
+    if(not any(255 in b for b in mask_array) and not any(192 in b for b in mask_array) and not any(129 in b for b in mask_array)):
+      RGB_tile=im_S2.crop((im_S2.width-tile_size,im_S2.height-tile_size,im_S2.width,im_S2.height))
+      if(check_data(RGB_tile)):
+        RGB_tile.save("s2_RGB/"+s2name+"_"+str(tiles_x)+"_"+str(tiles_y)+".png")
+    
