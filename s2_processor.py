@@ -50,7 +50,7 @@ for S2_SAFE in os.listdir('s2_zip'):
 tile_size=512
 s=0
 l=0
-
+o=0
 for RGB_im in os.listdir("S2_images"):
   name=RGB_im.split(".")[0]
   s2name=S2_short(RGB_im)
@@ -65,6 +65,8 @@ for RGB_im in os.listdir("S2_images"):
       mask_tile=mask.crop((i*tile_size,j*tile_size,tile_size*(i+1),tile_size*(j+1)))
       mask_array=np.array(mask_tile,dtype=np.float)
       print(mask_array)
+      if(not any(255 in b for b in mask_array) and not any(192 in b for b in mask_array) and not any(129 in b for b in mask_array)):
+          o=o+1
       tile="_"+str(i)+"_"+str(j)
       #Is this tile cloudfree?
       for tile2 in os.listdir("/home/heido/projects/cm_predict/prediction/"+name):
@@ -80,6 +82,7 @@ for RGB_im in os.listdir("S2_images"):
               if(np.all(cm>=200)):
                 #print(cm)
                 l=l+1
-                
+
+print(o)
 print(s)
 print(l) 
