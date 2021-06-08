@@ -91,7 +91,7 @@ for RGB_im in os.listdir("S2_images"):
           RGB_tile.save("s2_RGB/"+s2name+"_"+str(tiles_x)+"_"+str(j)+".png")
   if(im_S2.height>tiles_y*tile_size):
     for i in range(0,tiles_x):
-      mask_tile=mask.crop((i*tile_size,mask.height-tile_size,tile_size*(i),mask.height))
+      mask_tile=mask.crop((i*tile_size,mask.height-tile_size,tile_size*(i+1),mask.height))
       print(mask_tile)
       mask_array=np.array(mask_tile,dtype=np.float)
       if(not any(255 in b for b in mask_array) and not any(192 in b for b in mask_array) and not any(129 in b for b in mask_array)):
