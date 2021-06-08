@@ -26,11 +26,11 @@ for S1_tif in os.listdir('s1_tif_final'):
             
             name=S1_name(S1_tif)+"_colwith_"+S2_name(S2_product)
             for folder3 in os.listdir('s2_zip/'+S2_product+'/GRANULE/'):
-            if("L2" in folder3):
-                for filename in os.listdir('s2_zip/'+S2_product+'/GRANULE/'+folder3+'/IMG_DATA/R10m/'):
-                    if('B02_10m.jp2' in filename):
-                        B02='/home/heido/projects/preprocessing/s2_zip/'+S2_product+'/GRANULE/'+folder3+'/IMG_DATA/R10m/'+filename
-                        B02name=filename
+                if("L2" in folder3):
+                    for filename in os.listdir('s2_zip/'+S2_product+'/GRANULE/'+folder3+'/IMG_DATA/R10m/'):
+                        if('B02_10m.jp2' in filename):
+                            B02='/home/heido/projects/preprocessing/s2_zip/'+S2_product+'/GRANULE/'+folder3+'/IMG_DATA/R10m/'+filename
+                            B02name=filename
             targetpath='/home/heido/projects/preprocessing/collocated/'+name+".dim"
             f.write("/snap/snap8/bin/gpt collocation.xml -PB02=\""+B02+"\" -PS1=\""+S1p+"\" -PB02name=\""+B02name+"\" -Ptargetpath=\""+targetpath+"\"\n")
             
