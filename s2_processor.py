@@ -48,7 +48,8 @@ for S2_SAFE in os.listdir('s2_zip'):
         shutil.move(RGB_im+".png",'S2_images/')
     
 tile_size=512
-    
+i=0
+
 for RGB_im in os.listdir("S2_images"):
   name=RGB_im.split(".")[0]
   im_S2 = Image.open("S2_images/"+RGB_im)
@@ -65,6 +66,7 @@ for RGB_im in os.listdir("S2_images"):
               prediction=Image.open("/home/heido/projects/cm_predict/prediction/"+name+"/"+tile2+"/prediction.png")
               pm=np.array(prediction,dtype=np.float)
               if(not any(255 in b for b in pm) and not any(192 in b for b in pm) and not any(129 in b for b in pm)):
+                i=i+1
                 print(pm)
-              
+print(i)
   
