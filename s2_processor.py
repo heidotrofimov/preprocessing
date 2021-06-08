@@ -63,6 +63,8 @@ for RGB_im in os.listdir("S2_images"):
   for i in range(0,tiles_x):
     for j in range(0,tiles_y):
       mask_tile=mask.crop((i*tile_size,j*tile_size,tile_size*(i+1),tile_size*(j+1)))
+      mask_array=np.array(mask_tile,dtype=np.float)
+      print(mask_array)
       tile="_"+str(i)+"_"+str(j)
       #Is this tile cloudfree?
       for tile2 in os.listdir("/home/heido/projects/cm_predict/prediction/"+name):
@@ -76,7 +78,7 @@ for RGB_im in os.listdir("S2_images"):
               if(not any(255 in b for b in pm) and not any(192 in b for b in pm) and not any(129 in b for b in pm)):
                 s=s+1
               if(np.all(cm>=200)):
-                print(cm)
+                #print(cm)
                 l=l+1
                 
 print(s)
