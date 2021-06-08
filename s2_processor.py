@@ -49,6 +49,7 @@ for S2_SAFE in os.listdir('s2_zip'):
     
 tile_size=512
 i=0
+j=0
 
 for RGB_im in os.listdir("S2_images"):
   name=RGB_im.split(".")[0]
@@ -64,9 +65,14 @@ for RGB_im in os.listdir("S2_images"):
             tile3=tile2.split("ile")[1]
             if(tile==tile3):
               prediction=Image.open("/home/heido/projects/cm_predict/prediction/"+name+"/"+tile2+"/prediction.png")
+              clear=Image.open("/home/heido/projects/cm_predict/prediction/"+name+"/"+tile2+"/predict_CLEAR.png")
               pm=np.array(prediction,dtype=np.float)
+              cm=np.array(clear,dtype=np.float)
               if(not any(255 in b for b in pm) and not any(192 in b for b in pm) and not any(129 in b for b in pm)):
                 i=i+1
-                print(pm)
+              if(np.all(cm>=200)):
+                print(cm)
+                j=j+1
+                
 print(i)
   
