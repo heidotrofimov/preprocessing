@@ -65,6 +65,6 @@ for RGB_im in os.listdir("S2_images"):
               prediction=Image.open("/home/heido/projects/cm_predict/prediction/"+name+"/"+tile2+"/prediction.png")
               pm=np.array(prediction,dtype=np.float)
               if(not any(255 in b for b in pm) and not any(192 in b for b in pm) and not any(129 in b for b in pm)):
-                print(cm)
+                print(pm)
               
   
