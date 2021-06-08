@@ -1,25 +1,11 @@
 import sys
-sys.path.append('/home/heido/jpy/build/lib.linux-x86_64-3.6')
-sys.path.append('/home/heido/.snap/snap-python')
-import snappy
-from snappy import ProductIO
 import numpy as np
 import matplotlib.pyplot as plt
 from snappy import ProductData
 from PIL import Image
-from snappy import ProductUtils
-from snappy import ProgressMonitor
-from snappy import Product
-from snappy import FlagCoding
-from snappy import GPF
-from snappy import HashMap
 import os
 import shutil
 from datetime import datetime
-
-jpy = snappy.jpy
-ImageManager = jpy.get_type('org.esa.snap.core.image.ImageManager')
-JAI = jpy.get_type('javax.media.jai.JAI')
 
 #Biomass environment for this script!
 
@@ -40,13 +26,26 @@ def S2_short(S2_full):
 for S2_SAFE in os.listdir('s2_zip'):
     RGB_im=S2_SAFE.split(".")[0]
     if(os.path.isfile("S2_images/"+RGB_im+".png")==False):
-      S2_product=ProductIO.readProduct('s2_zip/'+S2_SAFE+'/GRANULE/output.dim')
-      band_names = S2_product.getBandNames()
-      red = S2_product.getBand('B4')
-      green = S2_product.getBand('B3')
-      blue = S2_product.getBand('B2')
-      write_rgb_image([red, green, blue], RGB_im, 'png')
-      shutil.move(RGB_im,'S2_images')
+        sys.path.append('/home/heido/jpy/build/lib.linux-x86_64-3.6')
+        sys.path.append('/home/heido/.snap/snap-python')
+        import snappy
+        from snappy import ProductIO
+        from snappy import ProductUtils
+        from snappy import ProgressMonitor
+        from snappy import Product
+        from snappy import FlagCoding
+        from snappy import GPF
+        from snappy import HashMap
+        jpy = snappy.jpy
+        ImageManager = jpy.get_type('org.esa.snap.core.image.ImageManager')
+        JAI = jpy.get_type('javax.media.jai.JAI')
+        S2_product=ProductIO.readProduct('s2_zip/'+S2_SAFE+'/GRANULE/output.dim')
+        band_names = S2_product.getBandNames()
+        red = S2_product.getBand('B4')
+        green = S2_product.getBand('B3')
+        blue = S2_product.getBand('B2')
+        write_rgb_image([red, green, blue], RGB_im, 'png')
+        shutil.move(RGB_im+".png",'S2_images/')
     
 tile_size=512
     
