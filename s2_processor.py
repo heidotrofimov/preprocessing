@@ -55,7 +55,7 @@ def check_data(img):
   return True
   
 
-if(a.phase==full_RGB" or a.phase=="RGB"):
+if(a.phase=="full_RGB" or a.phase=="RGB"):
     for S2_SAFE in os.listdir('s2_zip'):
         RGB_im=S2_SAFE.split(".")[0]
         if(os.path.isfile("S2_images/"+RGB_im+".png")==False):
