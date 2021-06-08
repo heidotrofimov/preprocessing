@@ -1,7 +1,6 @@
 import sys
 import numpy as np
 import matplotlib.pyplot as plt
-from snappy import ProductData
 from PIL import Image
 import os
 import shutil
@@ -36,6 +35,7 @@ for S2_SAFE in os.listdir('s2_zip'):
         from snappy import FlagCoding
         from snappy import GPF
         from snappy import HashMap
+        from snappy import ProductData
         jpy = snappy.jpy
         ImageManager = jpy.get_type('org.esa.snap.core.image.ImageManager')
         JAI = jpy.get_type('javax.media.jai.JAI')
