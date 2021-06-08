@@ -148,7 +148,7 @@ if(a.phase=="NDVI"):
             shutil.move(NDVI_im+".png",'S2_images')
             os.remove('NDVI.dim')
             shutil.rmtree('NDVI.data')
-    for filename in os.listdir("s2_images/"):
+    for filename in os.listdir("S2_images/"):
         if("NDVI" in filename):
             s2name=S2_short(filename)
             im_S2 = Image.open("S2_images/"+filename)
