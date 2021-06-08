@@ -11,6 +11,6 @@ for filename in os.listdir("s2_NDVI/"):
       if(filename not in copied):
         copyfile("s2_NDVI/"+filename,"data/S2/"+filename)
         copied.append(filename)
-      copyfile("s1_tiles/"+filename2,"data/S2/"+filename2)
+      copyfile("s1_tiles/"+filename2,"data/S1/"+filename2)
       
     
