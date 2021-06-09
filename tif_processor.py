@@ -3,6 +3,7 @@ from osgeo import gdal
 import sys
 from libtiff import TIFF
 from shutil import copyfile
+from datetime import datetime, timedelta
 
 #Use senpy environment for executing this script!
 
@@ -10,8 +11,8 @@ from shutil import copyfile
 
 #Tiff linearization:
 
-os.system("bash linearize_rasters.sh s1_tif")
-os.system("bash combine_tiffs.sh s1_tif")
+#os.system("bash linearize_rasters.sh s1_tif")
+#os.system("bash combine_tiffs.sh s1_tif")
 
 #Collocation with Sentinel2 products from the same date:
 
@@ -26,10 +27,12 @@ def S2_name(S2_full):
 for S1_tif in os.listdir('s1_tif_final'):
     S1p='s1_tif_final/'+S1_tif
     date1=S1_tif.split("_")[5].split("T")[0]
+    print("Original date: "+date1)
+    found=False
     for S2_product in os.listdir("s2_zip"):
         date2=S2_product.split("_")[2].split("T")[0]
         if(date1==date2):
-            
+            found=True
             name=S1_name(S1_tif)+"_colwith_"+S2_name(S2_product)
             for folder3 in os.listdir('s2_zip/'+S2_product+'/GRANULE/'):
                 if("L2" in folder3):
@@ -38,8 +41,13 @@ for S1_tif in os.listdir('s1_tif_final'):
                             B02='/home/heido/projects/preprocessing/s2_zip/'+S2_product+'/GRANULE/'+folder3+'/IMG_DATA/R10m/'+filename
                             B02name=filename
             targetpath='/home/heido/projects/preprocessing/collocated/'+name+".dim"
-            os.system("/snap/snap8/bin/gpt collocation.xml -PB02=\""+B02+"\" -PS1=\""+S1p+"\" -PB02name=\""+B02name+"\" -Ptargetpath=\""+targetpath+"\"")
-            
+            #os.system("/snap/snap8/bin/gpt collocation.xml -PB02=\""+B02+"\" -PS1=\""+S1p+"\" -PB02name=\""+B02name+"\" -Ptargetpath=\""+targetpath+"\"")
+    if(found==False):
+        date_time_obj = datetime.strptime(date1, '%y/%m/%d')
+        newdate=date_time_obj-timedelta(days=1)
+        date1=str(newdate)
+        print("New date "+date1)
+'''
 #Save the tif files from the collocated data:
 
 for filename in os.listdir('collocated'):
@@ -101,3 +109,4 @@ for filename in os.listdir("s1_tiles"):
         break
     if(condition==False):
       break
+'''
