@@ -1,9 +1,9 @@
 import os
 
 
-f2=open("missing.txt","r")
+f2=open("missing.txt","w")
 
-f= open("s2_data/products.dat")
+f= open("s2_data/products.dat","r")
 lines = f.readlines()
 
 for line in lines:
