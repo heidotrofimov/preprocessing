@@ -43,7 +43,7 @@ for S1_tif in os.listdir('s1_tif'):
             targetpath='/home/heido/projects/preprocessing/collocated/'+name+".dim"
             #os.system("/snap/snap8/bin/gpt collocation.xml -PB02=\""+B02+"\" -PS1=\""+S1p+"\" -PB02name=\""+B02name+"\" -Ptargetpath=\""+targetpath+"\"")
     if(found==False):
-        date_time_obj = datetime(int(date1[0:4]),int(date1[4:2]),int(date1[6:2]))
+        date_time_obj = datetime(int(date1[0:4]),int(date1[4:6]),int(date1[6:8]))
         newdate=date_time_obj-timedelta(days=1)
         date1=str(newdate)
         print("New date "+date1)
