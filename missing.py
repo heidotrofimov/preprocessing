@@ -14,6 +14,7 @@ for line in lines:
     if(".SAFE" in filename):
       print(filename)
       if(line==filename.split(".SAFE")[0]):
+        print("Olen siin")
         olemas=True
   if(olemas==False):
     f2.write(line)
