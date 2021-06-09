@@ -12,6 +12,17 @@ parser = argparse.ArgumentParser()
 parser.add_argument("--phase", required=True, choices=["full_RGB", "RGB_tiles", "RGB", "NDVI"])
 a = parser.parse_args()
 
+for safe in os.lsitdir("s2_zip"):
+    nodim=True
+    for filename in os.listdir("s2_zip/"+safe+"/GRANULE"):
+        if(".dim" in filename):
+            nodim=False
+    if(nodim):
+        input_path="s2_zip/"+safe+"/MTD_MSIL2A.xml"
+        output_path="s2_zip/"+safe+"/GRANULE/output.dim"
+        line_for_gpt="/snap/snap8/bin/gpt output.xml -Pinput=\""+input_path+"\" -Poutput=\""+output_path+"\""
+        os.system(line_for_gpt)
+
 if(a.phase!="RGB_tiles"):
     sys.path.append('/home/heido/jpy/build/lib.linux-x86_64-3.6')
     sys.path.append('/home/heido/.snap/snap-python')
