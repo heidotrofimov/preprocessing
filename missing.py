@@ -1,3 +1,5 @@
+import os
+
 
 f2=open("missing.txt","r")
 
