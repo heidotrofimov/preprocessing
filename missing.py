@@ -13,7 +13,7 @@ for line in lines:
       if(line==filename.split(".SAFE")[0]):
         olemas=True
   if(olemas==False):
-    missing.write(line+"\n")
+    f2.write(line+"\n")
     
 f.close()
 f2.close()
