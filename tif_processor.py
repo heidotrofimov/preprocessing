@@ -27,6 +27,7 @@ def S2_name(S2_full):
 for S1_tif in os.listdir('s1_tif_final'):
     S1p='s1_tif_final/'+S1_tif
     date1=S1_tif.split("_")[5].split("T")[0]
+    date1_o=S1_tif.split("_")[5].split("T")[0]
     found=False
     for S2_product in os.listdir("s2_zip"):
         date2=S2_product.split("_")[2].split("T")[0]
@@ -42,7 +43,7 @@ for S1_tif in os.listdir('s1_tif_final'):
             targetpath='/home/heido/projects/preprocessing/collocated/'+name+".dim"
             os.system("/snap/snap8/bin/gpt collocation.xml -PB02=\""+B02+"\" -PS1=\""+S1p+"\" -PB02name=\""+B02name+"\" -Ptargetpath=\""+targetpath+"\"")
     if(found==False):
-        date_time_obj = datetime(int(date1[0:4]),int(date1[4:6]),int(date1[6:8]))
+        date_time_obj = datetime(int(date1_o[0:4]),int(date1_o[4:6]),int(date1_o[6:8]))
         newdate=date_time_obj-timedelta(days=1)
         date1=str(newdate).split()[0].replace("-","")
         for S2_product in os.listdir("s2_zip"):
@@ -59,8 +60,8 @@ for S1_tif in os.listdir('s1_tif_final'):
                 targetpath='/home/heido/projects/preprocessing/collocated/'+name+".dim"
                 os.system("/snap/snap8/bin/gpt collocation.xml -PB02=\""+B02+"\" -PS1=\""+S1p+"\" -PB02name=\""+B02name+"\" -Ptargetpath=\""+targetpath+"\"")
     if(found==False):
-        date_time_obj = datetime(int(date1[0:4]),int(date1[4:6]),int(date1[6:8]))
-        newdate=date_time_obj-timedelta(days=1)
+        date_time_obj = datetime(int(date1_o[0:4]),int(date1_o[4:6]),int(date1_o[6:8]))
+        newdate=date_time_obj-timedelta(days=2)
         date1=str(newdate).split()[0].replace("-","")
         for S2_product in os.listdir("s2_zip"):
             date2=S2_product.split("_")[2].split("T")[0]
@@ -75,7 +76,42 @@ for S1_tif in os.listdir('s1_tif_final'):
                                 B02name=filename
                 targetpath='/home/heido/projects/preprocessing/collocated/'+name+".dim"
                 os.system("/snap/snap8/bin/gpt collocation.xml -PB02=\""+B02+"\" -PS1=\""+S1p+"\" -PB02name=\""+B02name+"\" -Ptargetpath=\""+targetpath+"\"")       
-
+    if(found==False):
+        date_time_obj = datetime(int(date1_o[0:4]),int(date1_o[4:6]),int(date1_o[6:8]))
+        newdate=date_time_obj+timedelta(days=1)
+        date1=str(newdate).split()[0].replace("-","")
+        for S2_product in os.listdir("s2_zip"):
+            date2=S2_product.split("_")[2].split("T")[0]
+            if(date1==date2):
+                found=True
+                name=S1_name(S1_tif)+"_colwith_"+S2_name(S2_product)
+                for folder3 in os.listdir('s2_zip/'+S2_product+'/GRANULE/'):
+                    if("L2" in folder3):
+                        for filename in os.listdir('s2_zip/'+S2_product+'/GRANULE/'+folder3+'/IMG_DATA/R10m/'):
+                            if('B02_10m.jp2' in filename):
+                                B02='/home/heido/projects/preprocessing/s2_zip/'+S2_product+'/GRANULE/'+folder3+'/IMG_DATA/R10m/'+filename
+                                B02name=filename
+                targetpath='/home/heido/projects/preprocessing/collocated/'+name+".dim"
+                os.system("/snap/snap8/bin/gpt collocation.xml -PB02=\""+B02+"\" -PS1=\""+S1p+"\" -PB02name=\""+B02name+"\" -Ptargetpath=\""+targetpath+"\"") 
+    if(found==False):
+        date_time_obj = datetime(int(date1_o[0:4]),int(date1_o[4:6]),int(date1_o[6:8]))
+        newdate=date_time_obj+timedelta(days=2)
+        date1=str(newdate).split()[0].replace("-","")
+        for S2_product in os.listdir("s2_zip"):
+            date2=S2_product.split("_")[2].split("T")[0]
+            if(date1==date2):
+                found=True
+                name=S1_name(S1_tif)+"_colwith_"+S2_name(S2_product)
+                for folder3 in os.listdir('s2_zip/'+S2_product+'/GRANULE/'):
+                    if("L2" in folder3):
+                        for filename in os.listdir('s2_zip/'+S2_product+'/GRANULE/'+folder3+'/IMG_DATA/R10m/'):
+                            if('B02_10m.jp2' in filename):
+                                B02='/home/heido/projects/preprocessing/s2_zip/'+S2_product+'/GRANULE/'+folder3+'/IMG_DATA/R10m/'+filename
+                                B02name=filename
+                targetpath='/home/heido/projects/preprocessing/collocated/'+name+".dim"
+                os.system("/snap/snap8/bin/gpt collocation.xml -PB02=\""+B02+"\" -PS1=\""+S1p+"\" -PB02name=\""+B02name+"\" -Ptargetpath=\""+targetpath+"\"") 
+                
+                
 #Save the tif files from the collocated data:
 
 for filename in os.listdir('collocated'):
