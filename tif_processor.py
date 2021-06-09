@@ -5,9 +5,21 @@ from libtiff import TIFF
 from shutil import copyfile
 from datetime import datetime, timedelta
 
+#Clean before and then copy:
+'''
+rm -r s1_iq/*
+rm -r s1_tif/*
+rm -r s1_tif_final/*
+rm -r collocated/*
+rm -r collocated_tifs/*
+mv ../heido_test/s1_iq ./
+'''
+
 #Use senpy environment for executing this script!
 
 #Rename the tiffs and delete unnecessary tifs before executing this script
+
+#Final output: new files added to s1_tiles
 
 #Tiff linearization:
 
