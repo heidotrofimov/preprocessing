@@ -45,7 +45,7 @@ for S1_tif in os.listdir('s1_tif'):
     if(found==False):
         date_time_obj = datetime(int(date1[0:4]),int(date1[4:6]),int(date1[6:8]))
         newdate=date_time_obj-timedelta(days=1)
-        date1=str(newdate).split([0]).repalce("-","")
+        date1=str(newdate).split()[0].repalce("-","")
         print("New date "+date1)
 '''
 #Save the tif files from the collocated data:
