@@ -10,10 +10,11 @@ missing=[]
 
 for line in lines:
   olemas=False
+  line2=line.rstrip()
   for filename in os.listdir("s2_data"):
     if(".SAFE" in filename):
       print(filename)
-      if(line==filename.split(".SAFE")[0]):
+      if(line2==filename.split(".SAFE")[0]):
         print("Olen siin")
         olemas=True
   if(olemas==False):
