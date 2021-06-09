@@ -24,7 +24,7 @@ def S2_name(S2_full):
     S2=S2_full.split(".")[0].split("_")
     return S2[0]+"_"+S2[2]+"_"+S2[5]
 
-for S1_tif in os.listdir('s1_tif_final'):
+for S1_tif in os.listdir('s1_tif'):
     S1p='s1_tif_final/'+S1_tif
     date1=S1_tif.split("_")[5].split("T")[0]
     print("Original date: "+date1)
