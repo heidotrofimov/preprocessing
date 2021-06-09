@@ -12,7 +12,7 @@ parser = argparse.ArgumentParser()
 parser.add_argument("--phase", required=True, choices=["full_RGB", "RGB_tiles", "RGB", "NDVI"])
 a = parser.parse_args()
 
-for safe in os.lsitdir("s2_zip"):
+for safe in os.listdir("s2_zip"):
     nodim=True
     for filename in os.listdir("s2_zip/"+safe+"/GRANULE"):
         if(".dim" in filename):
