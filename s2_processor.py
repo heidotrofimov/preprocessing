@@ -8,6 +8,11 @@ from datetime import datetime
 import argparse
 
 
+#S2_images - 10980 px RGB and NDVI images for each product. For temporary files only; should be empty
+#s2_NDVI, s2_RGB - final, cloudfree tiles
+#s2_RGB_new - newly produced files, that have to be overlooked first. after checking all files and deleting cloudy/fieldless files, transfer the content
+#to s2_RGB
+
 parser = argparse.ArgumentParser()
 parser.add_argument("--phase", required=True, choices=["full_RGB", "RGB_tiles", "RGB", "NDVI"])
 a = parser.parse_args()
@@ -64,7 +69,9 @@ def check_data(img):
       if(img[i,j][3]==0):
         return False
   return True
-  
+ 
+    
+#Create full RGB images
 
 if(a.phase=="full_RGB" or a.phase=="RGB"):
     for S2_SAFE in os.listdir('s2_zip'):
@@ -88,7 +95,7 @@ if(a.phase=="RGB_tiles" or a.phase=="RGB"):
       name=RGB_im.split(".")[0]
       s2name=S2_short(RGB_im)
       im_S2 = Image.open("S2_images/"+RGB_im)
-      for filename in os.listdir("/home/heido/projects/cm_predict/prediction/"+name):
+      for filename in os.listdir("/home/heido/projects/preprocessing/cloudmasks/"+name):
         if(".png" in filename):
           mask=Image.open("/home/heido/projects/cm_predict/prediction/"+name+"/"+filename)
       tiles_x=int(im_S2.width/tile_size)
@@ -100,7 +107,7 @@ if(a.phase=="RGB_tiles" or a.phase=="RGB"):
           if(not any(255 in b for b in mask_array) and not any(192 in b for b in mask_array) and not any(129 in b for b in mask_array)):
               RGB_tile=im_S2.crop((i*tile_size,j*tile_size,tile_size*(i+1),tile_size*(j+1)))
               if(check_data(RGB_tile)):
-                RGB_tile.save("s2_RGB/"+s2name+"_"+str(i)+"_"+str(j)+".png")
+                RGB_tile.save("s2_RGB_new/"+s2name+"_"+str(i)+"_"+str(j)+".png")
       if(im_S2.width>tiles_x*tile_size):
         for j in range(0,tiles_y):
           mask_tile=mask.crop((mask.width-tile_size,j*tile_size,mask.width,tile_size*(j+1)))
@@ -108,7 +115,7 @@ if(a.phase=="RGB_tiles" or a.phase=="RGB"):
           if(not any(255 in b for b in mask_array) and not any(192 in b for b in mask_array) and not any(129 in b for b in mask_array)):
             RGB_tile=im_S2.crop((im_S2.width-tile_size,j*tile_size,im_S2.width,tile_size*(j+1)))
             if(check_data(RGB_tile)):
-              RGB_tile.save("s2_RGB/"+s2name+"_"+str(tiles_x)+"_"+str(j)+".png")
+              RGB_tile.save("s2_RGB_new/"+s2name+"_"+str(tiles_x)+"_"+str(j)+".png")
       if(im_S2.height>tiles_y*tile_size):
         for i in range(0,tiles_x):
           mask_tile=mask.crop((i*tile_size,mask.height-tile_size,tile_size*(i+1),mask.height))
@@ -116,14 +123,14 @@ if(a.phase=="RGB_tiles" or a.phase=="RGB"):
           if(not any(255 in b for b in mask_array) and not any(192 in b for b in mask_array) and not any(129 in b for b in mask_array)):
             RGB_tile=im_S2.crop((i*tile_size,im_S2.height-tile_size,tile_size*(i+1),im_S2.height))
             if(check_data(RGB_tile)):
-              RGB_tile.save("s2_RGB/"+s2name+"_"+str(i)+"_"+str(tiles_y)+".png")
+              RGB_tile.save("s2_RGB_new/"+s2name+"_"+str(i)+"_"+str(tiles_y)+".png")
       if(im_S2.height>tiles_y*tile_size and im_S2.width>tiles_x*tile_size):
         mask_tile=mask.crop((mask.width-tile_size,mask.height-tile_size,mask.width,mask.height))
         mask_array=np.array(mask_tile,dtype=np.float)
         if(not any(255 in b for b in mask_array) and not any(192 in b for b in mask_array) and not any(129 in b for b in mask_array)):
           RGB_tile=im_S2.crop((im_S2.width-tile_size,im_S2.height-tile_size,im_S2.width,im_S2.height))
           if(check_data(RGB_tile)):
-            RGB_tile.save("s2_RGB/"+s2name+"_"+str(tiles_x)+"_"+str(tiles_y)+".png")
+            RGB_tile.save("s2_RGB_new/"+s2name+"_"+str(tiles_x)+"_"+str(tiles_y)+".png")
     
 if(a.phase=="NDVI"):
     for S2_SAFE in os.listdir('s2_zip'):
