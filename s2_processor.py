@@ -97,7 +97,7 @@ if(a.phase=="RGB_tiles" or a.phase=="RGB"):
       im_S2 = Image.open("S2_images/"+RGB_im)
       for filename in os.listdir("/home/heido/projects/preprocessing/cloudmasks/"+name):
         if(".png" in filename):
-          mask=Image.open("/home/heido/projects/cm_predict/prediction/"+name+"/"+filename)
+          mask=Image.open("/home/heido/projects/preprocessing/cloudmasks/"+name+"/"+filename)
       tiles_x=int(im_S2.width/tile_size)
       tiles_y=int(im_S2.height/tile_size)
       for i in range(0,tiles_x):
