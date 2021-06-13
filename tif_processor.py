@@ -30,7 +30,7 @@ os.system("bash combine_tiffs.sh s1_tif")
 
 def S1_name(S1_full):
     S1=S1_full.split(".")[0].split("_")
-    return S1[0]+"_"+S1[4]+"_"+S1[-3]+"_"+S1[-2]+"_"+S1[-1]
+    return S1[0]+"_"+S1[5]+"_"+S1[-1]
 
 def S2_name(S2_full):
     S2=S2_full.split(".")[0].split("_")
