@@ -22,12 +22,30 @@ for line in lines:
   
 f1.close()
 
+
+for filename in os.listdir("data/S1"):
+    if("03E1E1_1AED" in filename):
+        new_part="S1A_20200718T042609_1AED"
+        old_part=filename.split("_colwith")[0]
+        newname=filename.replace(old_part,new_part)
+        print(newname)
+        #copyfile("data/S1/"+filename,"data/S1/"+newname)
+        #os.remove("data/S1/"+filename)
+    if("03D73C_344A" in filename):
+        new_part="S1A_20200624T042608_344A"
+        old_part=filename.split("_colwith")[0]
+        newname=filename.replace(old_part,new_part)
+        print(newname)
+        #copyfile("data/S1/"+filename,"data/S1/"+newname)
+        #os.remove("data/S1/"+filename)
+
+'''
 for filename in os.listdir("/home/users/biomass/s2_NDVI"):
-  '''
+
   s1_part=filename.split("_")[2]+"_"+filename.split("_")[3]
   s1_long=s1_dict[s1_part]
   s1_real=S1_name(s1_long)
-  '''
+
   s2_part=filename.split("_")[0]+"_"+filename.split("_")[1]
   s2_long=s1_dict[s2_part]
   s2_real=S2_name(s2_long).replace(" ","")
@@ -42,7 +60,7 @@ for filename in os.listdir("/home/users/biomass/s2_NDVI"):
  
     
     
-'''
+
 
 for filename in os.listdir("/home/users/biomass/s1_files"):
     newname=filename.replace(" ","")
