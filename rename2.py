@@ -35,11 +35,11 @@ for filename in os.listdir("/home/users/biomass/s2_RGB"):
   new_name=s2_real+"_"+filename.split("_")[4]+"_"+filename.split("_")[5]
   print(new_name)
 
-  '''
-  new_name=s1_real+"_colwith_"+s2_real+"_"+filename.split("_")[4]+"_"+filename.split("_")[5]+".tif"
-  copyfile("/home/users/biomass/s1_files/"+filename,"/home/users/biomass/s1_files/"+new_name)
-  os.remove("/home/users/biomass/s1_files/"+filename)
-  '''
+ 
+  #new_name=s1_real+"_colwith_"+s2_real+"_"+filename.split("_")[4]+"_"+filename.split("_")[5]+".tif"
+  copyfile("/home/users/biomass/s2_RGB/"+filename,"/home/users/biomass/s2_RGB/"+new_name)
+  os.remove("/home/users/biomass/s2_RGB/"+filename)
+ 
     
     
 '''
