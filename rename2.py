@@ -17,7 +17,7 @@ lines=f1.readlines()
 
 for line in lines:
   short=line.split(":")[0]
-  long=line.split(":")[1].rtrip()
+  long=line.split(":")[1].rstrip()
   s1_dict[short]=long
   
 f1.close()
