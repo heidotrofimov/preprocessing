@@ -29,15 +29,15 @@ for filename in os.listdir("data/S1"):
         old_part=filename.split("_colwith")[0]
         newname=filename.replace(old_part,new_part)
         print(newname)
-        #copyfile("data/S1/"+filename,"data/S1/"+newname)
-        #os.remove("data/S1/"+filename)
+        copyfile("data/S1/"+filename,"data/S1/"+newname)
+        os.remove("data/S1/"+filename)
     if("03D73C_344A" in filename):
         new_part="S1A_20200624T042608_344A"
         old_part=filename.split("_colwith")[0]
         newname=filename.replace(old_part,new_part)
         print(newname)
-        #copyfile("data/S1/"+filename,"data/S1/"+newname)
-        #os.remove("data/S1/"+filename)
+        copyfile("data/S1/"+filename,"data/S1/"+newname)
+        os.remove("data/S1/"+filename)
 
 '''
 for filename in os.listdir("/home/users/biomass/s2_NDVI"):
