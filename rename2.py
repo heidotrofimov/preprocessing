@@ -10,7 +10,7 @@ def S2_name(S2_full):
     return S2[0]+"_"+S2[2]+"_"+S2[5]
 
 s1_dict={}
-
+'''
 f1=open("full_product_names","r")
 
 lines=f1.readlines()
@@ -33,3 +33,11 @@ for filename in os.listdir("/home/users/biomass/s1_files"):
   new_name=s1_real+"_colwith_"+s2_real+"_"+filename.split("_")[4]+"_"+filename.split("_")[5]+".tif"
   copyfile("/home/users/biomass/s1_files/"+filename,"/home/users/biomass/s1_files/"+new_name)
   os.remove("/home/users/biomass/s1_files/"+filename)
+'''
+
+for filename in os.listdir("/home/users/biomass/s1_files"):
+    newname=filename.replace(" ","")
+    newname=newname.replace(".tif.tif",".tif")
+    newname.replace("'","")
+    print(newname)
+    
