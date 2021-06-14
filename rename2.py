@@ -22,7 +22,7 @@ for line in lines:
   
 f1.close()
 
-for filename in os.listdir("/home/users/biomass/s2_RGB"):
+for filename in os.listdir("/home/users/biomass/s2_NDVI"):
   '''
   s1_part=filename.split("_")[2]+"_"+filename.split("_")[3]
   s1_long=s1_dict[s1_part]
@@ -37,8 +37,8 @@ for filename in os.listdir("/home/users/biomass/s2_RGB"):
 
  
   #new_name=s1_real+"_colwith_"+s2_real+"_"+filename.split("_")[4]+"_"+filename.split("_")[5]+".tif"
-  copyfile("/home/users/biomass/s2_RGB/"+filename,"/home/users/biomass/s2_RGB/"+new_name)
-  os.remove("/home/users/biomass/s2_RGB/"+filename)
+  copyfile("/home/users/biomass/s2_NDVI/"+filename,"/home/users/biomass/s2_NDVI/"+new_name)
+  os.remove("/home/users/biomass/s2_NDVI/"+filename)
  
     
     
