@@ -13,6 +13,7 @@ rm -r s1_tif_final/*
 rm -r collocated/*
 rm -r collocated_tifs/*
 mv ../heido_test/s1_iq ./
+rm s1_tiles/*
 '''
 
 #Use senpy environment for executing this script!
@@ -31,12 +32,7 @@ tiles_file=open(AOI+"_tiles_with_fields.txt","r")
 lines=tiles_file.readlines()
 for line in lines:
     tiles_of_interest.append(line.rstrip())
-    
-print(tiles_of_interest)
 
-
-
-'''
 
 os.system("bash linearize_rasters.sh s1_tif")
 os.system("bash combine_tiffs.sh s1_tif")
@@ -169,8 +165,10 @@ for filename in os.listdir(inputdir):
     for y_tiles in range(yRange):
         for x_tiles in range(xRange):
             outputPath = "s1_tiles/"+filename.split(".tif")[0]+"_"+str(x_tiles)+"_"+str(y_tiles)
-            com_string = "gdal_translate -of GTIFF -srcwin " + str(xOffset)+ ", " + str(yOffset) + ", " + str(tile_width) + ", " + str(tile_height) + " " + str(inputPath) + " " + str(outputPath) + ".tif"
-            os.system(com_string)
+            tile_nr=str(x_tiles)+"_"+str(y_tiles)
+            if(tile_nr in tiles_of_interest):
+                com_string = "gdal_translate -of GTIFF -srcwin " + str(xOffset)+ ", " + str(yOffset) + ", " + str(tile_width) + ", " + str(tile_height) + " " + str(inputPath) + " " + str(outputPath) + ".tif"
+                os.system(com_string)
 
             if inputTiff.RasterXSize - xOffset > 512:
                 xOffset += 512
@@ -201,4 +199,4 @@ for filename in os.listdir("s1_tiles"):
     if(condition==False):
       break
 
-'''
+
