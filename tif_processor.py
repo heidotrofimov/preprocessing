@@ -23,6 +23,21 @@ mv ../heido_test/s1_iq ./
 
 #Tiff linearization:
 
+AOI="T35VMF"
+
+tiles_of_interest=[]
+
+tiles_file=open(AOI+"_tiles_with_fields.txt","r")
+lines=tiles_file.readlines()
+for line in lines:
+    tiles_of_interest.append(line.rstrip())
+    
+print(tiles_of_interest)
+
+
+
+'''
+
 os.system("bash linearize_rasters.sh s1_tif")
 os.system("bash combine_tiffs.sh s1_tif")
 
@@ -186,3 +201,4 @@ for filename in os.listdir("s1_tiles"):
     if(condition==False):
       break
 
+'''
