@@ -165,8 +165,9 @@ for filename in os.listdir(inputdir):
     for y_tiles in range(yRange):
         for x_tiles in range(xRange):
             outputPath = "s1_tiles/"+filename.split(".tif")[0]+"_"+str(x_tiles)+"_"+str(y_tiles)
-            print(outputPath)
+            print("Olen siin: "+outputPath)
             corresponding_S2=outputPath.split("colwith_")[1]
+            print("Jõudsin siia: "+corresponding_S2)
             tile_nr=str(x_tiles)+"_"+str(y_tiles)
             s2_tile_exists=False
             for filename in os.listdir("s2_RGB_new"):
