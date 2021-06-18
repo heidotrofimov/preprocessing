@@ -33,7 +33,7 @@ lines=tiles_file.readlines()
 for line in lines:
     tiles_of_interest.append(line.rstrip())
 
-
+'''
 os.system("bash linearize_rasters.sh s1_tif")
 os.system("bash combine_tiffs.sh s1_tif")
 
@@ -142,7 +142,7 @@ for filename in os.listdir('collocated'):
     inputfile='collocated/'+filename
     output='collocated_tifs/'+filename.split(".")[0]+'.tif'
     os.system("/snap/snap8/bin/gpt save_tif.xml -Pinput=\""+inputfile+"\" -Poutput=\""+output+"\"")
-    
+'''    
 #Tile the tif files:
 
 inputdir="collocated_tifs"
@@ -165,7 +165,7 @@ for filename in os.listdir(inputdir):
     for y_tiles in range(yRange):
         for x_tiles in range(xRange):
             outputPath = "s1_tiles/"+filename.split(".tif")[0]+"_"+str(x_tiles)+"_"+str(y_tiles)
-            corresponding_S2=outputpath.split("colwith_")[1].split(".")[0]
+            corresponding_S2=outputPath.split("colwith_")[1].split(".")[0]
             tile_nr=str(x_tiles)+"_"+str(y_tiles)
             s2_tile_exists=False
             for filename in os.lsitdir("s2_RGB_new"):
