@@ -165,8 +165,14 @@ for filename in os.listdir(inputdir):
     for y_tiles in range(yRange):
         for x_tiles in range(xRange):
             outputPath = "s1_tiles/"+filename.split(".tif")[0]+"_"+str(x_tiles)+"_"+str(y_tiles)
+            corresponding_S2=outputpath.split("colwith_")[1].split(".")[0]
             tile_nr=str(x_tiles)+"_"+str(y_tiles)
-            if(tile_nr in tiles_of_interest):
+            s2_tile_exists=False
+            for filename in os.lsitdir("s2_RGB_new"):
+                if(filename.split(".")[0]==corresponding_S2):
+                    s2_tile_exists=True
+                    break
+            if(tile_nr in tiles_of_interest and s2_tile_exists==True):
                 com_string = "gdal_translate -of GTIFF -srcwin " + str(xOffset)+ ", " + str(yOffset) + ", " + str(tile_width) + ", " + str(tile_height) + " " + str(inputPath) + " " + str(outputPath) + ".tif"
                 os.system(com_string)
 
