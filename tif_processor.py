@@ -1,4 +1,5 @@
 import os
+import os.path
 from osgeo import gdal
 import sys
 from libtiff import TIFF
@@ -172,7 +173,7 @@ for filename in os.listdir(inputdir):
                 if(filename2.split(".")[0]==corresponding_S2):
                     s2_tile_exists=True
                     break
-            if(tile_nr in tiles_of_interest and s2_tile_exists==True):
+            if(tile_nr in tiles_of_interest and s2_tile_exists==True and os.path.isfile(str(outputPath)+".tif")==False):
                 com_string = "gdal_translate -of GTIFF -srcwin " + str(xOffset)+ ", " + str(yOffset) + ", " + str(tile_width) + ", " + str(tile_height) + " " + str(inputPath) + " " + str(outputPath) + ".tif"
                 os.system(com_string)
 
