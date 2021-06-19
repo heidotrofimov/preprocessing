@@ -16,16 +16,26 @@ for filename in os.listdir("data/S2/"):
         if(AOI1==AOI2 and tile_nr1==tile_nr2 and date_time_obj2<date_time_obj1 and (date_time_obj1-date_time_obj2).days<32):
             print(filename+" with "+filename2)
             S2_filename=filename.split(AOI1)[0]+AOI1+"_"+filename2.split("_")[0]+"_"+filename2.split("_")[1]+"_"+tile_nr1+".png"
-            print("New S2 filename: "+S2_filename)
-            S1s=[]
+            target=Image.open("data/S2/"+filename)
+            history=Image.open("s2_NDVI/"+filename2)
+            dst = Image.new('RGB', (target.width + history.width, target.height))
+            dst.paste(target, (0, 0))
+            dst.paste(history, (target.width, 0))
+            dst.save("data/with_history/S2/"+S2_filename)
+            try:
+                target_RGB=Image.open("data/S2_RGB/"+filename)
+                history_RGB=Image.open("s2_RGB/"+filename2)
+                dst_RGB = Image.new('RGB', (target_RGB.width + history_RGB.width, target_RGB.height))
+                dst_RGB.paste(target_RGB, (0, 0))
+                dst_RGB.paste(history_RGB, (target_RGB.width, 0))
+                dst_RGB.save("data/with_history/S2_RGB/"+S2_filename)
+            except:
+                pass
             for filename3 in os.listdir("data/S1"):
                 corresponding_S2=filename3.split("colwith_")[1].replace(".tif",".png")
                 if(corresponding_S2==filename):
-                    print("The S1 we found: "+filename3)
                     S1_filename=filename3.split("colwith_")[0]+"colwith_"+S2_filename.split(".")[0]+".tif"
-                    S1s.append(S1_filename)
-            for S1 in S1s:
-                print("New S1 filename: "+S1)
+                    copyfile("data/S1/"+filename3,"data/with_history/S1/"+S1_filename)
             
             
         
