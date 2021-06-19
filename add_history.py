@@ -22,7 +22,7 @@ for filename in os.listdir("data/S2/"):
                 corresponding_S2=filename3.split("colwith_")[1].replace(".tif",".png")
                 if(corresponding_S2==filename):
                     print("The S1 we found: "+filename3)
-                    S1_filename=filename3.split("colwith_")[0]+S2_filename.split(".")[0]+".tif"
+                    S1_filename=filename3.split("colwith_")[0]+"colwith_"+S2_filename.split(".")[0]+".tif"
                     S1s.append(S1_filename)
             for S1 in S1s:
                 print("New S1 filename: "+S1)
