@@ -13,6 +13,16 @@ import argparse
 #s2_RGB_new - newly produced files, that have to be overlooked first. after checking all files and deleting cloudy/fieldless files, transfer the content
 #to s2_RGB
 
+AOI="T35VLF"
+
+tiles_of_interest=[]
+
+tiles_file=open(AOI+"_tiles_with_fields.txt","r")
+lines=tiles_file.readlines()
+for line in lines:
+    tiles_of_interest.append(line.rstrip())
+tiles_file.close()
+
 parser = argparse.ArgumentParser()
 parser.add_argument("--phase", required=True, choices=["full_RGB", "RGB_tiles", "RGB", "NDVI"])
 a = parser.parse_args()
@@ -106,7 +116,7 @@ if(a.phase=="RGB_tiles" or a.phase=="RGB"):
           mask_array=np.array(mask_tile,dtype=np.float)
           if(not any(255 in b for b in mask_array) and not any(192 in b for b in mask_array) and not any(129 in b for b in mask_array)):
               RGB_tile=im_S2.crop((i*tile_size,j*tile_size,tile_size*(i+1),tile_size*(j+1)))
-              if(check_data(RGB_tile)):
+              if(check_data(RGB_tile) and str(i)+"_"+str(j) in tiles_of_interest):
                 RGB_tile.save("s2_RGB_new/"+s2name+"_"+str(i)+"_"+str(j)+".png")
       if(im_S2.width>tiles_x*tile_size):
         for j in range(0,tiles_y):
@@ -114,7 +124,7 @@ if(a.phase=="RGB_tiles" or a.phase=="RGB"):
           mask_array=np.array(mask_tile,dtype=np.float)
           if(not any(255 in b for b in mask_array) and not any(192 in b for b in mask_array) and not any(129 in b for b in mask_array)):
             RGB_tile=im_S2.crop((im_S2.width-tile_size,j*tile_size,im_S2.width,tile_size*(j+1)))
-            if(check_data(RGB_tile)):
+            if(check_data(RGB_tile) and str(tiles_x)+"_"+str(j) in tiles_of_interest):
               RGB_tile.save("s2_RGB_new/"+s2name+"_"+str(tiles_x)+"_"+str(j)+".png")
       if(im_S2.height>tiles_y*tile_size):
         for i in range(0,tiles_x):
@@ -122,14 +132,14 @@ if(a.phase=="RGB_tiles" or a.phase=="RGB"):
           mask_array=np.array(mask_tile,dtype=np.float)
           if(not any(255 in b for b in mask_array) and not any(192 in b for b in mask_array) and not any(129 in b for b in mask_array)):
             RGB_tile=im_S2.crop((i*tile_size,im_S2.height-tile_size,tile_size*(i+1),im_S2.height))
-            if(check_data(RGB_tile)):
+            if(check_data(RGB_tile) and str(i)+"_"+str(tiles_y) in tiles_of_interest):
               RGB_tile.save("s2_RGB_new/"+s2name+"_"+str(i)+"_"+str(tiles_y)+".png")
       if(im_S2.height>tiles_y*tile_size and im_S2.width>tiles_x*tile_size):
         mask_tile=mask.crop((mask.width-tile_size,mask.height-tile_size,mask.width,mask.height))
         mask_array=np.array(mask_tile,dtype=np.float)
         if(not any(255 in b for b in mask_array) and not any(192 in b for b in mask_array) and not any(129 in b for b in mask_array)):
           RGB_tile=im_S2.crop((im_S2.width-tile_size,im_S2.height-tile_size,im_S2.width,im_S2.height))
-          if(check_data(RGB_tile)):
+          if(check_data(RGB_tile) and str(tiles_x)+"_"+str(tiles_y) in tiles_of_interest):
             RGB_tile.save("s2_RGB_new/"+s2name+"_"+str(tiles_x)+"_"+str(tiles_y)+".png")
     
 if(a.phase=="NDVI"):
