@@ -20,6 +20,7 @@ for filename in os.listdir("data/S2/"):
             print(S2_filename)
             for filename3 in os.listdir("data/S1"):
                 corresponding_S2=filename3.split("colwith_")[1].replace(".tif",".png")
+                print(corresponding_S2)
                 if(filename3==filename):
                     S1_filename=filename3.split("colwith_")[0]+S2_filename.split(".")[0]+".tif"
             print("New S1 filename: "+S1_filename)
