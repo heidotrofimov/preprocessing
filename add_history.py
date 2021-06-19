@@ -18,12 +18,14 @@ for filename in os.listdir("data/S2/"):
             S2_filename=filename.split("AOI1")[0]+AOI1+"_"+filename2.split("_")[0]+"_"+filename2.split("_")[1]+"_"+tile_nr1+".png"
             print("New S2 filename: "+S2_filename)
             print(S2_filename)
+            S1s=[]
             for filename3 in os.listdir("data/S1"):
                 corresponding_S2=filename3.split("colwith_")[1].replace(".tif",".png")
-                print(corresponding_S2)
-                if(filename3==filename):
+                if(corresponding_S2==filename):
                     S1_filename=filename3.split("colwith_")[0]+S2_filename.split(".")[0]+".tif"
-            print("New S1 filename: "+S1_filename)
+                    S1s.append(S1_filename)
+            for S1 in S1s:
+                print("New S1 filename: "+S1_filename)
             
             
         
