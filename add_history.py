@@ -17,7 +17,6 @@ for filename in os.listdir("data/S2/"):
             print(filename+" with "+filename2)
             S2_filename=filename.split(AOI1)[0]+AOI1+"_"+filename2.split("_")[0]+"_"+filename2.split("_")[1]+"_"+tile_nr1+".png"
             print("New S2 filename: "+S2_filename)
-            print(S2_filename)
             S1s=[]
             for filename3 in os.listdir("data/S1"):
                 corresponding_S2=filename3.split("colwith_")[1].replace(".tif",".png")
