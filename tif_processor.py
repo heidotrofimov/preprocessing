@@ -5,6 +5,7 @@ import sys
 from libtiff import TIFF
 from shutil import copyfile
 from datetime import datetime, timedelta
+import numpy as np
 
 #Clean before and then copy:
 '''
