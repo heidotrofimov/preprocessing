@@ -10,7 +10,7 @@ for tif in os.listdir("s1_tif_final"):
         if(collocated.split("_colwith")[0]==S1_short):
             print(tif)
             print(S1_short)
-            deleted+=0
+            deleted+=1
             break
             
 print(deleted)
