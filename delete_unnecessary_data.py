@@ -9,5 +9,6 @@ for tif in os.listdir("s1_tif_final"):
     for collocated in os.listdir("collocated"):
         if(collocated.split("_colwith")[0]==S1_short):
             os.remove("s1_tif_final/"+tif)
+            break
             
 
