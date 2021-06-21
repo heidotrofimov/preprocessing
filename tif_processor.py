@@ -25,16 +25,6 @@ rm s1_tiles/*
 
 #Tiff linearization:
 
-AOI="T35VMF"
-
-tiles_of_interest=[]
-
-tiles_file=open(AOI+"_tiles_with_fields.txt","r")
-lines=tiles_file.readlines()
-for line in lines:
-    tiles_of_interest.append(line.rstrip())
-
-'''
 os.system("bash linearize_rasters.sh s1_tif")
 os.system("bash combine_tiffs.sh s1_tif")
 
@@ -143,7 +133,7 @@ for filename in os.listdir('collocated'):
     inputfile='collocated/'+filename
     output='collocated_tifs/'+filename.split(".")[0]+'.tif'
     os.system("/snap/snap8/bin/gpt save_tif.xml -Pinput=\""+inputfile+"\" -Poutput=\""+output+"\"")
-'''    
+   
 #Tile the tif files:
 
 inputdir="collocated_tifs"
@@ -173,7 +163,16 @@ for filename in os.listdir(inputdir):
                 if(filename2.split(".")[0]==corresponding_S2):
                     s2_tile_exists=True
                     break
-            if(tile_nr in tiles_of_interest and s2_tile_exists==True and os.path.isfile(str(outputPath)+".tif")==False):
+                    
+            #Check if the tif in this region is OK
+            tifOK=True
+            S1_im=TIFF.open(inputPath)
+            imarray=S1_im.read_image()
+            i=xOffset+10
+            j=yOffset+10
+            if(imarray[j][i][0]==0 or (imarray[j][i][1]==-32768 and imarray[j][i][2]==-32768 and imarray[j][i][3]==-32768 and imarray[j][i][4]==-32768)):
+                tifOK=False
+            if(s2_tile_exists==True and os.path.isfile(str(outputPath)+".tif")==False and tifOK==True):
                 com_string = "gdal_translate -of GTIFF -srcwin " + str(xOffset)+ ", " + str(yOffset) + ", " + str(tile_width) + ", " + str(tile_height) + " " + str(inputPath) + " " + str(outputPath) + ".tif"
                 os.system(com_string)
 
