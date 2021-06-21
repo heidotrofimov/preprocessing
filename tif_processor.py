@@ -144,7 +144,6 @@ for filename in os.listdir(inputdir):
     
     S1_im=TIFF.open(inputPath)
     imarray=S1_im.read_image()
-    print(imarray.shape)
 
 
     tile_width = 512
@@ -176,7 +175,7 @@ for filename in os.listdir(inputdir):
                 
                 i=xOffset+10
                 j=yOffset+10
-                if(imarray[j][i][0]==0 or (imarray[j][i][1]==-32768 and imarray[j][i][2]==-32768 and imarray[j][i][3]==-32768 and imarray[j][i][4]==-32768)):
+                if(imarray[0][j][i]==0 or (imarray[1][j][i]==-32768 and imarray[2][j][i]==-32768 and imarray[3][j][i]==-32768 and imarray[4][j][i]==-32768)):
                     tifOK=False
                 if(tifOK==True):
                     datecondition=True    
