@@ -48,7 +48,7 @@ for filename in os.listdir("data/S2/"):
     if(max_days<32):
         print(filename+" with "+found_historical)
         S2_filename=filename.split(AOI1)[0]+AOI1+"_"+found_historical.split("_")[0]+"_"+found_historical.split("_")[1]+"_"+tile_nr1+".png"
-        if(os.path.isfile("data/with_history/S2/"+S2_filename===False):
+        if(os.path.isfile("data/with_history/S2/"+S2_filename)==False):
             target=Image.open("data/S2/"+filename)
             history=Image.open("s2_NDVI/"+found_historical)
             dst = Image.new('RGB', (target.width + history.width, target.height))
