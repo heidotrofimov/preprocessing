@@ -164,17 +164,34 @@ for filename in os.listdir(inputdir):
                     s2_tile_exists=True
                     break
                     
-            #Check if the tif in this region is OK
-            tifOK=True
-            S1_im=TIFF.open(inputPath)
-            imarray=S1_im.read_image()
-            i=xOffset+10
-            j=yOffset+10
-            if(imarray[j][i][0]==0 or (imarray[j][i][1]==-32768 and imarray[j][i][2]==-32768 and imarray[j][i][3]==-32768 and imarray[j][i][4]==-32768)):
-                tifOK=False
-            if(s2_tile_exists==True and os.path.isfile(str(outputPath)+".tif")==False and tifOK==True):
-                com_string = "gdal_translate -of GTIFF -srcwin " + str(xOffset)+ ", " + str(yOffset) + ", " + str(tile_width) + ", " + str(tile_height) + " " + str(inputPath) + " " + str(outputPath) + ".tif"
-                os.system(com_string)
+                
+                
+            if(s2_tile_exists==True and os.path.isfile(str(outputPath)+".tif")==False):
+                tifOK=True
+                S1_im=TIFF.open(inputPath)
+                imarray=S1_im.read_image()
+                i=xOffset+10
+                j=yOffset+10
+                if(imarray[j][i][0]==0 or (imarray[j][i][1]==-32768 and imarray[j][i][2]==-32768 and imarray[j][i][3]==-32768 and imarray[j][i][4]==-32768)):
+                    tifOK=False
+                if(tifOK==True):
+                    datecondition=True    
+                    S1_date=filename.split("_")[1].split("T")[0]
+                    S1_date_obj=datetime(int(S1_date[0:4]),int(S1_date[4:6]),int(S1_date[6:8]))
+                    corresponding_S2=outputPath.split("colwith_")[1]
+                    S2_date=corresponding_S2.split("_")[1].split("T")[0]
+                    S2_date_obj=datetime(int(S2_date[0:4]),int(S2_date[4:6]),int(S2_date[6:8]))
+                    for filename3 in os.listdir("s1_tiles"):
+                        if(filename3.split("colwith_")==corresponding_S2):
+                            #If current date is farther away from S2_date, then we won't proceed
+                            other_date=filename3.split("_")[1].split("T")[0]
+                            other_date_obj=datetime(int(other_date[0:4]),int(other_date[4:6]),int(other_date[6:8]))
+                            if(np.abs((other_date_obj-S2_date_obj).days)<np.abs((S1_date_obj-S2_date_obj).days)):
+                                datecondition=False
+                                break
+                    if(datecondition==True):
+                        com_string = "gdal_translate -of GTIFF -srcwin " + str(xOffset)+ ", " + str(yOffset) + ", " + str(tile_width) + ", " + str(tile_height) + " " + str(inputPath) + " " + str(outputPath) + ".tif"
+                        os.system(com_string)
 
             if inputTiff.RasterXSize - xOffset > 512:
                 xOffset += 512
