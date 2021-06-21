@@ -182,8 +182,8 @@ for filename in os.listdir(inputdir):
                     S2_date=corresponding_S2.split("_")[1].split("T")[0]
                     S2_date_obj=datetime(int(S2_date[0:4]),int(S2_date[4:6]),int(S2_date[6:8]))
                     for filename3 in os.listdir("s1_tiles"):
-                        if(filename3.split("colwith_")==corresponding_S2):
-                            #If current date is farther away from S2_date, then we won't proceed
+                        if(filename3.split("colwith_").split(".")[0]==corresponding_S2):
+                            #If current date is farther away from S2_date than the other date, then we won't proceed
                             other_date=filename3.split("_")[1].split("T")[0]
                             other_date_obj=datetime(int(other_date[0:4]),int(other_date[4:6]),int(other_date[6:8]))
                             if(np.abs((other_date_obj-S2_date_obj).days)<np.abs((S1_date_obj-S2_date_obj).days)):
