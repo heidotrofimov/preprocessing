@@ -7,4 +7,4 @@ for mask in os.listdir("cloudmasks"):
     date2=product.split("_")[2]
     if(date==date2):
       os.mkdir("cloudmasks/"+product.split(".")[0])
-      shutil.move("cloudmasks/"+mask,"cloudmasks/"++product.split(".")[0]+"/"+mask)
+      shutil.move("cloudmasks/"+mask,"cloudmasks/"+product.split(".")[0]+"/"+mask)
