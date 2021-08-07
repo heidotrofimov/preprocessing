@@ -26,8 +26,8 @@ rm s1_tiles/*
 
 #Tiff linearization:
 
-//os.system("bash linearize_rasters.sh s1_tif")
-//os.system("bash combine_tiffs.sh s1_tif")
+#os.system("bash linearize_rasters.sh s1_tif")
+#os.system("bash combine_tiffs.sh s1_tif")
 
 #Collocation with Sentinel2 products from the same date:
 
