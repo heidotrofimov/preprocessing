@@ -6,6 +6,17 @@ from datetime import datetime, timedelta
 
 copied=[]
 
+for s2 in os.listdir("s2_NDVI"):
+  s2_date=s2.split("_")[1].split("T")[0]
+  s2_date_obj = datetime(int(s2_date[0:4]),int(s2_date[4:6]),int(s2_date[6:8]))
+  days_between=100
+  chosen_s1=[]
+  for s1 in os.listdir("s1_tiles"):
+    if(s1.split("colwith_")[1].split(".")[0]==s2.split(".")[0]):
+      s1_date=s1.split("_")[1].split("T")[0]
+      s1_date_obj = datetime(int(s1_date[0:4]),int(s1_date[4:6]),int(s1_date[6:8]))
+
+
 for filename in os.listdir("s1_tiles/"):
   corresponding_s2=filename.split("colwith_")[1].split(".")[0]
   for filename2 in os.listdir("s2_NDVI"):
