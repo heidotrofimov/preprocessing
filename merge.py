@@ -1,10 +1,13 @@
 import os
+import numpy as np
 from shutil import copyfile
 from PIL import Image
 from datetime import datetime, timedelta
 
+year="2020"
+AOI="T35VMC"
 
-copied=[]
+#Without history:
 
 for s2 in os.listdir("s2_NDVI"):
   s2_date=s2.split("_")[1].split("T")[0]
@@ -15,47 +18,41 @@ for s2 in os.listdir("s2_NDVI"):
     if(s1.split("colwith_")[1].split(".")[0]==s2.split(".")[0]):
       s1_date=s1.split("_")[1].split("T")[0]
       s1_date_obj = datetime(int(s1_date[0:4]),int(s1_date[4:6]),int(s1_date[6:8]))
-
-
-for filename in os.listdir("s1_tiles/"):
-  corresponding_s2=filename.split("colwith_")[1].split(".")[0]
-  for filename2 in os.listdir("s2_NDVI"):
-    s2name=filename2.split(".")[0]
-    if(s2name==corresponding_s2):
-      copyfile("s1_tiles/"+filename,"data/S1/"+filename)
-      if(filename2 not in copied):
-        copyfile("s2_NDVI/"+filename2,"data/S2/"+filename2)
-        copied.append(filename2)
-        
-copied=[]        
-for filename in os.listdir("s1_tiles/"):
-  corresponding_s2=filename.split("colwith_")[1].split(".")[0]
-  for filename2 in os.listdir("s2_RGB"):
-    s2name=filename2.split(".")[0]
-    if(s2name==corresponding_s2):
-      #copyfile("s1_tiles/"+filename,"data/S1/"+filename)
-      if(filename2 not in copied):
-        copyfile("s2_RGB/"+filename2,"data/S2_RGB/"+filename2)
-        copied.append(filename2)
-        
+      nr_of_days= np.abs((s2_date_obj-s1_date_obj).days)
+      if(nr_of_days<days_between):
+        days_between=nr_of_days
+  for s1 in os.listdir("s1_tiles"):
+    if(s1.split("colwith_")[1].split(".")[0]==s2.split(".")[0]):
+      s1_date=s1.split("_")[1].split("T")[0]
+      s1_date_obj = datetime(int(s1_date[0:4]),int(s1_date[4:6]),int(s1_date[6:8]))
+      nr_of_days=np.abs((s2_date_obj-s1_date_obj).days)
+      if(nr_of_days==days_between):
+        chosen_s1.append("s1_tiles/"+s1)
+  if(len(chosen_s1)!=0):
+    copyfile("s2_NDVI/"+s2,"data/S2/"+s2)
+    for s1 in chosen_s1:
+      copyfile(s1,"data/S1/"+s1.split("/")[1])
+       
 #Historical images:
-
 
 for filename in os.listdir("data/S2/"):
     AOI1=filename.split("_")[2]
     date_str1=filename.split("_")[1].split("T")[0]
-    date_time_obj1 = datetime(int(date_str1[0:4]),int(date_str1[4:6]),int(date_str1[6:8]))
-    tile_nr1=filename.split(AOI1+"_")[1].split(".")[0]
-    list_of_suitables=[]
-    max_days=32
-    for filename2 in os.listdir("s2_NDVI/"):
-        AOI2=filename2.split("_")[2]
-        date_str2=filename2.split("_")[1].split("T")[0]
-        date_time_obj2 = datetime(int(date_str2[0:4]),int(date_str2[4:6]),int(date_str2[6:8]))
-        tile_nr2=filename2.split(AOI2+"_")[1].split(".")[0]
-        if(AOI1==AOI2 and tile_nr1==tile_nr2 and date_time_obj2<date_time_obj1 and (date_time_obj1-date_time_obj2).days<max_days):
-            found_historical=filename2
-            max_days=(date_time_obj1-date_time_obj2).days
+    year1=date_str1[0:4]
+    if(AOI1==AOI and year1==year):
+      
+      date_time_obj1 = datetime(int(date_str1[0:4]),int(date_str1[4:6]),int(date_str1[6:8]))
+      tile_nr1=filename.split(AOI1+"_")[1].split(".")[0]
+      list_of_suitables=[]
+      max_days=32
+      for filename2 in os.listdir("s2_NDVI/"):
+          AOI2=filename2.split("_")[2]
+          date_str2=filename2.split("_")[1].split("T")[0]
+          date_time_obj2 = datetime(int(date_str2[0:4]),int(date_str2[4:6]),int(date_str2[6:8]))
+          tile_nr2=filename2.split(AOI2+"_")[1].split(".")[0]
+          if(AOI1==AOI2 and tile_nr1==tile_nr2 and date_time_obj2<date_time_obj1 and (date_time_obj1-date_time_obj2).days<max_days):
+              found_historical=filename2
+              max_days=(date_time_obj1-date_time_obj2).days
     if(max_days<32):
         print(filename+" with "+found_historical)
         S2_filename=filename.split(AOI1)[0]+AOI1+"_"+found_historical.split("_")[0]+"_"+found_historical.split("_")[1]+"_"+tile_nr1+".png"
