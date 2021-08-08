@@ -65,8 +65,8 @@ for filename in os.listdir("data/S2/"):
                 dst_RGB.paste(target_RGB, (0, 0))
                 dst_RGB.paste(history_RGB, (target_RGB.width, 0))
                 dst_RGB.save("data/with_history/S2_RGB/"+S2_filename)
-            except:
-                pass
+            except Exception as e:
+                print(e)
             for filename3 in os.listdir("data/S1"):
                 corresponding_S2=filename3.split("colwith_")[1].replace(".tif",".png")
                 if(corresponding_S2==filename):
