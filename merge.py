@@ -58,15 +58,14 @@ for filename in os.listdir("data/S2/"):
             dst.paste(target, (0, 0))
             dst.paste(history, (target.width, 0))
             dst.save("data/with_history/S2/"+S2_filename)
-            try:
-                target_RGB=Image.open("data/S2_RGB/"+filename)
-                history_RGB=Image.open("s2_RGB/"+found_historical)
-                dst_RGB = Image.new('RGB', (target_RGB.width + history_RGB.width, target_RGB.height))
-                dst_RGB.paste(target_RGB, (0, 0))
-                dst_RGB.paste(history_RGB, (target_RGB.width, 0))
-                dst_RGB.save("data/with_history/S2_RGB/"+S2_filename)
-            except Exception as e:
-                print(e)
+
+            target_RGB=Image.open("data/S2_RGB/"+filename)
+            history_RGB=Image.open("s2_RGB/"+found_historical)
+            dst_RGB = Image.new('RGB', (target_RGB.width + history_RGB.width, target_RGB.height))
+            dst_RGB.paste(target_RGB, (0, 0))
+            dst_RGB.paste(history_RGB, (target_RGB.width, 0))
+            dst_RGB.save("data/with_history/S2_RGB/"+S2_filename)
+
             for filename3 in os.listdir("data/S1"):
                 corresponding_S2=filename3.split("colwith_")[1].replace(".tif",".png")
                 if(corresponding_S2==filename):
