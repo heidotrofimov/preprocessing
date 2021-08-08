@@ -158,6 +158,7 @@ for filename in os.listdir(inputdir):
     yRange = (inputTiff.RasterYSize // tile_height) + 1
 
     images_created = list()
+    print("Olen siin: 0")
     for y_tiles in range(yRange):
         for x_tiles in range(xRange):
             outputPath = "s1_tiles/"+filename.split(".tif")[0]+"_"+str(x_tiles)+"_"+str(y_tiles)
@@ -172,6 +173,7 @@ for filename in os.listdir(inputdir):
                 
                 
             if(s2_tile_exists==True and os.path.isfile(str(outputPath)+".tif")==False):
+                print("Olen siin: 01")
                 tifOK=True
                 
                 
