@@ -180,6 +180,7 @@ for filename in os.listdir(inputdir):
                 if(imarray[0][j][i]==0 or (imarray[1][j][i]==-32768 and imarray[2][j][i]==-32768 and imarray[3][j][i]==-32768 and imarray[4][j][i]==-32768)):
                     tifOK=False
                 if(tifOK==True):
+                    print("Olen siin: 1")
                     datecondition=True    
                     S1_date=filename.split("_")[1].split("T")[0]
                     S1_date_obj=datetime(int(S1_date[0:4]),int(S1_date[4:6]),int(S1_date[6:8]))
@@ -195,6 +196,7 @@ for filename in os.listdir(inputdir):
                                 datecondition=False
                                 break
                     if(datecondition==True):
+                        print("Olen siin: 2")
                         com_string = "gdal_translate -of GTIFF -srcwin " + str(xOffset)+ ", " + str(yOffset) + ", " + str(tile_width) + ", " + str(tile_height) + " " + str(inputPath) + " " + str(outputPath) + ".tif"
                         os.system(com_string)
 
