@@ -38,7 +38,7 @@ def S1_name(S1_full):
 def S2_name(S2_full):
     S2=S2_full.split(".")[0].split("_")
     return S2[0]+"_"+S2[2]+"_"+S2[5]
-
+'''
 for S1_tif in os.listdir('s1_tif_final'):
     S1p='s1_tif_final/'+S1_tif
     date1=S1_tif.split("_")[5].split("T")[0]
@@ -134,6 +134,7 @@ for filename in os.listdir('collocated'):
     inputfile='collocated/'+filename
     output='collocated_tifs/'+filename.split(".")[0]+'.tif'
     os.system("/snap/snap8/bin/gpt save_tif.xml -Pinput=\""+inputfile+"\" -Poutput=\""+output+"\"")
+'''
 
 #Tile the tif files:
 
