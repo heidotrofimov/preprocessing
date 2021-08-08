@@ -166,7 +166,7 @@ for filename in os.listdir(inputdir):
             corresponding_S2=outputPath.split("colwith_")[1]
             tile_nr=str(x_tiles)+"_"+str(y_tiles)
             s2_tile_exists=False
-            for filename2 in os.listdir("s2_RGB_new"):
+            for filename2 in os.listdir("s2_NDVI"):
                 if(filename2.split(".")[0]==corresponding_S2):
                     s2_tile_exists=True
                     break
