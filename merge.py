@@ -27,6 +27,7 @@ for s2 in os.listdir("s2_NDVI"):
         chosen_s1.append("s1_tiles/"+s1)
   if(len(chosen_s1)!=0):
     copyfile("s2_NDVI/"+s2,"data/S2/"+s2)
+    copyfile("s2_RGB/"+s2,"data/S2_RGB/"+s2)
     for s1 in chosen_s1:
       copyfile(s1,"data/S1/"+s1.split("/")[1])
        
