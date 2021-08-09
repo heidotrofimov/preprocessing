@@ -15,7 +15,7 @@ for product in os.listdir("s2_zip"):
   dates.append(date_str)
   
 
-while(len(dates>0)):
+while(len(dates)>0):
   date_str1=""
   for date_str in dates:
     date_obj=datetime(int(date_str[0:4]),int(date_str[4:6]),int(date_str[6:8]))
