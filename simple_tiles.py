@@ -8,15 +8,16 @@ from datetime import datetime
 import argparse
 
 for safe in os.listdir("products"):
-    nodim=True
-    for filename in os.listdir("products/"+safe+"/GRANULE"):
-        if(".dim" in filename):
-            nodim=False
-    if(nodim):
-        input_path="products/"+safe+"/MTD_MSIL2A.xml"
-        output_path="products/"+safe+"/GRANULE/output.dim"
-        line_for_gpt="/snap/snap8/bin/gpt output.xml -Pinput=\""+input_path+"\" -Poutput=\""+output_path+"\""
-        os.system(line_for_gpt)
+    if("SAFE" in safe):
+        nodim=True
+        for filename in os.listdir("products/"+safe+"/GRANULE"):
+            if(".dim" in filename):
+                nodim=False
+        if(nodim):
+            input_path="products/"+safe+"/MTD_MSIL2A.xml"
+            output_path="products/"+safe+"/GRANULE/output.dim"
+            line_for_gpt="/snap/snap8/bin/gpt output.xml -Pinput=\""+input_path+"\" -Poutput=\""+output_path+"\""
+            os.system(line_for_gpt)
         
 sys.path.append('/home/heido/jpy/build/lib.linux-x86_64-3.6')
 sys.path.append('/home/heido/.snap/snap-python')
