@@ -23,6 +23,7 @@ while(len(dates)>0):
       referencedate=date_obj
       date_str1=date_str
   if(date_str1!=""):
+    print(date_str1)
     sorted_dates.append(date_str1)
     dates.remove(date_str1)
 
