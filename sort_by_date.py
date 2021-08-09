@@ -5,7 +5,7 @@ from datetime import datetime, timedelta
 
 #Leiame kõigepealt kõige hilisema
 
-referencedate=datetime(2006,10,10)
+
 dates=[]
 sorted_dates=[]
 
@@ -16,6 +16,7 @@ for product in os.listdir("s2_zip"):
   
 
 while(len(dates)>0):
+  referencedate=datetime(2006,10,10)
   date_str1=""
   for date_str in dates:
     date_obj=datetime(int(date_str[0:4]),int(date_str[4:6]),int(date_str[6:8]))
