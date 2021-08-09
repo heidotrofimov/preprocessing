@@ -26,8 +26,8 @@ rm s1_tiles/*
 
 #Tiff linearization:
 
-#os.system("bash linearize_rasters.sh s1_tif")
-#os.system("bash combine_tiffs.sh s1_tif")
+os.system("bash linearize_rasters.sh s1_tif")
+os.system("bash combine_tiffs.sh s1_tif")
 
 #Collocation with Sentinel2 products from the same date:
 
@@ -38,7 +38,7 @@ def S1_name(S1_full):
 def S2_name(S2_full):
     S2=S2_full.split(".")[0].split("_")
     return S2[0]+"_"+S2[2]+"_"+S2[5]
-'''
+
 for S1_tif in os.listdir('s1_tif_final'):
     S1p='s1_tif_final/'+S1_tif
     date1=S1_tif.split("_")[5].split("T")[0]
@@ -134,7 +134,7 @@ for filename in os.listdir('collocated'):
     inputfile='collocated/'+filename
     output='collocated_tifs/'+filename.split(".")[0]+'.tif'
     os.system("/snap/snap8/bin/gpt save_tif.xml -Pinput=\""+inputfile+"\" -Poutput=\""+output+"\"")
-'''
+
 
 #Tile the tif files:
 
@@ -158,11 +158,9 @@ for filename in os.listdir(inputdir):
     yRange = (inputTiff.RasterYSize // tile_height) + 1
 
     images_created = list()
-    print("Olen siin: 0")
     for y_tiles in range(yRange):
         for x_tiles in range(xRange):
             outputPath = "s1_tiles/"+filename.split(".tif")[0]+"_"+str(x_tiles)+"_"+str(y_tiles)
-            print(outputPath)
             corresponding_S2=outputPath.split("colwith_")[1]
             tile_nr=str(x_tiles)+"_"+str(y_tiles)
             s2_tile_exists=False
@@ -174,7 +172,6 @@ for filename in os.listdir(inputdir):
                 
                 
             if(s2_tile_exists==True and os.path.isfile(str(outputPath)+".tif")==False):
-                print("Olen siin: 01")
                 tifOK=True
                 
                 
@@ -183,7 +180,7 @@ for filename in os.listdir(inputdir):
                 if(imarray[0][j][i]==0 or (imarray[1][j][i]==-32768 and imarray[2][j][i]==-32768 and imarray[3][j][i]==-32768 and imarray[4][j][i]==-32768)):
                     tifOK=False
                 if(tifOK==True):
-                    print("Olen siin: 1")
+                    
                     datecondition=True    
                     S1_date=filename.split("_")[1].split("T")[0]
                     S1_date_obj=datetime(int(S1_date[0:4]),int(S1_date[4:6]),int(S1_date[6:8]))
@@ -199,7 +196,7 @@ for filename in os.listdir(inputdir):
                                 datecondition=False
                                 break
                     if(datecondition==True):
-                        print("Olen siin: 2")
+                 
                         com_string = "gdal_translate -of GTIFF -srcwin " + str(xOffset)+ ", " + str(yOffset) + ", " + str(tile_width) + ", " + str(tile_height) + " " + str(inputPath) + " " + str(outputPath) + ".tif"
                         os.system(com_string)
 
