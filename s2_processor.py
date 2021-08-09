@@ -13,7 +13,7 @@ import argparse
 #s2_RGB_new - newly produced files, that have to be overlooked first. after checking all files and deleting cloudy/fieldless files, transfer the content
 #to s2_RGB
 
-AOI="T35VMC"
+AOI="T34UED"
 
 tiles_of_interest=[]
 
