@@ -46,7 +46,7 @@ def write_image(band, filename, format):
     
 for S2_SAFE in os.listdir('products'):
     RGB_im=S2_SAFE.split(".")[0]
-    if(os.path.isfile("S2_images/"+RGB_im+".png")==False):
+    if(os.path.isfile("products/"+RGB_im+".png")==False):
         S2_product=ProductIO.readProduct('products/'+S2_SAFE+'/GRANULE/output.dim')
         band_names = S2_product.getBandNames()
         red = S2_product.getBand('B4')
