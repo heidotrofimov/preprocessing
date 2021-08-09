@@ -22,8 +22,9 @@ while(len(dates)>0):
     if(date_obj>referencedate):
       referencedate=date_obj
       date_str1=date_str
-  sorted_dates.append(date_str1)
-  dates.remove(date_str1)
+  if(date_str1!=""):
+    sorted_dates.append(date_str1)
+    dates.remove(date_str1)
 
 for i in range(len(sorted_dates)):
   date_str=sorted_dates[i]
