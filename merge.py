@@ -6,6 +6,9 @@ from datetime import datetime, timedelta
 
 #Without history:
 
+s2n=0
+s1n=0
+
 for s2 in os.listdir("s2_NDVI"):
   s2_date=s2.split("_")[1].split("T")[0]
   s2_date_obj = datetime(int(s2_date[0:4]),int(s2_date[4:6]),int(s2_date[6:8]))
@@ -26,10 +29,18 @@ for s2 in os.listdir("s2_NDVI"):
       if(nr_of_days==days_between):
         chosen_s1.append("s1_tiles/"+s1)
   if(len(chosen_s1)!=0):
+    s2n=s2n+1
     copyfile("s2_NDVI/"+s2,"data/S2/"+s2)
     copyfile("s2_RGB/"+s2,"data/S2_RGB/"+s2)
     for s1 in chosen_s1:
       copyfile(s1,"data/S1/"+s1.split("/")[1])
+      s1n=s1n+1
+      
+print("Added s1: "+str(s1n))
+print("Added s2: "+str(s2n))
+
+s1n=0
+s2n=0
        
 #Historical images:
 
@@ -49,7 +60,7 @@ for filename in os.listdir("data/S2/"):
             found_historical=filename2
             max_days=(date_time_obj1-date_time_obj2).days
     if(max_days<32):
-        print(filename+" with "+found_historical)
+        #print(filename+" with "+found_historical)
         S2_filename=filename.split(AOI1)[0]+AOI1+"_"+found_historical.split("_")[0]+"_"+found_historical.split("_")[1]+"_"+tile_nr1+".png"
         if(os.path.isfile("data/with_history/S2/"+S2_filename)==False):
           target=Image.open("data/S2/"+filename)
@@ -58,6 +69,7 @@ for filename in os.listdir("data/S2/"):
           dst.paste(target, (0, 0))
           dst.paste(history, (target.width, 0))
           dst.save("data/with_history/S2/"+S2_filename)
+          s2n=s2n+1
           try:
             target_RGB=Image.open("data/S2_RGB/"+filename)
             history_RGB=Image.open("s2_RGB/"+found_historical)
@@ -73,7 +85,10 @@ for filename in os.listdir("data/S2/"):
               if(corresponding_S2==filename):
                   S1_filename=filename3.split("colwith_")[0]+"colwith_"+S2_filename.split(".")[0]+".tif"
                   copyfile("data/S1/"+filename3,"data/with_history/S1/"+S1_filename)
-            
+                  s1n=s1n+1
+ 
+print("With historical tiles:")
       
-      
+print("Added s1: "+str(s1n))
+print("Added s2: "+str(s2n))
     
