@@ -149,4 +149,39 @@ for month in active_months:
     for product in month_list:
         product_list.append(product)
 
-print(product_list)
+for j in range(len(product_list)):
+    month=product_list[j].split("_")[2].split(year)[1][0:2]
+    print(month)
+    #Download the propduct:
+    if(os.path.isfile(current_dir+"/target_images/"+product_list[j]+".txt")==False and os.path.isfile(current_dir+"/clear_images/"+product_list[j]+".txt")==False):
+        f=open("products/products.dat","w")
+        f.write(product_list[j])
+        f.close()
+        os.system("~/miniconda3/envs/senpy/bin/python /home/heido/cvat-vsm/dias_old/main_engine.py -d products")
+        os.system("mv products/*.SAFE data/")
+        #Make the .dim file:
+        if(os.path.isdir("data/"+product_list[j]+".SAFE")==True):
+            input_path="data/"+product_list[j]+".SAFE/MTD_MSIL2A.xml"
+            output_path="data/"+product_list[j]+".SAFE/GRANULE/output.dim"
+            line_for_gpt="/snap/snap8/bin/gpt output.xml -Pinput=\""+input_path+"\" -Poutput=\""+output_path+"\""
+            os.system(line_for_gpt)
+            #Make the RGB image:
+            S2_product=ProductIO.readProduct('data/'+product_list[j]+'.SAFE/GRANULE/output.dim')
+            band_names = S2_product.getBandNames()
+            red = S2_product.getBand('B4')
+            green = S2_product.getBand('B3')
+            blue = S2_product.getBand('B2')
+            write_rgb_image([red, green, blue], product_list[j]+".png", 'png')
+            #Tile the image
+            im_S2 = Image.open(product_list[j]+".png")
+            where1=open(current_dir+"/target_images/"+product_list[j]+".txt","w")
+            where2=open(current_dir+"/clear_images/"+product_list[j]+".txt","w")
+            #os.system("mkdir target_images/"+product_list[j])
+            #os.system("mkdir clear_images/"+product_list[j])
+            tile_image(im_S2,product_list[j],where1)
+            tile_clear_image(im_S2,product_list[j],where2)
+            where1.close()
+            where2.close()
+            os.system("rm -r data/*")
+            os.system("rm -r products/*")
+            os.system("rm *.png")
