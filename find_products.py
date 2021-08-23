@@ -143,7 +143,7 @@ f.close()
 
 product_list=[]
 
-for month in months:
+for month in active_months:
     download_xml("S2*MSIL2A*"+year+month+"*"+place+"* AND ( (platformname:Sentinel-2 AND cloudcoverpercentage:[0 TO 4.0])) ","month_"+month+".xml")
     month_list=read_xml("month_"+month+".xml")
     for product in month_list:
