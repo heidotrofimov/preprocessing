@@ -4,6 +4,7 @@ import sys
 import time
 from pathlib import Path
 from PIL import Image
+from datetime import datetime, timedelta
 sys.path.append('/home/heido/jpy/build/lib.linux-x86_64-3.6')
 sys.path.append('/home/heido/.snap/snap-python')
 import snappy
@@ -169,7 +170,7 @@ for j in range(len(product_list)):
         f.write(product_list[j])
         f.close()
         os.system("~/miniconda3/envs/senpy/bin/python /home/heido/cvat-vsm/dias_old/main_engine.py -d prediction_data")
-        os.system("rm prediction_data/products*)
+        os.system("rm prediction_data/products*")
         #Make the .dim file:
         if(os.path.isdir("prediction_data/"+product_list[j]+".SAFE")==True):
             input_path="prediction_data/"+product_list[j]+".SAFE/MTD_MSIL2A.xml"
