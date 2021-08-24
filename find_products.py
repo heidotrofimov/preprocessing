@@ -20,8 +20,8 @@ jpy = snappy.jpy
 ImageManager = jpy.get_type('org.esa.snap.core.image.ImageManager')
 JAI = jpy.get_type('javax.media.jai.JAI')
 
-lsit_for_senpy=open("list_for_senpy.txt","w")
-
+list_for_senpy=open("list_for_senpy.txt","w")
+tile_size=512
 Image.MAX_IMAGE_PIXELS = None
 
 def download_xml(product, out_path):
