@@ -20,7 +20,7 @@ jpy = snappy.jpy
 ImageManager = jpy.get_type('org.esa.snap.core.image.ImageManager')
 JAI = jpy.get_type('javax.media.jai.JAI')
 
-lsit_for_senpy=Open("list_for_senpy.txt","w")
+lsit_for_senpy=open("list_for_senpy.txt","w")
 
 Image.MAX_IMAGE_PIXELS = None
 
