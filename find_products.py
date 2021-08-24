@@ -140,7 +140,7 @@ def tile_NDVI_image(im_S2,name,where,where_RGB):
             RGB_tile.save(where+"/"+S2_name+"_"+str(tiles_x)+"_"+str(tiles_y)+".png")
 
 year="2019"
-place="T34UEA"
+place="T34UFD"
 
 
 os.system("rm month*.xml")
