@@ -76,7 +76,7 @@ def tile_clear_image(im_S2,name,where):
     tiles_file.close()
     #Make the mask
     S2_name=S2_short(name)
-    os.system("~/miniconda3/envs/cm_predict/bin/python cm_predict.py -c config/config_example.json -product "+name)
+    os.system("~/miniconda3/envs/cm_predict/bin/python cm_predict.py -c config/config_example.json --tiling-output prediction_data -product "+name)
     for filename in os.listdir("prediction/"+name):
         if(".png" in filename):
             mask=Image.open("/home/heido/projects/day_test/prediction/"+name+"/"+filename)
