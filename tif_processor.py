@@ -132,7 +132,6 @@ for S1_tif in os.listdir('s1_tif_final'):
                 os.system("/snap/snap8/bin/gpt collocation.xml -PB02=\""+B02+"\" -PS1=\""+S1p+"\" -PB02name=\""+B02name+"\" -Ptargetpath=\""+targetpath+"\"") 
                 os.system("rm s1_tif_final/"+S1_tif)
                 
-os.system("rm -r s2_zip/*") 
 
 #Save the tif files from the collocated data:
 
