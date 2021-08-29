@@ -28,6 +28,7 @@ rm s1_tiles/*
 
 os.system("bash linearize_rasters.sh s1_tif")
 os.system("bash combine_tiffs.sh s1_tif")
+os.system("rm s1_tif/*")
 
 #Collocation with Sentinel2 products from the same date:
 
@@ -57,6 +58,7 @@ for S1_tif in os.listdir('s1_tif_final'):
                             B02name=filename
             targetpath='/home/heido/projects/preprocessing/collocated/'+name+".dim"
             os.system("/snap/snap8/bin/gpt collocation.xml -PB02=\""+B02+"\" -PS1=\""+S1p+"\" -PB02name=\""+B02name+"\" -Ptargetpath=\""+targetpath+"\"")
+            os.system("rm s1_tif_final/"+S1_tif)
     if(found==False):
         date_time_obj = datetime(int(date1_o[0:4]),int(date1_o[4:6]),int(date1_o[6:8]))
         newdate=date_time_obj-timedelta(days=1)
@@ -74,6 +76,7 @@ for S1_tif in os.listdir('s1_tif_final'):
                                 B02name=filename
                 targetpath='/home/heido/projects/preprocessing/collocated/'+name+".dim"
                 os.system("/snap/snap8/bin/gpt collocation.xml -PB02=\""+B02+"\" -PS1=\""+S1p+"\" -PB02name=\""+B02name+"\" -Ptargetpath=\""+targetpath+"\"")
+                os.system("rm s1_tif_final/"+S1_tif)
     if(found==False):
         date_time_obj = datetime(int(date1_o[0:4]),int(date1_o[4:6]),int(date1_o[6:8]))
         newdate=date_time_obj-timedelta(days=2)
@@ -90,7 +93,8 @@ for S1_tif in os.listdir('s1_tif_final'):
                                 B02='/home/heido/projects/preprocessing/s2_zip/'+S2_product+'/GRANULE/'+folder3+'/IMG_DATA/R10m/'+filename
                                 B02name=filename
                 targetpath='/home/heido/projects/preprocessing/collocated/'+name+".dim"
-                os.system("/snap/snap8/bin/gpt collocation.xml -PB02=\""+B02+"\" -PS1=\""+S1p+"\" -PB02name=\""+B02name+"\" -Ptargetpath=\""+targetpath+"\"")       
+                os.system("/snap/snap8/bin/gpt collocation.xml -PB02=\""+B02+"\" -PS1=\""+S1p+"\" -PB02name=\""+B02name+"\" -Ptargetpath=\""+targetpath+"\"")  
+                os.system("rm s1_tif_final/"+S1_tif)
     if(found==False):
         date_time_obj = datetime(int(date1_o[0:4]),int(date1_o[4:6]),int(date1_o[6:8]))
         newdate=date_time_obj+timedelta(days=1)
@@ -108,6 +112,7 @@ for S1_tif in os.listdir('s1_tif_final'):
                                 B02name=filename
                 targetpath='/home/heido/projects/preprocessing/collocated/'+name+".dim"
                 os.system("/snap/snap8/bin/gpt collocation.xml -PB02=\""+B02+"\" -PS1=\""+S1p+"\" -PB02name=\""+B02name+"\" -Ptargetpath=\""+targetpath+"\"") 
+                os.system("rm s1_tif_final/"+S1_tif)
     if(found==False):
         date_time_obj = datetime(int(date1_o[0:4]),int(date1_o[4:6]),int(date1_o[6:8]))
         newdate=date_time_obj+timedelta(days=2)
@@ -125,8 +130,10 @@ for S1_tif in os.listdir('s1_tif_final'):
                                 B02name=filename
                 targetpath='/home/heido/projects/preprocessing/collocated/'+name+".dim"
                 os.system("/snap/snap8/bin/gpt collocation.xml -PB02=\""+B02+"\" -PS1=\""+S1p+"\" -PB02name=\""+B02name+"\" -Ptargetpath=\""+targetpath+"\"") 
+                os.system("rm s1_tif_final/"+S1_tif)
                 
-                
+os.system("rm -r s2_zip/*") 
+
 #Save the tif files from the collocated data:
 
 for filename in os.listdir('collocated'):
@@ -134,6 +141,7 @@ for filename in os.listdir('collocated'):
     inputfile='collocated/'+filename
     output='collocated_tifs/'+filename.split(".")[0]+'.tif'
     os.system("/snap/snap8/bin/gpt save_tif.xml -Pinput=\""+inputfile+"\" -Poutput=\""+output+"\"")
+    os.system("rm -r collocated/"+filename.split(".")[0]+"*")
 
 
 #Tile the tif files:
