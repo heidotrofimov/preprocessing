@@ -11,7 +11,7 @@ for filename in os.listdir("s2_NDVI"):
     start_date=date_obj
   if(date_obj<end_date):
     end_date=date_obj
-start_date = start_date - datetime.timedelta(days=1)
-end_date = end_date - datetime.timedelta(days=31)
+start_date = start_date - timedelta(days=1)
+end_date = end_date - timedelta(days=31)
 print(start_date)
 print(end_date)
