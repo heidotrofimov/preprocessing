@@ -171,20 +171,20 @@ for month in active_months:
 
 for j in range(len(product_list)):
     #Download the product:
-    if(os.path.isdir("prediction_data/"+product_list[j]+".SAFE")==False):
-        f=open("prediction_data/products.dat","w")
+    if(os.path.isdir("products/"+product_list[j]+".SAFE")==False):
+        f=open("products/products.dat","w")
         f.write(product_list[j])
         f.close()
-        os.system("~/miniconda3/envs/senpy/bin/python /home/heido/cvat-vsm/dias_old/main_engine.py -d prediction_data")
-        os.system("rm prediction_data/products*")
+        os.system("~/miniconda3/envs/senpy/bin/python /home/heido/cvat-vsm/dias_old/main_engine.py -d products")
+        os.system("rm products/products*")
         #Make the .dim file:
-        if(os.path.isdir("prediction_data/"+product_list[j]+".SAFE")==True):
-            input_path="prediction_data/"+product_list[j]+".SAFE/MTD_MSIL2A.xml"
-            output_path="prediction_data/"+product_list[j]+".SAFE/GRANULE/output.dim"
+        if(os.path.isdir("products/"+product_list[j]+".SAFE")==True):
+            input_path="products/"+product_list[j]+".SAFE/MTD_MSIL2A.xml"
+            output_path="products/"+product_list[j]+".SAFE/GRANULE/output.dim"
             line_for_gpt="/snap/snap8/bin/gpt output.xml -Pinput=\""+input_path+"\" -Poutput=\""+output_path+"\""
             os.system(line_for_gpt)
             #Make the RGB image:
-            S2_product=ProductIO.readProduct('prediction_data/'+product_list[j]+'.SAFE/GRANULE/output.dim')
+            S2_product=ProductIO.readProduct('products/'+product_list[j]+'.SAFE/GRANULE/output.dim')
             band_names = S2_product.getBandNames()
             red = S2_product.getBand('B4')
             green = S2_product.getBand('B3')
@@ -236,5 +236,6 @@ for j in range(len(product_list)):
                 date_end_str=date_end.year+"-"+date_end.month+"-"+date_end.day
                 list_for_senpy.write(date_start_str+","+date_end_str+"\n")
                 os.system("mv products/"+product_list[j]+"* target_products/")
-
+            os.system(rm -r products/*.SAFE)
+            
 list_for_senpy.close()
