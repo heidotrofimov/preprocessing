@@ -42,15 +42,15 @@ def S2_name(S2_full):
 f=open("../find_products/list_for_senpy.txt","r")
 nr=f.readlines()
 f.close()
-
-for n in range(1):
+'''
+for n in range(nr):
     while(os.path.isfile("senpy_ready.txt")==False):
         time.sleep(300)
         print("Waiting for senpy")
     os.system("rm senpy_ready.txt")
     print("Senpy ready, starting to process!")
-    #os.system("~/miniconda3/envs/biomass/bin/python rename_tiffs.py")
-    #os.system("rm -r s1_iq")
+    os.system("~/miniconda3/envs/biomass/bin/python rename_tiffs.py")
+    os.system("rm -r s1_iq")
         
     os.system("bash linearize_rasters.sh s1_tif")
     os.system("bash combine_tiffs.sh s1_tif")
@@ -236,7 +236,7 @@ for n in range(1):
                 yOffset  = inputTiff.RasterYSize - 512
     os.system("rm -r collocated_tifs/*")
     
-
+'''
 #Delete the tif tiles that have regions of no data:
 
 for filename in os.listdir("s1_tiles"):
