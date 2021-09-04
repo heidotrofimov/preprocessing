@@ -15,22 +15,28 @@ from snappy import FlagCoding
 from snappy import GPF
 from snappy import HashMap
 from shutil import copyfile
-
+from datetime import datetime
 for dim in os.listdir('s1_iq/'):
   if('.dim' in dim):
     try:
       identity=dim.split('.')[0]
       product=ProductIO.readProduct('s1_iq/'+dim)
       name=str(product.getMetadataRoot().getElement('Abstracted_Metadata').getAttribute('PRODUCT').getData())
-      os.rename('/home/heido/projects/preprocessing/s1_iq/'+identity+'.tif','/home/heido/projects/preprocessing/s1_iq/'+name+'.tif')
+      name2=product.getMetadataRoot().getElement('Slave_Metadata').getElementNames()
+      name2=str(name2[0]).split("_Orb")[0]
+      date_c_str=name.split("_")[5]
+      date_c=datetime(int(date_c_str[0:4]),int(date_c_str[4:6]),int(date_c_str[6:8]))
+      date_a_str=name2.split("_")[5]
+      date_a=datetime(int(date_a_str[0:4]),int(date_a_str[4:6]),int(date_a_str[6:8]))
+      if(date_c>date_a):
+          chosen=name
+      else:
+          chosen=name2
+      os.rename('/home/heido/projects/preprocessing/s1_iq/'+identity+'.tif','/home/heido/projects/preprocessing/s1_iq/'+chosen+'.tif')
       print(identity+'.tif -> '+name+'.tif')
       copyfile('s1_iq/'+name+'.tif','s1_tif/'+name+'.tif')
-    except:
-      print("No tiff: "+dim)
-'''
 
-for tif in os.listdir('s1_iq'):
-  if('.tif' in tif and 'cohv' not in tif and 'linc' not in tif and 's0v' not in tif):
-    copyfile('s1_iq/'+tif,'s1_tif/'+tif)
-'''
+    except Exception as e:
+      print(str(e))
+
     
