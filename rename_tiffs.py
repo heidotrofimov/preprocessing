@@ -33,8 +33,8 @@ for dim in os.listdir('s1_iq/'):
       else:
           chosen=name2
       os.rename('/home/heido/projects/preprocessing/s1_iq/'+identity+'.tif','/home/heido/projects/preprocessing/s1_iq/'+chosen+'.tif')
-      print(identity+'.tif -> '+name+'.tif')
-      copyfile('s1_iq/'+name+'.tif','s1_tif/'+name+'.tif')
+      print(identity+'.tif -> '+chosen+'.tif')
+      copyfile('s1_iq/'+chosen+'.tif','s1_tif/'+chosen+'.tif')
 
     except Exception as e:
       print(str(e))
