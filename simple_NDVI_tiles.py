@@ -37,7 +37,7 @@ def S2_short(S2_full):
     
 for S2_SAFE in os.listdir('products'):                   
     NDVI_im=S2_SAFE.split(".")[0]+"_NDVI"
-    os.mkdir('checked_products/'+NDVI_im)
+    os.system('mkdir checked_products/'+NDVI_im)
     S2_product=ProductIO.readProduct('products/'+S2_SAFE+'/GRANULE/output.dim')
     band_names = S2_product.getBandNames()
     width = S2_product.getSceneRasterWidth()
