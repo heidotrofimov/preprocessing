@@ -34,7 +34,7 @@ def write_image(band, filename, format):
 def S2_short(S2_full):
     S2=S2_full.split(".")[0].split("_")
     return S2[0]+"_"+S2[2]+"_"+S2[5]
-    
+tile_size=512    
 for S2_SAFE in os.listdir('products'):                   
     NDVI_im=S2_SAFE.split(".")[0]+"_NDVI"
     os.system('mkdir checked_products/'+NDVI_im)
