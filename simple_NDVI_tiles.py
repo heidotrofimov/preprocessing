@@ -29,7 +29,11 @@ def write_rgb_image(bands, filename, format):
 def write_image(band, filename, format):
     im = ImageManager.getInstance().createColoredBandImage([band], band.getImageInfo(), 0)
     JAI.create("filestore", im, filename, format)
-    
+   
+
+def S2_short(S2_full):
+    S2=S2_full.split(".")[0].split("_")
+    return S2[0]+"_"+S2[2]+"_"+S2[5]
     
 for S2_SAFE in os.listdir('products'):                   
     NDVI_im=S2_SAFE.split(".")[0]+"_NDVI"
