@@ -43,7 +43,7 @@ f=open("../find_products/list_for_senpy.txt","r")
 nr=f.readlines()
 f.close()
 
-for n in nr:
+for n in range(3):
     while(os.path.isfile("senpy_ready.txt")==False):
         time.sleep(300)
         print("Waiting for senpy")
