@@ -1,6 +1,13 @@
 import os
 from datetime import datetime, timedelta
 
+for S1 in os.listdir("data/S1"):
+  S1p=S1.split("_colwith")[0]
+  parts=S1p.split("_")
+  if(len(parts)>3):
+    print(S1)
+
+'''
 for S2 in os.listdir("data/S2"):
   S2=S2.split(".")[0]
   date_S2_str=S2.split("_")[1].split("T")[0]
@@ -29,7 +36,7 @@ for S2 in os.listdir("data/S2"):
         to_be_deleted.append(S1)
     print("To be deleted:")
     print(to_be_deleted)
-      
+'''      
 
 
 
