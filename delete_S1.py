@@ -1,5 +1,6 @@
 import os
 from datetime import datetime, timedelta
+import numpy as np
 
 for S2 in os.listdir("data/S2"):
   S2=S2.split(".")[0]
