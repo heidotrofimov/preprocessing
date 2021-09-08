@@ -6,6 +6,9 @@ for S1 in os.listdir("data/S1"):
   parts=S1p.split("_")
   if(len(parts)>3):
     print(S1)
+    date=S1.split("_")[7]
+    newname=S1p[0]+"_"+date+"_"+S1p[4]+"_colwith_"+S1.split("colwith_")[1]
+    print(newname)
 
 '''
 for S2 in os.listdir("data/S2"):
