@@ -7,7 +7,7 @@ for S1 in os.listdir("data/S1"):
   if(len(parts)>3):
     print(S1)
     date=S1.split("_")[7]
-    newname=S1p[0]+"_"+date+"_"+S1p[4]+"_colwith_"+S1.split("colwith_")[1]
+    newname=parts[0]+"_"+date+"_"+parts[4]+"_colwith_"+S1.split("colwith_")[1]
     print(newname)
 
 '''
