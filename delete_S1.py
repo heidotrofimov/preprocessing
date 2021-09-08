@@ -18,7 +18,7 @@ for S2 in os.listdir("data/S2"):
     for S1 in S1s:
       date_str=S1.split("_")[1].split("T")[0]
       date_S1=datetime(int(date_str[0:4]),int(date_str[4:6]),int(date_str[6:8]))
-      days_between=date_S2-date_S1
+      days_between=(date_S2-date_S1).days
       if(days_between<min_days):
         min_days=days_between
     for S1 in S1s:
