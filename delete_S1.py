@@ -28,8 +28,8 @@ for S2 in os.listdir("data/S2"):
       days_between=np.abs((date_S2-date_S1).days)
       if(days_between!=min_days):
         to_be_deleted.append(S1)
-    print("To be deleted:")
-    print(to_be_deleted)
+    for d in to_be_deleted:
+      os.system("rm data/S1/"+d)
 
 
 
