@@ -12,8 +12,8 @@ for S2 in os.listdir("data/with_history/S2"):
     if(corresponding_S2==S2):
       S1s.append(S1)
   if(len(S1s)>1):
-    print(S2)
-    print(S1s)
+    #print(S2)
+    #print(S1s)
     to_be_deleted=[]
     min_days=3
     for S1 in S1s:
@@ -28,11 +28,10 @@ for S2 in os.listdir("data/with_history/S2"):
       days_between=np.abs((date_S2-date_S1).days)
       if(days_between!=min_days):
         to_be_deleted.append(S1)
-    print(to_be_deleted)
-    '''
+    #print(to_be_deleted)
     for d in to_be_deleted:
       os.system("rm data/with_history/S1/"+d)
-    '''
+
 
 
 
