@@ -9,6 +9,17 @@ for S1 in os.listdir("data/S1"):
     date=S1.split("_")[7]
     newname=parts[0]+"_"+date+"_"+parts[4]+"_colwith_"+S1.split("colwith_")[1]
     print(newname)
+    os.system("mv data/S1/"+S1+" data/S1/"+newname)
+    
+for S1 in os.listdir("data/with_history/S1"):
+  S1p=S1.split("_colwith")[0]
+  parts=S1p.split("_")
+  if(len(parts)>3):
+    print(S1)
+    date=S1.split("_")[7]
+    newname=parts[0]+"_"+date+"_"+parts[4]+"_colwith_"+S1.split("colwith_")[1]
+    print(newname)
+    os.system("mv data/with_history/S1/"+S1+" data/with_history/S1/"+newname)
 
 '''
 for S2 in os.listdir("data/S2"):
