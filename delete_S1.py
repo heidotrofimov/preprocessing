@@ -8,6 +8,7 @@ for S2 in os.listdir("data/with_history/S2"):
   date_S2=datetime(int(date_S2_str[0:4]),int(date_S2_str[4:6]),int(date_S2_str[6:8]))
   S1s=[]
   for S1 in os.listdir("data/with_history/S1"):
+    print(S1)
     corresponding_S2=S1.split("colwith_")[1].split(".")[0]
     if(corresponding_S2==S2):
       S1s.append(S1)
