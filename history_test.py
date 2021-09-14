@@ -22,6 +22,6 @@ for S2 in os.listdir("data/S2"):
 history.sort(key=len)
 
 for i in range(10):
-  print(history[-(i+1)])
+  print(history[i])
     
   
