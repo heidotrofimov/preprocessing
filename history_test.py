@@ -11,10 +11,10 @@ for S2 in os.listdir("data/S2"):
   date_str=S2.split("_")[1].split("T")[0]
   date_obj=datetime(int(date_str[0:4]),int(date_str[4:6]),int(date_str[6:8]))
   for S2_2 in os.listdir("data/S2"):
-      AOI2=S2.split("_")[2]
-      tile2=S2.split(AOI+"_")[0]
-      date_str2=S2.split("_")[1].split("T")[0]
-      date_obj2=datetime(int(date_str[0:4]),int(date_str[4:6]),int(date_str[6:8]))
+      AOI2=S2_2.split("_")[2]
+      tile2=S2_2.split(AOI+"_")[0]
+      date_str2=S2_2.split("_")[1].split("T")[0]
+      date_obj2=datetime(int(date_str2[0:4]),int(date_str2[4:6]),int(date_str2[6:8]))
       if(AOI2==AOI and tile2==tile and date_obj2<date_obj):
         histories.append(S2_2)
   history.append(histories)
@@ -22,6 +22,6 @@ for S2 in os.listdir("data/S2"):
 history.sort(key=len)
 
 for i in range(10):
-  print(history[i])
+  print(history[-(i+1)])
     
   
