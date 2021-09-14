@@ -15,7 +15,7 @@ for S2 in os.listdir("data/S2"):
       tile2=S2_2.split(AOI2+"_")[1]
       date_str2=S2_2.split("_")[1].split("T")[0]
       date_obj2=datetime(int(date_str2[0:4]),int(date_str2[4:6]),int(date_str2[6:8]))
-      if(AOI2==AOI and tile2==tile and date_obj2<date_obj and date_str2[0:4]==date_str[0:4])):
+      if(AOI2==AOI and tile2==tile and date_obj2<date_obj and date_str2[0:4]==date_str[0:4]):
         histories.append(S2_2)
   if(len(histories)>1):
       history.append(histories)
