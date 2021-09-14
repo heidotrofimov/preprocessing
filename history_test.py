@@ -19,9 +19,9 @@ for S2 in os.listdir("data/S2"):
         histories.append(S2_2)
   history.append(histories)
   
-history2=history.sort(key=len)
+history.sort(key=len)
 
 for i in range(10):
-  print(history2[-(i+1)])
+  print(history[-(i+1)])
     
   
