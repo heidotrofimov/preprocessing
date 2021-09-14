@@ -1,5 +1,6 @@
 import os
-from datetime import datetime, timedelta
+from datetime import datetime
+from PIL import Image
 
 history=[]
 
@@ -23,7 +24,25 @@ for S2 in os.listdir("data/S2"):
 history.sort(key=len)
 
 for i in range(30):
-  print(len(history[-(i+1)]))
-  print(history[-(i+1)])
+  list_of_S2=history[-(i+1)]
+  target=list_of_S2[0]
+  AOI=target.split("_")[2]
+  tile_nr=target.split(AOI+"_")[1]
+  for S1 in os.listdir("data/S1"):
+    corres_S2=S1.split("colwith_")[1].replace("tif","png")
+    if(corres_S2==target):
+      #os.system("cp data/S1/"+S1+" history_test/S1/")
+      chosen_S1=S1
+      break
+  for h in list_of_S2[1:]:  
+    S2_filename=target.split(AOI)[0]+AOI+"_"+h.split("_")[0]+"_"+h.split("_")[1]+"_"+tile_nr
+    S1_filename=chosen_S1.split("_")[0]+"_"+chosen_S1.split("_")[1]+"_"+chosen_S1.split("_")[2]+"_colwith_"+S2_filename.replace("png","tif")
+    os.system("cp data/S1/"+chosen_S1+" history_test/S1/"+S1_filename)
+    target_im=Image.open("data/S2/"+target)
+    history_im=Image.open("data/S2/"+h)
+    dst = Image.new('RGB', (target_im.width + history_im.width, target_im.height))
+    dst.paste(target_im, (0, 0))
+    dst.paste(history_im, (target_im.width, 0))
+    dst.save("history_test/S2/"+S2_filename)
     
   
