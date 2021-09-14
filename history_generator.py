@@ -144,9 +144,9 @@ def mapped_edge_generator(s1_input, image, target):
 from tensorflow import keras
 import datetime
 
-ep = keras.models.load_model("./ep")
-fe = keras.models.load_model("./fe")
-generator = keras.models.load_model("./generator")
+ep = keras.models.load_model("ep")
+fe = keras.models.load_model("fe")
+generator = keras.models.load_model("generator")
 
 test_dataset = tf.data.Dataset.from_generator(load_all_train, \
                                                output_signature=(
