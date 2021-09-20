@@ -25,6 +25,7 @@ for filename in os.listdir("s1_tiles"):
         print("To be deleted because all are -32768!!!")
         print(str(j)+" "+str(i))
         condition=False
+        break
     if(condition==False):
       break
   if(condition==True):
