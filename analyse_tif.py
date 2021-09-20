@@ -19,11 +19,13 @@ for filename in os.listdir("s1_tiles"):
       if(imarray[j][i][0]==0):
         print("To be deleted because there's a 0")
         print(str(j)+" "+str(i))
+        os.system("mv s1_tiles/"+filename+" to_be_analysed/")
         condition=False
         break
       if(imarray[j][i][1]==-32768 and imarray[j][i][2]==-32768 and imarray[j][i][3]==-32768 and imarray[j][i][4]==-32768):
         print("To be deleted because all are -32768!!!")
         print(str(j)+" "+str(i))
+        os.system("mv s1_tiles/"+filename+" to_be_analysed/")
         condition=False
         break
     if(condition==False):
