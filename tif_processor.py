@@ -43,7 +43,7 @@ f=open("../find_products/list_for_senpy.txt","r")
 nr=f.readlines()
 f.close()
 
-for n in nr:
+for n in range(1):
     while(os.path.isfile("senpy_ready.txt")==False):
         time.sleep(300)
         print("Waiting for senpy")
@@ -238,7 +238,7 @@ for n in nr:
     
 
     #Delete the tif tiles that have regions of no data:
-
+    '''
     for filename in os.listdir("s1_tiles"):
       print(filename)
       path="s1_tiles/"+filename
@@ -255,3 +255,4 @@ for n in nr:
           break
     os.system("~/miniconda3/envs/biomass/bin/python merge.py")
     os.system("rm s1_tiles/*")
+    '''
