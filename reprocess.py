@@ -86,7 +86,7 @@ for AOI in AOIs:
   print(AOI)
   print(dates)
 
-  print("Test data")  
+print("Test data")  
 
 products=[]
 
