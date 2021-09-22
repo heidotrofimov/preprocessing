@@ -8,4 +8,4 @@ for filename in os.listdir("data/S1"):
   ts=os.path.getmtime("data/S1/"+filename)
   dt=datetime.utcfromtimestamp(ts)
   if(dt>ref_date):
-    print(datetime.utcfromtimestamp(ts).strftime('%Y-%m-%d %H:%M:%S'))
+    print(filename)
