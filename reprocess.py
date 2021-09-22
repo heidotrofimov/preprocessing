@@ -2,6 +2,10 @@ import os
 from datetime import datetime
 
 
+ref_date=datetime(2021,9,6,23,59)
+
 for filename in os.listdir("data/S1"):
-  dt=os.path.getmtime("data/S1/"+filename)
-  print(datetime.utcfromtimestamp(dt).strftime('%Y-%m-%d %H:%M:%S'))
+  ts=os.path.getmtime("data/S1/"+filename)
+  dt=datetime.utcfromtimestamp(dt)
+  if(dt>ref_date):
+    print(datetime.utcfromtimestamp(ts).strftime('%Y-%m-%d %H:%M:%S'))
