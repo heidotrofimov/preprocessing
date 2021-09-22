@@ -99,7 +99,7 @@ for filename in os.listdir("test_data/with_history/S1"):
 AOIs=[]
 
 for product in products:
-  AOI=product.split("_")[-3]
+  AOI=product.split("_")[-5]
   if(AOI not in AOIs):
     AOIs.append(AOI)
     
