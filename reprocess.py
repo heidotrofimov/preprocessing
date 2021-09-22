@@ -36,7 +36,7 @@ print("With history")
 products=[]
 
 for filename in os.listdir("data/with_history/S1"):
-  ts=os.path.getmtime("data/S1/"+filename)
+  ts=os.path.getmtime("data/with_history/S1/"+filename)
   dt=datetime.utcfromtimestamp(ts)
   if(dt>ref_date):
     products.append(filename)
