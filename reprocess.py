@@ -15,9 +15,11 @@ for filename in os.listdir("data/S1"):
     products.append(filename)
     
 AOIs=[]
+S2_products=[]
 
 for product in products:
   AOI=product.split("_")[-3]
+  S2product=product.split()
   if(AOI not in AOIs):
     AOIs.append(AOI)
     
@@ -70,13 +72,16 @@ for filename in os.listdir("data/with_history/S1"):
     products.append(filename)
     
 AOIs=[]
-
+S2products=[]
 for product in products:
   AOI=product.split("_")[-5]
+  S2p=product.split("colwith_")[1].split"("_S2")[0]
+  if(S2p not in S2products):
+    S2products.append(S2p)
   if(AOI not in AOIs):
     AOIs.append(AOI)
     
-for AOI in AOIs:
+for i,AOI in enumerate(AOIs):
   dates=[]
   for product in products:
     if(AOI in product):
@@ -85,6 +90,7 @@ for AOI in AOIs:
         dates.append(S1date_str)
   print(AOI)
   print(dates)
+  print(S2products[i])
 
 print("Test data")  
 
