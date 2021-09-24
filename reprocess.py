@@ -81,7 +81,7 @@ for product in products:
   if(AOI not in AOIs):
     AOIs.append(AOI)
     
-for i,AOI in enumerate(AOIs):
+for AOI in AOIs:
   dates=[]
   for product in products:
     if(AOI in product):
@@ -90,7 +90,8 @@ for i,AOI in enumerate(AOIs):
         dates.append(S1date_str)
   print(AOI)
   print(dates)
-  print(S2products[i])
+  
+print(S2products)
 
 print("Test data")  
 
