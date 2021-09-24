@@ -186,15 +186,15 @@ for n in range(3):
                 outputPath = "s1_tiles/"+filename.split(".tif")[0]+"_"+str(x_tiles)+"_"+str(y_tiles)
                 corresponding_S2=outputPath.split("colwith_")[1]
                 tile_nr=str(x_tiles)+"_"+str(y_tiles)
-                s2_tile_exists=False
-                for filename2 in os.listdir("s2_NDVI"):
-                    if(filename2.split(".")[0]==corresponding_S2):
-                        s2_tile_exists=True
+                searchfor=filename.split("_colwith")[0]+"_"+str(x_tiles)+"_"+str(y_tiles)
+                exists=False
+                for filename23 in os.listdir("data/with_history/S1"):
+                    corresponding=filename23.split("_colwith")[0]+"_"+filename23.split("_")[-2]+"_"+filename23.split("_")[-1].split(".")[0]
+                    if(corresponding==searchfor):
+                        exists=True
                         break
 
-
-
-                if(s2_tile_exists==True and os.path.isfile(str(outputPath)+".tif")==False):
+                if(exists==True):
                     tifOK=True
 
 
@@ -203,25 +203,8 @@ for n in range(3):
                     if(imarray[0][j][i]==0 or (imarray[1][j][i]==-32768 and imarray[2][j][i]==-32768 and imarray[3][j][i]==-32768 and imarray[4][j][i]==-32768)):
                         tifOK=False
                     if(tifOK==True):
-
-                        datecondition=True    
-                        S1_date=filename.split("_")[1].split("T")[0]
-                        S1_date_obj=datetime(int(S1_date[0:4]),int(S1_date[4:6]),int(S1_date[6:8]))
-                        corresponding_S2=outputPath.split("colwith_")[1]
-                        S2_date=corresponding_S2.split("_")[1].split("T")[0]
-                        S2_date_obj=datetime(int(S2_date[0:4]),int(S2_date[4:6]),int(S2_date[6:8]))
-                        for filename3 in os.listdir("s1_tiles"):
-                            if(filename3.split("colwith_")[1].split(".")[0]==corresponding_S2):
-                                #If current date is farther away from S2_date than the other date, then we won't proceed
-                                other_date=filename3.split("_")[1].split("T")[0]
-                                other_date_obj=datetime(int(other_date[0:4]),int(other_date[4:6]),int(other_date[6:8]))
-                                if(np.abs((other_date_obj-S2_date_obj).days)<np.abs((S1_date_obj-S2_date_obj).days)):
-                                    datecondition=False
-                                    break
-                        if(datecondition==True):
-
-                            com_string = "gdal_translate -of GTIFF -srcwin " + str(xOffset)+ ", " + str(yOffset) + ", " + str(tile_width) + ", " + str(tile_height) + " " + str(inputPath) + " " + str(outputPath) + ".tif"
-                            os.system(com_string)
+                        com_string = "gdal_translate -of GTIFF -srcwin " + str(xOffset)+ ", " + str(yOffset) + ", " + str(tile_width) + ", " + str(tile_height) + " " + str(inputPath) + " " + str(outputPath) + ".tif"
+                        os.system(com_string)
 
                 if inputTiff.RasterXSize - xOffset > 512:
                     xOffset += 512
@@ -238,9 +221,9 @@ for n in range(3):
     
 
     #Delete the tif tiles that have regions of no data:
-    '''
+    
     for filename in os.listdir("s1_tiles"):
-      print(filename)
+      #print(filename)
       path="s1_tiles/"+filename
       S1_im=TIFF.open(path)
       imarray=S1_im.read_image()
@@ -253,6 +236,4 @@ for n in range(3):
             break
         if(condition==False):
           break
-    os.system("~/miniconda3/envs/biomass/bin/python merge.py")
-    os.system("rm s1_tiles/*")
-    '''
+
