@@ -184,7 +184,7 @@ for n in range(1):
         images_created = list()
         for y_tiles in range(yRange):
             for x_tiles in range(xRange):
-                if(x_tiles=13 and y_tiles=4):
+                if(x_tiles==13 and y_tiles==4):
                     outputPath = "s1_tiles/"+filename.split(".tif")[0]+"_"+str(x_tiles)+"_"+str(y_tiles)
                     outputPath2="s1_tiles_rejected/"+filename.split(".tif")[0]+"_"+str(x_tiles)+"_"+str(y_tiles)
 
