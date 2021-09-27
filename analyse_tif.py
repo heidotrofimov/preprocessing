@@ -13,6 +13,7 @@ path="s1_tiles_rejected/S1A_20201126T052448_70E0_colwith_S2A_20201127T102401_T32
 S1_im=TIFF.open(path)
 imarray=S1_im.read_image()
 for j in range(len(imarray)):
+    print(j)
     for i in range(len(imarray[j])):
       if(imarray[j][i][0]==0 or (imarray[j][i][1]==-32768 and imarray[j][i][2]==-32768 and imarray[j][i][3]==-32768 and imarray[j][i][4]==-32768)):
         print("Alert")
