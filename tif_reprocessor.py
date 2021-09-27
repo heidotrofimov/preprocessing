@@ -220,17 +220,19 @@ for n in range(1):
 
     #Delete the tif tiles that have regions of no data:
     
-    for filename in os.listdir("s1_tiles"):
+    for filename in os.listdir("s1_tiles_rejected"):
       #print(filename)
-      path="s1_tiles/"+filename
+      path="s1_tiles_rejected/"+filename
       S1_im=TIFF.open(path)
       imarray=S1_im.read_image()
+      print(imarray.shape)
       condition=True
       for j in range(len(imarray)):
         for i in range(len(imarray[j])):
           if(imarray[j][i][0]==0 or (imarray[j][i][1]==-32768 and imarray[j][i][2]==-32768 and imarray[j][i][3]==-32768 and imarray[j][i][4]==-32768)):
             condition=False
-            os.system("mv "+path+" s1_tiles_rejected/")
+            #os.system("mv "+path+" s1_tiles_rejected/")
+            print("alert")
             break
         if(condition==False):
           break
