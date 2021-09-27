@@ -170,6 +170,7 @@ for n in range(1):
 
         S1_im=TIFF.open(inputPath)
         imarray=S1_im.read_image()
+        print(imarray.shape)
 
 
         tile_width = 512
@@ -184,24 +185,24 @@ for n in range(1):
         images_created = list()
         for y_tiles in range(yRange):
             for x_tiles in range(xRange):
+                if(x_tiles==13 and y_tiles==4):
+                    outputPath = "s1_tiles/"+filename.split(".tif")[0]+"_"+str(x_tiles)+"_"+str(y_tiles)
+                    outputPath2="s1_tiles_rejected/"+filename.split(".tif")[0]+"_"+str(x_tiles)+"_"+str(y_tiles)
 
-                outputPath = "s1_tiles/"+filename.split(".tif")[0]+"_"+str(x_tiles)+"_"+str(y_tiles)
-                outputPath2="s1_tiles_rejected/"+filename.split(".tif")[0]+"_"+str(x_tiles)+"_"+str(y_tiles)
 
 
-
-                i=xOffset+10
-                j=yOffset+10
-                print(i)
-                print(j)
-                if(imarray[0][j][i]==0 or (imarray[1][j][i]==-32768 and imarray[2][j][i]==-32768 and imarray[3][j][i]==-32768 and imarray[4][j][i]==-32768)):
-                    tifOK=False
-                if(tifOK==True):
-                    com_string = "gdal_translate -of GTIFF -srcwin " + str(xOffset)+ ", " + str(yOffset) + ", " + str(tile_width) + ", " + str(tile_height) + " " + str(inputPath) + " " + str(outputPath) + ".tif"
-                    os.system(com_string)
-                else:
-                    com_string = "gdal_translate -of GTIFF -srcwin " + str(xOffset)+ ", " + str(yOffset) + ", " + str(tile_width) + ", " + str(tile_height) + " " + str(inputPath) + " " + str(outputPath2) + ".tif"
-                    os.system(com_string)
+                    i=xOffset+10
+                    j=yOffset+10
+                    print(i)
+                    print(j)
+                    if(imarray[0][j][i]==0 or (imarray[1][j][i]==-32768 and imarray[2][j][i]==-32768 and imarray[3][j][i]==-32768 and imarray[4][j][i]==-32768)):
+                        tifOK=False
+                    if(tifOK==True):
+                        com_string = "gdal_translate -of GTIFF -srcwin " + str(xOffset)+ ", " + str(yOffset) + ", " + str(tile_width) + ", " + str(tile_height) + " " + str(inputPath) + " " + str(outputPath) + ".tif"
+                        os.system(com_string)
+                    else:
+                        com_string = "gdal_translate -of GTIFF -srcwin " + str(xOffset)+ ", " + str(yOffset) + ", " + str(tile_width) + ", " + str(tile_height) + " " + str(inputPath) + " " + str(outputPath2) + ".tif"
+                        os.system(com_string)
                 if inputTiff.RasterXSize - xOffset > 512:
                     xOffset += 512
                 else:
