@@ -9,6 +9,15 @@ import numpy as np
 import time
 
 
+path="s1_tiles_rejected/S1A_20201126T052448_70E0_colwith_S2A_20201127T102401_T32UPG_13_4.tif"
+S1_im=TIFF.open(path)
+imarray=S1_im.read_image()
+for j in range(len(imarray)):
+    for i in range(len(imarray[j])):
+      if(imarray[j][i][0]==0 or (imarray[j][i][1]==-32768 and imarray[j][i][2]==-32768 and imarray[j][i][3]==-32768 and imarray[j][i][4]==-32768)):
+        print("Alert")
+
+'''
 for filename in os.listdir("s1_tiles"):
   print(filename)
   path="s1_tiles/"+filename
@@ -25,7 +34,6 @@ for filename in os.listdir("s1_tiles"):
       break
 
 
-'''
 for filename in os.listdir("s1_tiles"):
   print(filename)
   path="s1_tiles/"+filename
