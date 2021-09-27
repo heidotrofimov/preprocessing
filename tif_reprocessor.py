@@ -195,6 +195,7 @@ for n in range(1):
                     j=yOffset+10
                     print(i)
                     print(j)
+                    tifOK=True
                     if(imarray[0][j][i]==0 or (imarray[1][j][i]==-32768 and imarray[2][j][i]==-32768 and imarray[3][j][i]==-32768 and imarray[4][j][i]==-32768)):
                         tifOK=False
                     if(tifOK==True):
