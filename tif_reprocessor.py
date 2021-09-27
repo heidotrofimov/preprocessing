@@ -44,6 +44,7 @@ nr=f.readlines()
 f.close()
 
 for n in range(1):
+    '''
     while(os.path.isfile("senpy_ready.txt")==False):
         time.sleep(300)
         print("Waiting for senpy")
@@ -184,28 +185,20 @@ for n in range(1):
         for y_tiles in range(yRange):
             for x_tiles in range(xRange):
                 outputPath = "s1_tiles/"+filename.split(".tif")[0]+"_"+str(x_tiles)+"_"+str(y_tiles)
-                corresponding_S2=outputPath.split("colwith_")[1]
-                tile_nr=str(x_tiles)+"_"+str(y_tiles)
-                searchfor=filename.split("_colwith")[0]+"_"+str(x_tiles)+"_"+str(y_tiles)
-                exists=False
-                for filename23 in os.listdir("data/with_history/S1"):
-                    corresponding=filename23.split("_colwith")[0]+"_"+filename23.split("_")[-2]+"_"+filename23.split("_")[-1].split(".")[0]
-                    if(corresponding==searchfor):
-                        exists=True
-                        break
-
-                if(exists==True):
-                    tifOK=True
+                outputPath2="s1_tiles_rejected/"+filename.split(".tif")[0]+"_"+str(x_tiles)+"_"+str(y_tiles)
+                
 
 
-                    i=xOffset+10
-                    j=yOffset+10
-                    if(imarray[0][j][i]==0 or (imarray[1][j][i]==-32768 and imarray[2][j][i]==-32768 and imarray[3][j][i]==-32768 and imarray[4][j][i]==-32768)):
-                        tifOK=False
-                    if(tifOK==True):
-                        com_string = "gdal_translate -of GTIFF -srcwin " + str(xOffset)+ ", " + str(yOffset) + ", " + str(tile_width) + ", " + str(tile_height) + " " + str(inputPath) + " " + str(outputPath) + ".tif"
-                        os.system(com_string)
-
+                i=xOffset+10
+                j=yOffset+10
+                if(imarray[0][j][i]==0 or (imarray[1][j][i]==-32768 and imarray[2][j][i]==-32768 and imarray[3][j][i]==-32768 and imarray[4][j][i]==-32768)):
+                    tifOK=False
+                if(tifOK==True):
+                    com_string = "gdal_translate -of GTIFF -srcwin " + str(xOffset)+ ", " + str(yOffset) + ", " + str(tile_width) + ", " + str(tile_height) + " " + str(inputPath) + " " + str(outputPath) + ".tif"
+                    os.system(com_string)
+                else:
+                    com_string = "gdal_translate -of GTIFF -srcwin " + str(xOffset)+ ", " + str(yOffset) + ", " + str(tile_width) + ", " + str(tile_height) + " " + str(inputPath) + " " + str(outputPath2) + ".tif"
+                    os.system(com_string)
                 if inputTiff.RasterXSize - xOffset > 512:
                     xOffset += 512
                 else:
@@ -232,8 +225,8 @@ for n in range(1):
         for i in range(len(imarray[j])):
           if(imarray[j][i][0]==0 or (imarray[j][i][1]==-32768 and imarray[j][i][2]==-32768 and imarray[j][i][3]==-32768 and imarray[j][i][4]==-32768)):
             condition=False
-            os.remove(path)
+            os.system("mv "+path+" s1_tiles_rejected/")
             break
         if(condition==False):
           break
-    '''
+    
