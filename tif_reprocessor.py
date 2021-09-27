@@ -193,17 +193,19 @@ for n in range(1):
 
                     i=xOffset+10
                     j=yOffset+10
-                    print(i)
-                    print(j)
+                    #print(i)
+                    #print(j)
                     tifOK=True
                     if(imarray[0][j][i]==0 or (imarray[1][j][i]==-32768 and imarray[2][j][i]==-32768 and imarray[3][j][i]==-32768 and imarray[4][j][i]==-32768)):
                         tifOK=False
                     if(tifOK==True):
                         com_string = "gdal_translate -of GTIFF -srcwin " + str(xOffset)+ ", " + str(yOffset) + ", " + str(tile_width) + ", " + str(tile_height) + " " + str(inputPath) + " " + str(outputPath) + ".tif"
                         os.system(com_string)
+                        print("Executing :"+com_string)
                     else:
                         com_string = "gdal_translate -of GTIFF -srcwin " + str(xOffset)+ ", " + str(yOffset) + ", " + str(tile_width) + ", " + str(tile_height) + " " + str(inputPath) + " " + str(outputPath2) + ".tif"
                         os.system(com_string)
+                        print("Executing: "+com_string)
                 if inputTiff.RasterXSize - xOffset > 512:
                     xOffset += 512
                 else:
@@ -233,6 +235,8 @@ for n in range(1):
             condition=False
             #os.system("mv "+path+" s1_tiles_rejected/")
             print("alert")
+            print(i)
+            print(j)
             break
         if(condition==False):
           break
