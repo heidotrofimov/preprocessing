@@ -210,7 +210,7 @@ for n in range(1):
                 yOffset += 512
             else:
                 yOffset  = inputTiff.RasterYSize - 512
-    os.system("rm -r collocated_tifs/*")
+    #os.system("rm -r collocated_tifs/*")
     
 
     #Delete the tif tiles that have regions of no data:
