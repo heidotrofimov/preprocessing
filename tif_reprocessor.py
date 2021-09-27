@@ -43,7 +43,7 @@ f=open("../find_products/list_for_senpy.txt","r")
 nr=f.readlines()
 f.close()
 
-for n in range(3):
+for n in range(1):
     while(os.path.isfile("senpy_ready.txt")==False):
         time.sleep(300)
         print("Waiting for senpy")
@@ -55,7 +55,7 @@ for n in range(3):
     os.system("bash linearize_rasters.sh s1_tif")
     os.system("bash combine_tiffs.sh s1_tif")
     os.system("rm s1_tif/*")
-    
+    '''
     for S1_tif in os.listdir('s1_tif_final'):
         S1p='s1_tif_final/'+S1_tif
         date1=S1_tif.split("_")[5].split("T")[0]
@@ -236,4 +236,4 @@ for n in range(3):
             break
         if(condition==False):
           break
-
+    '''
