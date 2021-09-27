@@ -204,8 +204,8 @@ for n in range(1):
                         print("Executing :"+com_string)
                     else:
                         com_string = "gdal_translate -of GTIFF -srcwin " + str(xOffset)+ ", " + str(yOffset) + ", " + str(tile_width) + ", " + str(tile_height) + " " + str(inputPath) + " " + str(outputPath2) + ".tif"
-                        os.system(com_string)
-                        print("Executing: "+com_string)
+                        #os.system(com_string)
+                        #print("Executing: "+com_string)
                 if inputTiff.RasterXSize - xOffset > 512:
                     xOffset += 512
                 else:
@@ -222,21 +222,18 @@ for n in range(1):
 
     #Delete the tif tiles that have regions of no data:
     
-    for filename in os.listdir("s1_tiles_rejected"):
+    for filename in os.listdir("s1_tiles"):
       #print(filename)
-      path="s1_tiles_rejected/"+filename
+      path="s1_tiles/"+filename
       S1_im=TIFF.open(path)
       imarray=S1_im.read_image()
-      print(imarray.shape)
       condition=True
       for j in range(len(imarray)):
         for i in range(len(imarray[j])):
           if(imarray[j][i][0]==0 or (imarray[j][i][1]==-32768 and imarray[j][i][2]==-32768 and imarray[j][i][3]==-32768 and imarray[j][i][4]==-32768)):
             condition=False
-            #os.system("mv "+path+" s1_tiles_rejected/")
-            print("alert")
-            print(i)
-            print(j)
+            os.system("mv "+path+" s1_tiles_rejected/")
+            print("Moved a file!")
             break
         if(condition==False):
           break
