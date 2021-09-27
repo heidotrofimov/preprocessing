@@ -56,7 +56,7 @@ for n in range(1):
     os.system("bash linearize_rasters.sh s1_tif")
     os.system("bash combine_tiffs.sh s1_tif")
     os.system("rm s1_tif/*")
-    '''
+    
     for S1_tif in os.listdir('s1_tif_final'):
         S1p='s1_tif_final/'+S1_tif
         date1=S1_tif.split("_")[5].split("T")[0]
@@ -159,7 +159,7 @@ for n in range(1):
         os.system("/snap/snap8/bin/gpt save_tif.xml -Pinput=\""+inputfile+"\" -Poutput=\""+output+"\"")
         os.system("rm -r collocated/"+filename.split(".")[0]+"*")
     os.system("rm -r collocated/*")
-
+    '''
     #Tile the tif files:
 
     inputdir="collocated_tifs"
@@ -191,7 +191,7 @@ for n in range(1):
 
                 i=xOffset+10
                 j=yOffset+10
-                if(imarray[0][j][i]==0 or (imarray[1][j][i]==-32768 and imarray[2][j][i]==-32768 and imarray[3][j][i]==-32768 and imarray[4][j][i]==-32768)):
+                if(imarray[j][i][0]==0 or (imarray[j][i][1]==-32768 and imarray[j][i][2]==-32768 and imarray[j][i][3]==-32768 and imarray[j][i][4]==-32768)):
                     tifOK=False
                 if(tifOK==True):
                     com_string = "gdal_translate -of GTIFF -srcwin " + str(xOffset)+ ", " + str(yOffset) + ", " + str(tile_width) + ", " + str(tile_height) + " " + str(inputPath) + " " + str(outputPath) + ".tif"
