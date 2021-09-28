@@ -234,11 +234,11 @@ for n in range(1):
                 yOffset += 512
             else:
                 yOffset  = inputTiff.RasterYSize - 512
-    os.system("rm -r collocated_tifs/*")
+    #os.system("rm -r collocated_tifs/*")
     
 
     #Delete the tif tiles that have regions of no data:
-    '''
+    
     for filename in os.listdir("s1_tiles"):
       print(filename)
       path="s1_tiles/"+filename
@@ -254,5 +254,5 @@ for n in range(1):
         if(condition==False):
           break
     os.system("~/miniconda3/envs/biomass/bin/python merge.py")
-    os.system("rm s1_tiles/*")
-    '''
+    #os.system("rm s1_tiles/*")
+    
