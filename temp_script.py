@@ -6,7 +6,7 @@ i=0
 
 for filename in os.listdir("s1_tiles_previous"):
   if("T32UPG" in filename):
-    S2=filename.split("colwith_")[0].split(".")[0]
+    S2=filename.split("colwith_")[1].split(".")[0]
     found=False
     for filename2 in os.listdir("s2_NDVI"):
       if(filename2.split(".")[0]==S2):
