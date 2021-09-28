@@ -37,7 +37,7 @@ for dim in os.listdir('s1_iq/'):
           chosen=name2
       names.append(chosen)
       k=names.count(chosen)
-      chosen=chosen+"_part"+str(k)
+      chosen=chosen+"_p"+str(k)
       os.rename('/home/heido/projects/preprocessing/s1_iq/'+identity+'.tif','/home/heido/projects/preprocessing/s1_iq/'+chosen+'.tif')
       print(identity+'.tif -> '+chosen+'.tif')
       copyfile('s1_iq/'+chosen+'.tif','s1_tif/'+chosen+'.tif')
