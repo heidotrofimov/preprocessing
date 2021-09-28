@@ -32,7 +32,11 @@ rm s1_tiles/*
 
 def S1_name(S1_full):
     S1=S1_full.split(".")[0].split("_")
-    return S1[0]+"_"+S1[5]+"_"+S1[-1]
+    return S1[0]+"_"+S1[5]+"_"+S1[-2]+"_"+S1[-1]
+
+def S1_name_short(S1_name):
+    S1=S1_full.split(".")[0].split("_")
+    return S1[0]+"_"+S1[1]+"_"+S1[2]
 
 def S2_name(S2_full):
     S2=S2_full.split(".")[0].split("_")
@@ -43,7 +47,7 @@ f=open("../find_products/list_for_senpy.txt","r")
 nr=f.readlines()
 f.close()
 
-for n in range(1):
+for n in range(7):
     while(os.path.isfile("senpy_ready.txt")==False):
         time.sleep(300)
         print("Waiting for senpy")
@@ -160,6 +164,7 @@ for n in range(1):
     os.system("rm -r collocated/*")
 
     #Tile the tif files:
+    #Here the "part" part shouldn't matter anymore
 
     inputdir="collocated_tifs"
     for filename in os.listdir(inputdir):
@@ -183,7 +188,10 @@ for n in range(1):
         images_created = list()
         for y_tiles in range(yRange):
             for x_tiles in range(xRange):
-                outputPath = "s1_tiles/"+filename.split(".tif")[0]+"_"+str(x_tiles)+"_"+str(y_tiles)
+                part1=filename.split("_p")[0]
+                part2=filename.split("colwith_")[1]
+                name_save=part1+"_colwith_"+part2
+                outputPath = "s1_tiles/"+name_save.split(".tif")[0]+"_"+str(x_tiles)+"_"+str(y_tiles)
                 corresponding_S2=outputPath.split("colwith_")[1]
                 tile_nr=str(x_tiles)+"_"+str(y_tiles)
                 s2_tile_exists=False
@@ -254,5 +262,5 @@ for n in range(1):
         if(condition==False):
           break
     os.system("~/miniconda3/envs/biomass/bin/python merge.py")
-    #os.system("rm s1_tiles/*")
+    os.system("rm s1_tiles/*")
     
