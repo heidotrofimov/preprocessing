@@ -16,6 +16,9 @@ from snappy import GPF
 from snappy import HashMap
 from shutil import copyfile
 from datetime import datetime
+
+names=[]
+
 for dim in os.listdir('s1_iq/'):
   if('.dim' in dim):
     try:
@@ -32,6 +35,9 @@ for dim in os.listdir('s1_iq/'):
           chosen=name
       else:
           chosen=name2
+      names.append(chosen)
+      k=names.count(chosen)
+      chosen=chosen+"_part"+str(k)
       os.rename('/home/heido/projects/preprocessing/s1_iq/'+identity+'.tif','/home/heido/projects/preprocessing/s1_iq/'+chosen+'.tif')
       print(identity+'.tif -> '+chosen+'.tif')
       copyfile('s1_iq/'+chosen+'.tif','s1_tif/'+chosen+'.tif')
