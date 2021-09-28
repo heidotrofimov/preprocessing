@@ -2,8 +2,7 @@ import os
 import numpy as np
 from datetime import datetime, timedelta
 
-
-#Leiame kõigepealt kõige hilisema
+i=0
 
 for filename in os.listdir("s1_tiles_previous"):
   if("T32UPG" in filename):
@@ -15,6 +14,9 @@ for filename in os.listdir("s1_tiles_previous"):
         break
     if(found==False):
       print("To be deleted: "+filename)
+      i=i+1
+      
+print(i)
   
       
   
