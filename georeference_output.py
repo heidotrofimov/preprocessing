@@ -8,4 +8,5 @@ maxy = geoTransform[3]
 maxx = minx + geoTransform[1] * data.RasterXSize
 miny = maxy + geoTransform[5] * data.RasterYSize
 print([minx, miny, maxx, maxy])
-data = None
+
+os.system("gdal_translate -of Gtiff -a_ullr "+str(minx)+" "+str(maxy)+" "+str(maxx)+" "+str(miny)+" -a_srs 3301 data/S2/20201006T094041_T34UDA_19_3.png 20201006T094041_T34UDA_19_3.tif")
