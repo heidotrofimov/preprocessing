@@ -1,5 +1,6 @@
 import gdal
 from gdalconst import GA_ReadOnly
+import os
 
 data = gdal.Open('data/S1/S1A_20201008T044450_20CC_colwith_S2A_20201006T094041_T34UDA_19_3.tif', GA_ReadOnly)
 geoTransform = data.GetGeoTransform()
