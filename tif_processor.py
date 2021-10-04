@@ -47,7 +47,7 @@ f=open("../heido_test/list_for_senpy.txt","r")
 nr=f.readlines()
 f.close()
 
-for n in range(nr):
+for n in nr:
     while(os.path.isfile("senpy_ready.txt")==False):
         time.sleep(300)
         print("Waiting for senpy")
