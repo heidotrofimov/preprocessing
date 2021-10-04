@@ -43,11 +43,11 @@ def S2_name(S2_full):
     return S2[0]+"_"+S2[2]+"_"+S2[5]
 
 
-f=open("../find_products/list_for_senpy.txt","r")
+f=open("../heido_test/list_for_senpy.txt","r")
 nr=f.readlines()
 f.close()
 
-for n in range(8):
+for n in range(nr):
     while(os.path.isfile("senpy_ready.txt")==False):
         time.sleep(300)
         print("Waiting for senpy")
