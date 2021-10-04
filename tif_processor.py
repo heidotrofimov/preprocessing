@@ -263,4 +263,5 @@ for n in nr:
           break
     os.system("~/miniconda3/envs/biomass/bin/python merge.py")
     os.system("rm s1_tiles/*")
+    os.system("cp preprocessing_ready.txt ../heido_test/")
     
