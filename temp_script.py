@@ -84,10 +84,10 @@ for filename in os.listdir(inputdir):
                   com_string = "gdal_translate -of GTIFF -srcwin " + str(xOffset)+ ", " + str(yOffset) + ", " + str(tile_width) + ", " + str(tile_height) + " " + str(inputPath) + " " + str(outputPath) + ".tif"
                   os.system(com_string)
 
-                if inputTiff.RasterXSize - xOffset > 512:
-                    xOffset += 512
-                else:
-                    xOffset  = inputTiff.RasterXSize - 512
+          if inputTiff.RasterXSize - xOffset > 512:
+            xOffset += 512
+          else:
+            xOffset  = inputTiff.RasterXSize - 512
 
       xOffset = 0
       if inputTiff.RasterYSize - yOffset > 512:
