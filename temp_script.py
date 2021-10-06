@@ -13,11 +13,12 @@ def S2_name(S2_full):
     return S2[0]+"_"+S2[2]+"_"+S2[5]
 
 
-os.system("bash linearize_rasters.sh s1_tif")
-os.system("bash combine_tiffs.sh s1_tif")
-os.system("rm s1_tif/*")
+#os.system("bash linearize_rasters.sh s1_tif")
+#os.system("bash combine_tiffs.sh s1_tif")
+#os.system("rm s1_tif/*")
     
 for S1_tif in os.listdir('s1_tif_final'):
+  S1p='s1_tif_final/'+S1_tif
   for S2_product in os.listdir("s2_zip"):
     name=S1_tif.split(".")[0]+"_colwith_"+S2_name(S2_product)
     for folder3 in os.listdir('s2_zip/'+S2_product+'/GRANULE/'):
