@@ -154,7 +154,7 @@ for s2 in os.listdir("s2_NDVI"):
         chosen_s1.append("s1_tiles/"+s1)
   if(len(chosen_s1)!=0):
     s2n=s2n+1
-    copyfile("s2_NDVI/"+s2,"tmp_S2"+s2)
+    copyfile("s2_NDVI/"+s2,"tmp_S2/"+s2)
     #copyfile("s2_RGB/"+s2,"data/S2_RGB/"+s2)
     for s1 in chosen_s1:
       copyfile(s1,"tmp_S1/"+s1.split("/")[1])
@@ -192,7 +192,7 @@ for filename in os.listdir("tmp_S2"):
           dst = Image.new('RGB', (target.width + history.width, target.height))
           dst.paste(target, (0, 0))
           dst.paste(history, (target.width, 0))
-          dst.save("tmp_S2_h"+S2_filename)
+          dst.save("tmp_S2_h/"+S2_filename)
           s2n=s2n+1
           
 
