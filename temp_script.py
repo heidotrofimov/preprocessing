@@ -187,7 +187,7 @@ for filename in os.listdir("tmp_S2"):
         #print(filename+" with "+found_historical)
         S2_filename=filename.split(AOI1)[0]+AOI1+"_"+found_historical.split("_")[0]+"_"+found_historical.split("_")[1]+"_"+tile_nr1+".png"
         if(os.path.isfile("tmp_S2_h"+S2_filename)==False):
-          target=Image.open("tmp_S2"+filename)
+          target=Image.open("tmp_S2/"+filename)
           history=Image.open("s2_NDVI/"+found_historical)
           dst = Image.new('RGB', (target.width + history.width, target.height))
           dst.paste(target, (0, 0))
