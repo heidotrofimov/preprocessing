@@ -9,7 +9,7 @@ input_png=sys.argv[2]  #Path to input S2 png. The output PNG will be saved
 name_parts=input_png.split("_")
 for p in name_parts:
   if(p[0]=="T"):
-    EPSG="326"+p[1:2]
+    EPSG="326"+p[1:3]
 print(EPSG)
 
 data = gdal.Open(input_tif, GA_ReadOnly)
