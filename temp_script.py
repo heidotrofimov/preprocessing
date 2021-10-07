@@ -29,7 +29,7 @@ for S1_tif in os.listdir('s1_tif_final'):
             B02name=filename
     targetpath='/home/heido/projects/preprocessing/collocated/'+name+".dim"
     os.system("/snap/snap8/bin/gpt collocation.xml -PB02=\""+B02+"\" -PS1=\""+S1p+"\" -PB02name=\""+B02name+"\" -Ptargetpath=\""+targetpath+"\"")
-    os.system("rm s1_tif_final/"+S1_tif)
+  os.system("rm s1_tif_final/"+S1_tif)
    
   
 for filename in os.listdir('collocated'):
