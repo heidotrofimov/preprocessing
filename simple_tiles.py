@@ -130,13 +130,12 @@ for RGB_im in os.listdir("products"):
               if(check_data(RGB_tile)):
                 RGB_tile.save("products/"+name+"/"+str(i)+"_"+str(tiles_y)+".png")
       if(im_S2.height>tiles_y*tile_size and im_S2.width>tiles_x*tile_size):
-        if(str(tiles_x)+"_"+str(tiles_y) in tiles_of_interest):
-            cond=False
-            for S1 in os.listdir("s1_tiles"):
-                if(name_check+"_"+str(tiles_x)+"_"+str(tiles_y)+".tif"==S1):
-                  cond=True
-                  break
-            if(cond==True):
-              RGB_tile=im_S2.crop((im_S2.width-tile_size,im_S2.height-tile_size,im_S2.width,im_S2.height))
-              if(check_data(RGB_tile)):
-                  RGB_tile.save("products/"+name+"/"+str(tiles_x)+"_"+str(tiles_y)+".png")
+          cond=False
+          for S1 in os.listdir("s1_tiles"):
+              if(name_check+"_"+str(tiles_x)+"_"+str(tiles_y)+".tif"==S1):
+                cond=True
+                break
+          if(cond==True):
+            RGB_tile=im_S2.crop((im_S2.width-tile_size,im_S2.height-tile_size,im_S2.width,im_S2.height))
+            if(check_data(RGB_tile)):
+                RGB_tile.save("products/"+name+"/"+str(tiles_x)+"_"+str(tiles_y)+".png")
