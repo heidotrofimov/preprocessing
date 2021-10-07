@@ -15,7 +15,11 @@ def check_data(img):
       if(img[i,j][3]==0):
         return False
   return True
-'''
+
+def S2_short(S2_full):
+    S2=S2_full.split(".")[0].split("_")
+    return S2[0]+"_"+S2[2]+"_"+S2[5]
+
 for safe in os.listdir("products"):
     if("SAFE" in safe):
         nodim=True
@@ -27,7 +31,7 @@ for safe in os.listdir("products"):
             output_path="products/"+safe+"/GRANULE/output.dim"
             line_for_gpt="/snap/snap8/bin/gpt output.xml -Pinput=\""+input_path+"\" -Poutput=\""+output_path+"\""
             os.system(line_for_gpt)
- '''       
+    
 sys.path.append('/home/heido/jpy/build/lib.linux-x86_64-3.6')
 sys.path.append('/home/heido/.snap/snap-python')
 import snappy
@@ -52,7 +56,7 @@ def write_image(band, filename, format):
     im = ImageManager.getInstance().createColoredBandImage([band], band.getImageInfo(), 0)
     JAI.create("filestore", im, filename, format)
     
-'''    
+
 for S2_SAFE in os.listdir('products'):
     RGB_im=S2_SAFE.split(".")[0]
     if(os.path.isfile("products/"+RGB_im+".png")==False):
@@ -63,10 +67,10 @@ for S2_SAFE in os.listdir('products'):
         blue = S2_product.getBand('B2')
         write_rgb_image([red, green, blue], RGB_im+".png", 'png')
         shutil.move(RGB_im+".png",'products/')
-'''        
+    
 tile_size=512
 AOI="T33UVS"
-
+'''
 tiles_of_interest=[]
 
 tiles_file=open(AOI+"_tiles_with_fields.txt","r")
@@ -74,11 +78,16 @@ lines=tiles_file.readlines()
 for line in lines:
     tiles_of_interest.append(line.rstrip())
 tiles_file.close()
+'''
+
+
 
 for RGB_im in os.listdir("products"):
   if(".png" in RGB_im):
       print(RGB_im)
       name=RGB_im.split(".")[0]
+      name_check=S2_short(RGB_im)
+
       os.mkdir("products/"+name)
       im_S2 = Image.open("products/"+RGB_im)
 
@@ -86,24 +95,46 @@ for RGB_im in os.listdir("products"):
       tiles_y=int(im_S2.height/tile_size)
       for i in range(0,tiles_x):
         for j in range(0,tiles_y):
-            if(str(i)+"_"+str(j) in tiles_of_interest):
+            cond=False
+            for S1 in s1_tiles:
+                if(name_check+"_"+str(i)+"_"+str(j)+".tif"==S1):
+                  cond=True
+                  break
+            #if(str(i)+"_"+str(j) in tiles_of_interest):
+            if(cond==True):
               RGB_tile=im_S2.crop((i*tile_size,j*tile_size,tile_size*(i+1),tile_size*(j+1)))
               if(check_data(RGB_tile)):
                 RGB_tile.save("products/"+name+"/"+str(i)+"_"+str(j)+".png")
       if(im_S2.width>tiles_x*tile_size):
         for j in range(0,tiles_y):
-            if(str(tiles_x)+"_"+str(j) in tiles_of_interest):
+            cond=False
+            for S1 in s1_tiles:
+                if(name_check+"_"+str(tiles_x)+"_"+str(j)+".tif"==S1):
+                  cond=True
+                  break
+            if(cond==True):
               RGB_tile=im_S2.crop((im_S2.width-tile_size,j*tile_size,im_S2.width,tile_size*(j+1)))
               if(check_data(RGB_tile)):
                 RGB_tile.save("products/"+name+"/"+str(tiles_x)+"_"+str(j)+".png")
       if(im_S2.height>tiles_y*tile_size):
         for i in range(0,tiles_x):
-            if(str(i)+"_"+str(tiles_y) in tiles_of_interest):
+            cond=False
+            for S1 in s1_tiles:
+                if(name_check+"_"+str(i)+"_"+str(tiles_y)+".tif"==S1):
+                  cond=True
+                  break
+            if(cond==True):
               RGB_tile=im_S2.crop((i*tile_size,im_S2.height-tile_size,tile_size*(i+1),im_S2.height))
               if(check_data(RGB_tile)):
                 RGB_tile.save("products/"+name+"/"+str(i)+"_"+str(tiles_y)+".png")
       if(im_S2.height>tiles_y*tile_size and im_S2.width>tiles_x*tile_size):
         if(str(tiles_x)+"_"+str(tiles_y) in tiles_of_interest):
-            RGB_tile=im_S2.crop((im_S2.width-tile_size,im_S2.height-tile_size,im_S2.width,im_S2.height))
-            if(check_data(RGB_tile)):
-                RGB_tile.save("products/"+name+"/"+str(tiles_x)+"_"+str(tiles_y)+".png")
+            cond=False
+            for S1 in s1_tiles:
+                if(name_check+"_"+str(tiles_x)+"_"+str(tiles_y)+".tif"==S1):
+                  cond=True
+                  break
+            if(cond==True):
+              RGB_tile=im_S2.crop((im_S2.width-tile_size,im_S2.height-tile_size,im_S2.width,im_S2.height))
+              if(check_data(RGB_tile)):
+                  RGB_tile.save("products/"+name+"/"+str(tiles_x)+"_"+str(tiles_y)+".png")
