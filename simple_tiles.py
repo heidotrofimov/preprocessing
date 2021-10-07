@@ -90,7 +90,7 @@ for RGB_im in os.listdir("products"):
       name=RGB_im.split(".")[0]
       name_check=S2_short(RGB_im)
 
-      os.mkdir("products/"+name)
+      #os.mkdir("products/"+name)
       im_S2 = Image.open("products/"+RGB_im)
 
       tiles_x=int(im_S2.width/tile_size)
