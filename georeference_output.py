@@ -10,7 +10,6 @@ name_parts=input_png.split("_")
 for p in name_parts:
   if(p[0]=="T"):
     EPSG="326"+p[1:3]
-print(EPSG)
 
 data = gdal.Open(input_tif, GA_ReadOnly)
 geoTransform = data.GetGeoTransform()
@@ -20,4 +19,4 @@ maxx = minx + geoTransform[1] * data.RasterXSize
 miny = maxy + geoTransform[5] * data.RasterYSize
 print([minx, miny, maxx, maxy])
 
-os.system("gdal_translate -of Gtiff -a_ullr "+str(minx)+" "+str(maxy)+" "+str(maxx)+" "+str(miny)+" -a_srs EPSG:32634 "+input_png+" "+input_png.replace("png","tif"))
+os.system("gdal_translate -of Gtiff -a_ullr "+str(minx)+" "+str(maxy)+" "+str(maxx)+" "+str(miny)+" -a_srs EPSG:"+EPSG+" "+input_png+" "+input_png.replace("png","tif"))
