@@ -100,7 +100,7 @@ for RGB_im in os.listdir("products"):
             cond=False
             for S1 in os.listdir("s1_tiles"):
                 print(name_check+"_"+str(i)+"_"+str(j)+".tif")
-                if(name_check+"_"+str(i)+"_"+str(j)+".tif"==S1):
+                if(name_check+"_"+str(i)+"_"+str(j)+".tif"==S1.split("colwith_")[1]):
                   cond=True
                   break
             #if(str(i)+"_"+str(j) in tiles_of_interest):
@@ -112,7 +112,7 @@ for RGB_im in os.listdir("products"):
         for j in range(0,tiles_y):
             cond=False
             for S1 in os.listdir("s1_tiles"):
-                if(name_check+"_"+str(tiles_x)+"_"+str(j)+".tif"==S1):
+                if(name_check+"_"+str(tiles_x)+"_"+str(j)+".tif"==S1.split("colwith_")[1]):
                   cond=True
                   break
             if(cond==True):
@@ -123,7 +123,7 @@ for RGB_im in os.listdir("products"):
         for i in range(0,tiles_x):
             cond=False
             for S1 in os.listdir("s1_tiles"):
-                if(name_check+"_"+str(i)+"_"+str(tiles_y)+".tif"==S1):
+                if(name_check+"_"+str(i)+"_"+str(tiles_y)+".tif"==S1.split("colwith_")[1]):
                   cond=True
                   break
             if(cond==True):
@@ -133,7 +133,7 @@ for RGB_im in os.listdir("products"):
       if(im_S2.height>tiles_y*tile_size and im_S2.width>tiles_x*tile_size):
           cond=False
           for S1 in os.listdir("s1_tiles"):
-              if(name_check+"_"+str(tiles_x)+"_"+str(tiles_y)+".tif"==S1):
+              if(name_check+"_"+str(tiles_x)+"_"+str(tiles_y)+".tif"==S1.split("colwith_")[1]):
                 cond=True
                 break
           if(cond==True):
