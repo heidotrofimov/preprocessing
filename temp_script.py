@@ -12,7 +12,7 @@ def S2_name(S2_full):
     S2=S2_full.split(".")[0].split("_")
     return S2[0]+"_"+S2[2]+"_"+S2[5]
 
-
+'''
 os.system("bash linearize_rasters.sh s1_tif")
 os.system("bash combine_tiffs.sh s1_tif")
 os.system("rm s1_tif/*")
@@ -67,7 +67,7 @@ for filename in os.listdir(inputdir):
           outputPath = "s1_tiles/"+filename.split(".tif")[0]+"_"+str(x_tiles)+"_"+str(y_tiles)
           corresponding_S2=outputPath.split("colwith_")[1]
           tile_nr=str(x_tiles)+"_"+str(y_tiles)
-          '''
+          
           s2_tile_exists=False
           for filename2 in os.listdir("s2_NDVI"):
               if(filename2.split(".")[0]==corresponding_S2):
@@ -75,7 +75,7 @@ for filename in os.listdir(inputdir):
                   break
 
 
-          '''
+          
           #if(s2_tile_exists==True and os.path.isfile(str(outputPath)+".tif")==False):
           if(True):
               tifOK=True
@@ -208,6 +208,6 @@ print("With historical tiles:")
       
 print("Added s1: "+str(s1n))
 print("Added s2: "+str(s2n))
-'''    
+ 
 
   
