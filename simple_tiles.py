@@ -19,7 +19,7 @@ def check_data(img):
 def S2_short(S2_full):
     S2=S2_full.split(".")[0].split("_")
     return S2[0]+"_"+S2[2]+"_"+S2[5]
-
+'''
 for safe in os.listdir("products"):
     if("SAFE" in safe):
         nodim=True
@@ -31,7 +31,7 @@ for safe in os.listdir("products"):
             output_path="products/"+safe+"/GRANULE/output.dim"
             line_for_gpt="/snap/snap8/bin/gpt output.xml -Pinput=\""+input_path+"\" -Poutput=\""+output_path+"\""
             os.system(line_for_gpt)
-  
+''' 
 sys.path.append('/home/heido/jpy/build/lib.linux-x86_64-3.6')
 sys.path.append('/home/heido/.snap/snap-python')
 import snappy
@@ -58,7 +58,7 @@ def write_image(band, filename, format):
     im = ImageManager.getInstance().createColoredBandImage([band], band.getImageInfo(), 0)
     JAI.create("filestore", im, filename, format)
     
-
+'''
 for S2_SAFE in os.listdir('products'):
     RGB_im=S2_SAFE.split(".")[0]
     if(os.path.isfile("products/"+RGB_im+".png")==False):
@@ -90,7 +90,7 @@ for RGB_im in os.listdir("products"):
       name=RGB_im.split(".")[0]
       name_check=S2_short(RGB_im)
 
-      #os.mkdir("products/"+name)
+      os.mkdir("products/"+name)
       im_S2 = Image.open("products/"+RGB_im)
 
       tiles_x=int(im_S2.width/tile_size)
@@ -140,4 +140,4 @@ for RGB_im in os.listdir("products"):
             RGB_tile=im_S2.crop((im_S2.width-tile_size,im_S2.height-tile_size,im_S2.width,im_S2.height))
             if(check_data(RGB_tile)):
                 RGB_tile.save("products/"+name+"/"+str(tiles_x)+"_"+str(tiles_y)+".png")
-'''
+
