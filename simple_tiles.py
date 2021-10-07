@@ -99,6 +99,7 @@ for RGB_im in os.listdir("products"):
         for j in range(0,tiles_y):
             cond=False
             for S1 in os.listdir("s1_tiles"):
+                print(name_check+"_"+str(i)+"_"+str(j)+".tif")
                 if(name_check+"_"+str(i)+"_"+str(j)+".tif"==S1):
                   cond=True
                   break
