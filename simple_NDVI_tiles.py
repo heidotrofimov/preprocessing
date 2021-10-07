@@ -35,6 +35,20 @@ def S2_short(S2_full):
     S2=S2_full.split(".")[0].split("_")
     return S2[0]+"_"+S2[2]+"_"+S2[5]
 tile_size=512    
+
+for safe in os.listdir("products"):
+    if("SAFE" in safe):
+        nodim=True
+        for filename in os.listdir("products/"+safe+"/GRANULE"):
+            if(".dim" in filename):
+                nodim=False
+        if(nodim):
+            input_path="products/"+safe+"/MTD_MSIL2A.xml"
+            output_path="products/"+safe+"/GRANULE/output.dim"
+            line_for_gpt="/snap/snap8/bin/gpt output.xml -Pinput=\""+input_path+"\" -Poutput=\""+output_path+"\""
+            os.system(line_for_gpt)
+            
+            
 for S2_SAFE in os.listdir('products'):                   
     NDVI_im=S2_SAFE.split(".")[0]+"_NDVI"
     os.system('mkdir checked_products/'+NDVI_im)
