@@ -19,7 +19,7 @@ def check_data(img):
 def S2_short(S2_full):
     S2=S2_full.split(".")[0].split("_")
     return S2[0]+"_"+S2[2]+"_"+S2[5]
-'''
+
 for safe in os.listdir("products"):
     if("SAFE" in safe):
         nodim=True
@@ -31,7 +31,7 @@ for safe in os.listdir("products"):
             output_path="products/"+safe+"/GRANULE/output.dim"
             line_for_gpt="/snap/snap8/bin/gpt output.xml -Pinput=\""+input_path+"\" -Poutput=\""+output_path+"\""
             os.system(line_for_gpt)
-''' 
+
 sys.path.append('/home/heido/jpy/build/lib.linux-x86_64-3.6')
 sys.path.append('/home/heido/.snap/snap-python')
 import snappy
@@ -58,7 +58,7 @@ def write_image(band, filename, format):
     im = ImageManager.getInstance().createColoredBandImage([band], band.getImageInfo(), 0)
     JAI.create("filestore", im, filename, format)
     
-'''
+
 for S2_SAFE in os.listdir('products'):
     RGB_im=S2_SAFE.split(".")[0]
     if(os.path.isfile("products/"+RGB_im+".png")==False):
@@ -70,7 +70,7 @@ for S2_SAFE in os.listdir('products'):
         write_rgb_image([red, green, blue], RGB_im+".png", 'png')
         shutil.move(RGB_im+".png",'products/')
     
-'''
+
 AOI="T33UVS"
 
 tiles_of_interest=[]
@@ -88,6 +88,7 @@ for RGB_im in os.listdir("products"):
   if(".png" in RGB_im):
       print(RGB_im)
       name=RGB_im.split(".")[0]
+      AOI=name.split("_")[5]
       name_check=S2_short(RGB_im)
 
       os.mkdir("products/"+name)
@@ -99,8 +100,7 @@ for RGB_im in os.listdir("products"):
         for j in range(0,tiles_y):
             cond=False
             for S1 in os.listdir("s1_tiles"):
-                print(name_check+"_"+str(i)+"_"+str(j)+".tif")
-                if(name_check+"_"+str(i)+"_"+str(j)+".tif"==S1.split("colwith_")[1]):
+                if(AOI in S1 and "_"+str(i)+"_"+str(j)+".tif" in S1):
                   cond=True
                   break
             #if(str(i)+"_"+str(j) in tiles_of_interest):
@@ -112,7 +112,7 @@ for RGB_im in os.listdir("products"):
         for j in range(0,tiles_y):
             cond=False
             for S1 in os.listdir("s1_tiles"):
-                if(name_check+"_"+str(tiles_x)+"_"+str(j)+".tif"==S1.split("colwith_")[1]):
+                if(AOI in S1 and "_"+str(j)+".tif" in S1):
                   cond=True
                   break
             if(cond==True):
@@ -123,7 +123,7 @@ for RGB_im in os.listdir("products"):
         for i in range(0,tiles_x):
             cond=False
             for S1 in os.listdir("s1_tiles"):
-                if(name_check+"_"+str(i)+"_"+str(tiles_y)+".tif"==S1.split("colwith_")[1]):
+                if(AOI in S1 and "_"+str(i)+"_"+str(tiles_y)+".tif" in S1):
                   cond=True
                   break
             if(cond==True):
@@ -133,7 +133,7 @@ for RGB_im in os.listdir("products"):
       if(im_S2.height>tiles_y*tile_size and im_S2.width>tiles_x*tile_size):
           cond=False
           for S1 in os.listdir("s1_tiles"):
-              if(name_check+"_"+str(tiles_x)+"_"+str(tiles_y)+".tif"==S1.split("colwith_")[1]):
+              if(AOI in S1 and str(tiles_x)+"_"+str(tiles_y)+".tif" in S1):
                 cond=True
                 break
           if(cond==True):
