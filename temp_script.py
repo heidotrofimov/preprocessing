@@ -1,3 +1,4 @@
+'''
 import os
 import os.path
 from osgeo import gdal
@@ -12,7 +13,7 @@ def S2_name(S2_full):
     S2=S2_full.split(".")[0].split("_")
     return S2[0]+"_"+S2[2]+"_"+S2[5]
 
-'''
+
 os.system("bash linearize_rasters.sh s1_tif")
 os.system("bash combine_tiffs.sh s1_tif")
 os.system("rm s1_tif/*")
