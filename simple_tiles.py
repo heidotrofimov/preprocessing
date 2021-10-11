@@ -98,45 +98,24 @@ for RGB_im in os.listdir("products"):
       tiles_y=int(im_S2.height/tile_size)
       for i in range(0,tiles_x):
         for j in range(0,tiles_y):
-            cond=False
-            for S1 in os.listdir("s1_tiles"):
-                if(AOI in S1 and "_"+str(i)+"_"+str(j)+".tif" in S1):
-                  cond=True
-                  break
-            #if(str(i)+"_"+str(j) in tiles_of_interest):
-            if(cond==True):
+            if(str(i)+"_"+str(j) in tiles_of_interest):
               RGB_tile=im_S2.crop((i*tile_size,j*tile_size,tile_size*(i+1),tile_size*(j+1)))
               if(check_data(RGB_tile)):
                 RGB_tile.save("products/"+name+"/"+str(i)+"_"+str(j)+".png")
       if(im_S2.width>tiles_x*tile_size):
         for j in range(0,tiles_y):
-            cond=False
-            for S1 in os.listdir("s1_tiles"):
-                if(AOI in S1 and "_"+str(j)+".tif" in S1):
-                  cond=True
-                  break
-            if(cond==True):
+            if(str(tiles_x)+"_"+str(j) in tiles_of_interest):
               RGB_tile=im_S2.crop((im_S2.width-tile_size,j*tile_size,im_S2.width,tile_size*(j+1)))
               if(check_data(RGB_tile)):
                 RGB_tile.save("products/"+name+"/"+str(tiles_x)+"_"+str(j)+".png")
       if(im_S2.height>tiles_y*tile_size):
         for i in range(0,tiles_x):
-            cond=False
-            for S1 in os.listdir("s1_tiles"):
-                if(AOI in S1 and "_"+str(i)+"_"+str(tiles_y)+".tif" in S1):
-                  cond=True
-                  break
-            if(cond==True):
+            if(str(i)+"_"+str(tiles_y) in tiles_of_interest):
               RGB_tile=im_S2.crop((i*tile_size,im_S2.height-tile_size,tile_size*(i+1),im_S2.height))
               if(check_data(RGB_tile)):
                 RGB_tile.save("products/"+name+"/"+str(i)+"_"+str(tiles_y)+".png")
       if(im_S2.height>tiles_y*tile_size and im_S2.width>tiles_x*tile_size):
-          cond=False
-          for S1 in os.listdir("s1_tiles"):
-              if(AOI in S1 and str(tiles_x)+"_"+str(tiles_y)+".tif" in S1):
-                cond=True
-                break
-          if(cond==True):
+          if(str(i)+"_"+str(tiles_y) in tiles_of_interest):
             RGB_tile=im_S2.crop((im_S2.width-tile_size,im_S2.height-tile_size,im_S2.width,im_S2.height))
             if(check_data(RGB_tile)):
                 RGB_tile.save("products/"+name+"/"+str(tiles_x)+"_"+str(tiles_y)+".png")
