@@ -43,12 +43,12 @@ def S2_name(S2_full):
     return S2[0]+"_"+S2[2]+"_"+S2[5]
 
 
-f=open("../heido_test/list_for_senpy.txt","r")
+f=open("list_for_senpy.txt","r")
 nr=f.readlines()
 f.close()
 
 #for n in nr:
-for n in range(1):
+for n in nr:
     while(os.path.isfile("senpy_ready.txt")==False):
         time.sleep(300)
         print("Waiting for senpy")
@@ -264,5 +264,5 @@ for n in range(1):
           break
     os.system("~/miniconda3/envs/biomass/bin/python merge.py")
     os.system("rm s1_tiles/*")
-    os.system("cp preprocessing_ready.txt ../heido_test/")
+
     
