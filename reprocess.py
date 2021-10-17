@@ -3,7 +3,7 @@ from datetime import datetime
 
 
 ref_date=datetime(2021,9,6,23,59)
-
+ref_date2=datetime(2021,9,20,23,59)
 print("Without history:")
 
 products=[]
@@ -11,7 +11,7 @@ products=[]
 for filename in os.listdir("data/S1"):
   ts=os.path.getmtime("data/S1/"+filename)
   dt=datetime.utcfromtimestamp(ts)
-  if(dt>ref_date):
+  if(dt>ref_date and dt<ref_date2):
     products.append(filename)
     
 AOIs=[]
@@ -40,7 +40,7 @@ products=[]
 for filename in os.listdir("test_data/S1"):
   ts=os.path.getmtime("test_data/S1/"+filename)
   dt=datetime.utcfromtimestamp(ts)
-  if(dt>ref_date):
+  if(dt>ref_date and dt<ref_date2):
     products.append(filename)
     
 AOIs=[]
@@ -68,7 +68,7 @@ products=[]
 for filename in os.listdir("data/with_history/S1"):
   ts=os.path.getmtime("data/with_history/S1/"+filename)
   dt=datetime.utcfromtimestamp(ts)
-  if(dt>ref_date):
+  if(dt>ref_date and dt<ref_date2):
     products.append(filename)
     
 AOIs=[]
@@ -100,7 +100,7 @@ products=[]
 for filename in os.listdir("test_data/with_history/S1"):
   ts=os.path.getmtime("test_data/with_history/S1/"+filename)
   dt=datetime.utcfromtimestamp(ts)
-  if(dt>ref_date):
+  if(dt>ref_date and dt<ref_date2):
     products.append(filename)
     
 AOIs=[]
