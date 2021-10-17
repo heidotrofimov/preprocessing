@@ -14,7 +14,7 @@ for filename in os.listdir("data/S1"):
   dt=datetime.utcfromtimestamp(ts)
   if(dt>ref_date and dt<ref_date2):
     i=i+1
-    print(filename)
+    print(str(i)+" "+filename+" "+str(dt))
     products.append(filename)
     
 AOIs=[]
@@ -45,7 +45,7 @@ for filename in os.listdir("test_data/S1"):
   dt=datetime.utcfromtimestamp(ts)
   if(dt>ref_date and dt<ref_date2):
     i=i+1
-    print(filename)
+    print(str(i)+" "+filename+" "+str(dt))
     products.append(filename)
 '''    
 AOIs=[]
