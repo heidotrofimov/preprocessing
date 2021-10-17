@@ -8,10 +8,13 @@ print("Without history:")
 
 products=[]
 
+i=0
 for filename in os.listdir("data/S1"):
   ts=os.path.getmtime("data/S1/"+filename)
   dt=datetime.utcfromtimestamp(ts)
   if(dt>ref_date and dt<ref_date2):
+    i=i+1
+    print(filename)
     products.append(filename)
     
 AOIs=[]
@@ -30,19 +33,21 @@ for AOI in AOIs:
       S1date_str=product.split("_")[1].split("T")[0]
       if(S1date_str not in dates):
         dates.append(S1date_str)
-  print(AOI)
-  print(dates)
+  #print(AOI)
+  #print(dates)
 
 print("Test data")  
 
 products=[]
-
+i=0
 for filename in os.listdir("test_data/S1"):
   ts=os.path.getmtime("test_data/S1/"+filename)
   dt=datetime.utcfromtimestamp(ts)
   if(dt>ref_date and dt<ref_date2):
+    i=i+1
+    print(filename)
     products.append(filename)
-    
+'''    
 AOIs=[]
 
 for product in products:
@@ -119,3 +124,4 @@ for AOI in AOIs:
         dates.append(S1date_str)
   print(AOI)
   print(dates)
+'''
