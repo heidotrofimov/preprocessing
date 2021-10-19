@@ -63,6 +63,9 @@ for n in nr:
     os.system("bash combine_tiffs.sh s1_tif")
     os.system("rm s1_tif/*")
     
+    if(count==0):
+        os.system("cp s1_tif_final/* collocated_tifs_analysis/")
+    
     for S1_tif in os.listdir('s1_tif_final'):
         S1p='s1_tif_final/'+S1_tif
         date1=S1_tif.split("_")[5].split("T")[0]
@@ -247,7 +250,6 @@ for n in nr:
                 yOffset  = inputTiff.RasterYSize - 512
                 
     if(count==0):
-        os.system("mkdir collocated_tifs_analysis")
         os.system("mv collocated_tifs/* collocated_tifs_analysis/")
         count=1
     else:
