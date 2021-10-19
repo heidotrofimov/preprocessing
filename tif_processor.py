@@ -47,6 +47,8 @@ f=open("list_for_senpy.txt","r")
 nr=f.readlines()
 f.close()
 
+count=0
+
 #for n in nr:
 for n in nr:
     while(os.path.isfile("senpy_ready.txt")==False):
@@ -243,7 +245,13 @@ for n in nr:
                 yOffset += 512
             else:
                 yOffset  = inputTiff.RasterYSize - 512
-    os.system("rm -r collocated_tifs/*")
+                
+    if(count=0):
+        os.system("mkdir collocated_tifs_analysis")
+        os.system("mv collocated_tifs/* collocated_tifs_analysis/")
+        count=1
+    else:
+        os.system("rm -r collocated_tifs/*")
     
 
     #Delete the tif tiles that have regions of no data:
