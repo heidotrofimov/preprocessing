@@ -246,7 +246,7 @@ for n in nr:
             else:
                 yOffset  = inputTiff.RasterYSize - 512
                 
-    if(count=0):
+    if(count==0):
         os.system("mkdir collocated_tifs_analysis")
         os.system("mv collocated_tifs/* collocated_tifs_analysis/")
         count=1
