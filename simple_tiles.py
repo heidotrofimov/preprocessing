@@ -71,7 +71,7 @@ for S2_SAFE in os.listdir('products'):
         shutil.move(RGB_im+".png",'products/')
     
 
-AOI="T33UXV"
+AOI="T34UFG"
 
 tiles_of_interest=[]
 
