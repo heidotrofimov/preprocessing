@@ -63,8 +63,6 @@ for n in nr:
     os.system("bash combine_tiffs.sh s1_tif")
     os.system("rm s1_tif/*")
     
-    if(count==0):
-        os.system("cp s1_tif_final/* collocated_tifs_analysis/")
     
     for S1_tif in os.listdir('s1_tif_final'):
         S1p='s1_tif_final/'+S1_tif
@@ -248,12 +246,8 @@ for n in nr:
                 yOffset += 512
             else:
                 yOffset  = inputTiff.RasterYSize - 512
-                
-    if(count==0):
-        os.system("mv collocated_tifs/* collocated_tifs_analysis/")
-        count=1
-    else:
-        os.system("rm -r collocated_tifs/*")
+
+    os.system("rm -r collocated_tifs/*")
     
 
     #Delete the tif tiles that have regions of no data:
