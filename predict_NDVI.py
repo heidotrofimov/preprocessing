@@ -38,7 +38,7 @@ for S2_product in os.listdir("S2_products"):
           B02name=filename2
   targetpath=outdir+"/"+filename+"_"+S2_product.split("_")[5]+".dim"
   os.system("/snap/snap8/bin/gpt collocation.xml -PB02=\""+B02+"\" -PS1=\""+outdir+"/"+S1+"\" -PB02name=\""+B02name+"\" -Ptargetpath=\""+targetpath+"\"")
-'''
+
 #Save tif files from collocation products:
 
 collocated_tifs=[]
@@ -93,8 +93,20 @@ for inputPath in collocated_tifs:
           yOffset += 512
       else:
           yOffset  = inputTiff.RasterYSize - 512
-
-
+'''
+for filename2 in os.listdir("s1_tiles"):
+  path="s1_tiles/"+filename2
+  S1_im=TIFF.open(path)
+  imarray=S1_im.read_image()
+  condition=True
+  for j in range(len(imarray)):
+    for i in range(len(imarray[j])):
+      if(imarray[j][i][0]==0 or (imarray[j][i][1]==-32768 and imarray[j][i][2]==-32768 and imarray[j][i][3]==-32768 and imarray[j][i][4]==-32768)):
+        condition=False
+        os.remove(path)
+        break
+    if(condition==False):
+      break
 
 
 
