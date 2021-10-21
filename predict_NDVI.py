@@ -7,7 +7,7 @@ S1=sys.argv[1]  #Path to the S1 raster, based on which we want to predict sNDVI
 
 
 outdir="tmp"
-os.system("mkdir "+outdir)
+#os.system("mkdir "+outdir)
 filename=os.path.basename(S1).split(".")[0]
 prefix=outdir+"/"+filename
 
