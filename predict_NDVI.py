@@ -34,7 +34,7 @@ for S2_product in os.listdir("S2_products"):
         if('B02_10m.jp2' in filename2):
           B02='S2_products/'+S2_product+'/GRANULE/'+folder3+'/IMG_DATA/R10m/'+filename2
           B02name=filename2
-  targetpath=outdir+"/"+filename2+".dim"
+  targetpath=outdir+"/"+filename+"_"+S2_product.split("_")[5]+".dim"
   os.system("/snap/snap8/bin/gpt collocation.xml -PB02=\""+B02+"\" -PS1=\""+outdir+"/"+S1+"\" -PB02name=\""+B02name+"\" -Ptargetpath=\""+targetpath+"\"")
 
 
