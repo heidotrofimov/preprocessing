@@ -1,5 +1,6 @@
 import os
 import sys
+from osgeo import gdal
 
 S1=sys.argv[1]  #Path to the S1 raster, based on which we want to predict sNDVI
 
