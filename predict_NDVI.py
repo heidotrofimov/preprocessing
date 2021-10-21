@@ -53,7 +53,7 @@ for filename2 in os.listdir(outdir):
 #Tile the collocated tifs:
 
 for inputPath in collocated_tifs:
-  print(inptPath)
+  print(inputPath)
   inputTiff = gdal.Open(inputPath)
   name=os.path.basename(inputPath).split(".")[0]
   S1_im=TIFF.open(inputPath)
