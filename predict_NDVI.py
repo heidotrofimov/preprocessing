@@ -53,6 +53,7 @@ for filename2 in os.listdir(outdir):
 #Tile the collocated tifs:
 
 for inputPath in collocated_tifs:
+  print(inptPath)
   inputTiff = gdal.Open(inputPath)
   name=os.path.basename(inputPath).split(".")[0]
   S1_im=TIFF.open(inputPath)
@@ -66,13 +67,15 @@ for inputPath in collocated_tifs:
 
   xRange = (inputTiff.RasterXSize // tile_width) + 1
   yRange = (inputTiff.RasterYSize // tile_height) + 1
-
+  print(xRange)
+  print(yRange)
   images_created = list()
   for y_tiles in range(yRange):
       for x_tiles in range(xRange):
           outputPath = "s1_tiles/"+name+"_"+str(x_tiles)+"_"+str(y_tiles)
           i=xOffset+10
           j=yOffset+10
+          tifOK=True
           if(imarray[0][j][i]==0 or (imarray[1][j][i]==-32768 and imarray[2][j][i]==-32768 and imarray[3][j][i]==-32768 and imarray[4][j][i]==-32768)):
               tifOK=False
           if(tifOK==True):
