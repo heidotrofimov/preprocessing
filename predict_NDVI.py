@@ -21,7 +21,7 @@ os.system("gdal_calc.py -A "+S1+" --A_band=3 --outfile="+band3+" --type=Float32 
 os.system("gdal_calc.py -A "+S1+" --A_band=4 --outfile="+band4+" --type=Float32 --NoDataValue=-32768 --calc=\"A.astype(numpy.float32)/1e4\" &>/dev/null")
 
 os.system("gdalbuildvrt -q -separate "+prefix+".vrt "+band1+" "+band2+" "+band3+" "+band4+" "+band5)
-os.system("gdal_translate "+prefix+".vrt tmp/"+filename+".tif"
+os.system("gdal_translate "+prefix+".vrt tmp/"+filename+".tif")
 
 
 
