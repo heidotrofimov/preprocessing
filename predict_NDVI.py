@@ -27,7 +27,7 @@ os.system("gdal_translate "+prefix+".vrt tmp/"+filename+".tif")
 
 #Colocate the linearized raster with S2 products:
 
-for S2_product in os.listdir("S2_products":)
+for S2_product in os.listdir("S2_products"):
   for folder3 in os.listdir('S2_products/'+S2_product+'/GRANULE/'):
     if("L2" in folder3):
       for filename2 in os.listdir('S2_products/'+S2_product+'/GRANULE/'+folder3+'/IMG_DATA/R10m/'):
