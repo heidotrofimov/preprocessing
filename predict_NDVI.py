@@ -42,7 +42,7 @@ for S2_product in os.listdir("S2_products"):
 collocated_tifs=[]
 
 for filename2 in os.listdir(outdir):
-  if(".dim" in filename):
+  if(".dim" in filename2):
     inputfile=outdir+"/"+filename2
     output=outdir+"/"+filename2.split(".")[0]+'.tif'
     collocated_tifs.append(output)
