@@ -7,9 +7,8 @@ S1=sys.argv[1]  #Path to the S1 raster, based on which we want to predict sNDVI
 
 #Linearize raster
 
-
 outdir="tmp"
-#os.system("mkdir "+outdir)
+os.system("mkdir "+outdir)
 filename=os.path.basename(S1).split(".")[0]
 prefix=outdir+"/"+filename
 
@@ -17,7 +16,7 @@ band1=prefix+"_s0vv.tif"      # backscattering in VV-polarization
 band2=prefix+"_s0vh.tif"      # backscattering in VH-polarization
 band3=prefix+"_cohvv.tif"     # coherence in VV-polarization
 band4=prefix+"_cohvh.tif"     # coherence in VH-polarization
-'''
+
 os.system("gdal_calc.py -A "+S1+" --A_band=1 --outfile="+band1+" --type=Float32 --NoDataValue=-32768 --calc=\"10**(A.astype(numpy.float32)/1e4 - 2.0)\" &>/dev/null")
 os.system("gdal_calc.py -A "+S1+" --A_band=2 --outfile="+band2+" --type=Float32 --NoDataValue=-32768 --calc=\"10**(A.astype(numpy.float32)/1e4 - 2.0)\" &>/dev/null")
 os.system("gdal_calc.py -A "+S1+" --A_band=3 --outfile="+band3+" --type=Float32 --NoDataValue=-32768 --calc=\"A.astype(numpy.float32)/1e4\" &>/dev/null")
@@ -93,7 +92,7 @@ for inputPath in collocated_tifs:
           yOffset += 512
       else:
           yOffset  = inputTiff.RasterYSize - 512
-'''
+
 for filename2 in os.listdir("s1_tiles"):
   path="s1_tiles/"+filename2
   S1_im=TIFF.open(path)
