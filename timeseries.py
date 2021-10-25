@@ -20,12 +20,12 @@ target_dates_2019.sort(reverse=True)
 
 tiles=[]
 for i in range(len(target_dates_2020)):
-  if(i==0):
+  if(i==1):
     for filename in os.listdir("data/with_history/S2"):
       if(target_dates_2020[0] in filename):
         tile=filename.split("_")[5]+"_"+filename.split("_")[6]
         tiles.append(tile)
-  print(len(tiles))
+    print(len(tiles))
   j=0
   for filename in os.listdir("data/with_history/S2"):
     for tile in tiles:
@@ -45,7 +45,7 @@ for i in range(len(target_dates_2019)):
       if(target_dates_2019[0] in filename):
         tile=filename.split("_")[5]+"_"+filename.split("_")[6]
         tiles.append(tile)
-  print(len(tiles))
+    print(len(tiles))
   j=0
   for filename in os.listdir("data/with_history/S2"):
     for tile in tiles:
