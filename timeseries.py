@@ -2,27 +2,59 @@ import os
 from datetime import datetime, timedelta
 
 days_between=[]
-target_dates=[]
+target_dates_2020=[]
+target_dates_2019=[]
 for filename in os.listdir("data/with_history/S2"):
-  if("T35VMF" in filename):
+  if("T35VMF" in filename and "2020" in filename):
     d1s=filename.split("_")[1]
-    if(d1s not in target_dates):
+    if(d1s not in target_dates_2020):
       target_dates.append(d1s)
-    d2s=filename.split("_")[4]
-    d1=datetime(int(d1s[0:4]),int(d1s[4:6]),int(d1s[6:8]))
-    d2=datetime(int(d2s[0:4]),int(d2s[4:6]),int(d2s[6:8]))
-    bw=abs((d1-d2).days)
-    days_between.append(bw)
+  if("T35VMF" in filename and "2019" in filename):
+    d1s=filename.split("_")[1]
+    if(d1s not in target_dates_2019):
+      target_dates_2019.append(d1s)
 
-target_dates.sort()
-print(target_dates)    
+target_dates_2020.sort(reverse=True)
+target_dates_2019.sort(reverse=True)
 
-for target_date in target_dates:
-  print(target_date)
-  i=0
+
+tiles=[]
+for i in range(len(target_dates_2020)):
+  if(i==0):
+    for filename in os.listdir("data/with_history/S2"):
+      if(target_dates_2020[0] in filename):
+        tile=filename.split("_")[5]+"_"+filename.split("_")[6]
+        tiles.append(tile)
+  print(len(tiles))
+  j=0
   for filename in os.listdir("data/with_history/S2"):
-    if(target_date in filename):
-      i+=1
-  print(i)
+    for tile in tiles:
+      if(target_dates_2020[i] in filename.split("_")[1] and tile in filename):
+        j+=1
+  print(target_dates_2020[i]+" "+str(j))
+  
+  
+print("")
+print("2020")
+print("")
+
+tiles=[]
+for i in range(len(target_dates_2019)):
+  if(i==0):
+    for filename in os.listdir("data/with_history/S2"):
+      if(target_dates_2019[0] in filename):
+        tile=filename.split("_")[5]+"_"+filename.split("_")[6]
+        tiles.append(tile)
+  print(len(tiles))
+  j=0
+  for filename in os.listdir("data/with_history/S2"):
+    for tile in tiles:
+      if(target_dates_2019[i] in filename.split("_")[1] and tile in filename):
+        j+=1
+  print(target_dates_2019[i]+" "+str(j))
+                                                                         
+    
+
+
     
 
