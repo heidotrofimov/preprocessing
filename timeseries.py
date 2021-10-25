@@ -8,7 +8,7 @@ for filename in os.listdir("data/with_history/S2"):
   if("T35VMF" in filename and "2020" in filename):
     d1s=filename.split("_")[1]
     if(d1s not in target_dates_2020):
-      target_dates.append(d1s)
+      target_dates_2020.append(d1s)
   if("T35VMF" in filename and "2019" in filename):
     d1s=filename.split("_")[1]
     if(d1s not in target_dates_2019):
