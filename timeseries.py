@@ -14,7 +14,7 @@ for filename in os.listdir("data/with_history/S2"):
     bw=abs((d1-d2).days)
     days_between.append(bw)
 
-    
+target_dates.sort()
 print(target_dates)    
 
 for target_date in target_dates:
