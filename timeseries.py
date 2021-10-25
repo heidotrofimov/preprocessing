@@ -45,7 +45,7 @@ for i in range(len(target_dates_2019)):
       if(target_dates_2019[0] in filename):
         tile=filename.split("_")[5]+"_"+filename.split("_")[6]
         tiles.append(tile)
-    print(target_dates_2019[0+" "+str(len(tiles)))
+    print(target_dates_2019[0]+" "+str(len(tiles)))
   j=0
   for filename in os.listdir("data/with_history/S2"):
     for tile in tiles:
