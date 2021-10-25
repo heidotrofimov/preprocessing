@@ -2,7 +2,7 @@ import os
 from datetime import datetime, timedelta
 
 days_between=[]
-for filename in os.listdir("data/with_history_S2"):
+for filename in os.listdir("data/with_history/S2"):
   if("T35VMF" in filename):
     d1s=filename.split("_")[1]
     d2s=filename.split("_")[4]
