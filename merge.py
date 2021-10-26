@@ -31,7 +31,10 @@ for s2 in os.listdir("s2_NDVI"):
   if(len(chosen_s1)!=0):
     s2n=s2n+1
     copyfile("s2_NDVI/"+s2,"data/S2/"+s2)
-    copyfile("s2_RGB/"+s2,"data/S2_RGB/"+s2)
+    try:
+      copyfile("s2_RGB/"+s2,"data/S2_RGB/"+s2)
+    except:
+      pass
     for s1 in chosen_s1:
       copyfile(s1,"data/S1/"+s1.split("/")[1])
       s1n=s1n+1
