@@ -16,6 +16,8 @@ for S2 in os.listdir("data/with_history/S2/"):
   history_str=S2.split("_")[4].split("T")[0]
   target_S1s=[]
   historical_S1s=[]
+  S1_target=""
+  S1_history=""
   for S1 in os.listdir("data/with_history/S1"):
     S1_str=S1.split("_")[1].split("T")[0]
     AOI2=S1.split("_")[6]
@@ -36,10 +38,9 @@ for S2 in os.listdir("data/with_history/S2/"):
     if(days(S1_str,history_str)<ref):
       S1_history=name
       ref=days(S1_str,history_str)
-  try:
+  if(len(S1_history)>2 and len(S1_target)>2):
+    print("")
     print(S2)
     print(S1_target)
     print(S1_history)
-    print("")
-  except:
-    pass
+  
