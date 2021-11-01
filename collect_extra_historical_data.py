@@ -52,7 +52,7 @@ for S2 in os.listdir("data/with_history/S2/"):
           S1_history="data/S1/"+name
           ref=days(S1_str,history_str)
   if(len(S1_history)>2 and len(S1_target)>2):
-    new_name=S1_target.split("_colwith")[0]+"_"+S1_history.split("_colwith")[0]+"_colwith_"+S1_target.split("colwith_")[1]
+    new_name=S1_target.split("_colwith")[0]+"_"+S1_history.split("/")[-1].split("_colwith")[0]+"_colwith_"+S1_target.split("colwith_")[1]
     os.system("cp data/with_history/S2/"+S2+" data/extra_historical/S2/")
     os.system("gdal_merge.py -ot Float32 -of GTiff -separate -o data/extra_historical/S1/"+new_name+" data/with_history/S1/"+S1_target+" "+S1_history)
     print("")
