@@ -44,5 +44,5 @@ for S2 in os.listdir("data/with_history/S2/"):
     #os.system("gdal_merge.py -ot Float32 -of GTiff -separate -o data/extra_historical/S1/"+new_name+" data/with_history/S1/"+S1_target+" data/with_history/S1/"+S1_history)
     print("")
     print("cp data/with_history/S2/"+S2+" data/extra_historical/S2/")
-    print("gdal_merge.py -ot Float32 -of GTiff -separate -o data/extra_historical/S1/"+new_name+" data/with_history/S1/"+S1_target+" data/with_history/S1/"+S1_history))
+    print("gdal_merge.py -ot Float32 -of GTiff -separate -o data/extra_historical/S1/"+new_name+" data/with_history/S1/"+S1_target+" data/with_history/S1/"+S1_history)
   
