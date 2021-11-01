@@ -38,6 +38,19 @@ for S2 in os.listdir("data/with_history/S2/"):
     if(days(S1_str,history_str)<ref):
       S1_history=name
       ref=days(S1_str,history_str)
+  if(len(S1_history)<2):
+    for S1 in os.listdir("data/S1"):
+      S1_str=S1.split("_")[1].split("T")[0]
+      AOI2=S1.split("_")[6]
+      tile2=S1.split("_")[-2]+"_"+S1.split("_")[-1].split(".")[0]
+      if(AOI==AOI2 and tile==tile2 and (days(S1_str,history_str)==0 or days(S1_str,history_str)==1 or days(S1_str,history_str)==2)):
+        historical_S1s.append(S1)
+  ref=5
+  for name in historical_S1s:
+    S1_str=name.split("_")[1].split("T")[0]
+    if(days(S1_str,history_str)<ref):
+      S1_history=name
+      ref=days(S1_str,history_str)
   if(len(S1_history)>2 and len(S1_target)>2):
     new_name=S1_target.split("_colwith")[0]+"_"+S1_history.split("_colwith")[0]+"_colwith_"+S1_target.split("colwith_")[1]
     os.system("cp data/with_history/S2/"+S2+" data/extra_historical/S2/")
