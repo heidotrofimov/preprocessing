@@ -18,11 +18,11 @@ from snappy import GPF
 from snappy import HashMap
 from snappy import ProductData
 
-'''
+
 jpy = snappy.jpy
 ImageManager = jpy.get_type('org.esa.snap.core.image.ImageManager')
 JAI = jpy.get_type('javax.media.jai.JAI')
-'''
+
 def write_rgb_image(bands, filename, format):
     image_info = ProductUtils.createImageInfo(bands, True, ProgressMonitor.NULL)
     im = ImageManager.getInstance().createColoredBandImage(bands, image_info, 0)
@@ -37,7 +37,7 @@ def S2_short(S2_full):
     S2=S2_full.split(".")[0].split("_")
     return S2[0]+"_"+S2[2]+"_"+S2[5]
 tile_size=512    
-'''
+
 for safe in os.listdir("products"):
     if("SAFE" in safe):
         nodim=True
@@ -114,7 +114,7 @@ for S2_SAFE in os.listdir('products'):
         if(os.path.isfile(rgb)):
             NDVI_tile=im_S2.crop((im_S2.width-tile_size,im_S2.height-tile_size,im_S2.width,im_S2.height))
             NDVI_tile.save('checked_products/'+NDVI_im+"/"+s2name+"_"+str(tiles_x)+"_"+str(tiles_y)+".png")
-'''
+
 for RGB in os.listdir("checked_products"):
     if("NDVI" not in RGB):
         s2name=S2_short(RGB)
