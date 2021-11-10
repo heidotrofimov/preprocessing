@@ -7,19 +7,19 @@ dire="test_data"
 
 days_between=[]
 target_dates_2020=[]
-target_dates_2019=[]
+target_dates_2018=[]
 for filename in os.listdir(dire+"/with_history/S2"):
-  if(AOI in filename and "2020" in filename):
+  if(AOI in filename and "2018" in filename):
     d1s=filename.split("_")[1]
     if(d1s not in target_dates_2020):
       target_dates_2020.append(d1s)
-  if(AOI in filename and "2019" in filename):
+  if(AOI in filename and "2018" in filename):
     d1s=filename.split("_")[1]
-    if(d1s not in target_dates_2019):
-      target_dates_2019.append(d1s)
+    if(d1s not in target_dates_2018):
+      target_dates_2018.append(d1s)
 
 target_dates_2020.sort(reverse=True)
-target_dates_2019.sort(reverse=True)
+target_dates_2018.sort(reverse=True)
 
 
 tiles=[]
@@ -39,7 +39,7 @@ for i in range(len(target_dates_2020)):
   
   
 print("")
-print("2020")
+print("2018")
 print("")
 
 tiles=[]
