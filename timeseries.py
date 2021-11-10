@@ -30,6 +30,12 @@ for i in range(len(target_dates_2020)):
       if(target_dates_2020[i] in filename.split("_")[1] and tile in filename):
         j+=1
   print(target_dates_2020[i]+" "+str(j))
+  if(j==25):
+    for filename in os.listdir(dire+"/with_history/S2"):
+      for tile in tiles:
+        if(target_dates_2020[i] in filename.split("_")[1] and tile in filename):
+          print(filename)
+        
   
   
 print("")
