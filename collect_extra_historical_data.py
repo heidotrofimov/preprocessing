@@ -9,7 +9,7 @@ def days(str1,str2):
   dt2=dt(str2)
   return abs((dt1-dt2).days)
 
-for S2 in os.listdir("test_data/with_history/S2/"):
+for S2 in os.listdir("data/with_history/S2/"):
   AOI=S2.split("_")[2]
   tile=S2.split("_")[-2]+"_"+S2.split("_")[-1].split(".")[0]
   target_str=S2.split("_")[1].split("T")[0]
@@ -18,7 +18,7 @@ for S2 in os.listdir("test_data/with_history/S2/"):
   historical_S1s=[]
   S1_target=""
   S1_history=""
-  for S1 in os.listdir("test_data/with_history/S1"):
+  for S1 in os.listdir("data/with_history/S1"):
     S1_str=S1.split("_")[1].split("T")[0]
     AOI2=S1.split("_")[6]
     tile2=S1.split("_")[-2]+"_"+S1.split("_")[-1].split(".")[0]
@@ -36,10 +36,10 @@ for S2 in os.listdir("test_data/with_history/S2/"):
   for name in historical_S1s:
     S1_str=name.split("_")[1].split("T")[0]
     if(days(S1_str,history_str)<ref):
-      S1_history="test_data/with_history/S1/"+name
+      S1_history="data/with_history/S1/"+name
       ref=days(S1_str,history_str)
   if(len(S1_history)<2):
-    for S1 in os.listdir("test_data/S1"):
+    for S1 in os.listdir("data/S1"):
       S1_str=S1.split("_")[1].split("T")[0]
       AOI2=S1.split("_")[6]
       tile2=S1.split("_")[-2]+"_"+S1.split("_")[-1].split(".")[0]
@@ -49,12 +49,12 @@ for S2 in os.listdir("test_data/with_history/S2/"):
       for name in historical_S1s:
         S1_str=name.split("_")[1].split("T")[0]
         if(days(S1_str,history_str)<ref):
-          S1_history="test_data/S1/"+name
+          S1_history="data/S1/"+name
           ref=days(S1_str,history_str)
   if(len(S1_history)>2 and len(S1_target)>2):
     new_name=S1_target.split("_colwith")[0]+"_"+S1_history.split("/")[-1].split("_colwith")[0]+"_colwith_"+S1_target.split("colwith_")[1]
-    os.system("cp test_data/with_history/S2/"+S2+" test_data/extra_historical/S2/")
-    os.system("gdal_merge.py -ot Float32 -of GTiff -separate -o test_data/extra_historical/S1/"+new_name+" test_data/with_history/S1/"+S1_target+" "+S1_history)
+    os.system("cp data/with_history/S2/"+S2+" data/extra_historical/S2/")
+    os.system("gdal_merge.py -ot Float32 -of GTiff -separate -o data/extra_historical/S1/"+new_name+" data/with_history/S1/"+S1_target+" "+S1_history)
     print("")
     print("cp data/with_history/S2/"+S2+" data/extra_historical/S2/")
     print("gdal_merge.py -ot Float32 -of GTiff -separate -o data/extra_historical/S1/"+new_name+" data/with_history/S1/"+S1_target+" "+S1_history)
