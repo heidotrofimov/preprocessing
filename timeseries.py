@@ -12,9 +12,6 @@ for line in lines:
     tiles_of_interest.append(line.rstrip())
 tiles_file.close()
 
-
-target_dates_2020.sort(reverse=True)
-
 for tile in tiles_of_interest:
   count=0
   for filename in os.listdir(dire+"/with_history/S2"):
