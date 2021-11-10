@@ -114,7 +114,8 @@ for S2_SAFE in os.listdir('products'):
         if(os.path.isfile(rgb)):
             NDVI_tile=im_S2.crop((im_S2.width-tile_size,im_S2.height-tile_size,im_S2.width,im_S2.height))
             NDVI_tile.save('checked_products/'+NDVI_im+"/"+s2name+"_"+str(tiles_x)+"_"+str(tiles_y)+".png")
-
+            
+print("Rewriting filenames, don't abort just yet!")
 for RGB in os.listdir("checked_products"):
     if("NDVI" not in RGB):
         s2name=S2_short(RGB)
