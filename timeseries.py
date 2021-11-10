@@ -2,7 +2,7 @@ import os
 from datetime import datetime, timedelta
 
 
-AOI="T33UVS"
+AOI="T33UWU"
 dire="test_data"
 
 days_between=[]
