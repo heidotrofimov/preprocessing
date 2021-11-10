@@ -24,6 +24,7 @@ for i in range(len(target_dates_2020)):
         tile=filename.split("_")[5]+"_"+filename.split("_")[6]
         tiles.append(tile)
     print(target_dates_2020[i]+" "+str(len(tiles)))
+  print(tiles)
   j=0
   for filename in os.listdir(dire+"/with_history/S2"):
     for tile in tiles:
