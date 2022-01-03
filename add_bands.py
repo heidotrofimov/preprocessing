@@ -84,7 +84,7 @@ for product in products:
         if(tile not in tiles):
           tiles.append(tile)
     print(tiles)
-    os.system("~/miniconda3/envs/biomass/bin/python save_extra_band.py "+product+" "+str(tiles))
+    os.system("~/miniconda3/envs/biomass/bin/python save_extra_band.py "+product+" "+tiles)
     os.system("rm -r "+product+"*")
     os.system("rm *.png")
               
