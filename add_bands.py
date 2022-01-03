@@ -83,8 +83,10 @@ for product in products:
         tile=S1.split("_")[-2]+"_"+S1.split("_")[-1].split(".")[0]
         if(tile not in tiles):
           tiles.append(tile)
-    print(tiles)
-    os.system("~/miniconda3/envs/biomass/bin/python save_extra_band.py "+product+" "+tiles)
+    tiles_str=""
+    for m in tiles:
+      tiles_str+=str(m)+","
+    os.system("~/miniconda3/envs/biomass/bin/python save_extra_band.py "+product+" "+tiles_str)
     os.system("rm -r "+product+"*")
     os.system("rm *.png")
               
