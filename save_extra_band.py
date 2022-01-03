@@ -10,7 +10,7 @@ import argparse
 safe=sys.argv[1]
 tiles=sys.argv[2]
 
-for filename in os.listdir(+safe+"/GRANULE"):
+for filename in os.listdir(safe+"/GRANULE"):
   if(".dim" in filename):
     nodim=False
   if(nodim):
