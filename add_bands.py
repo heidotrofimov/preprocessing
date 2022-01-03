@@ -1,4 +1,5 @@
 import os
+import time
 
 f=open("../find_products/login.txt","r")
 lines=f.readlines()
