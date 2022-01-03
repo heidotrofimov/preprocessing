@@ -12,6 +12,7 @@ product=sys.argv[1]
 tiles=sys.argv[2]
 
 for filename in os.listdir(safe+"/GRANULE"):
+  nodim=True
   if(".dim" in filename):
     nodim=False
   if(nodim):
