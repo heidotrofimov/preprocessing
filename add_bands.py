@@ -28,6 +28,7 @@ for S1 in os.listdir("/home/users/biomass/extra_historical/S1"):
     if(S2_2 not in S2s):
       S2s.append(S2_2)
  
+print(S2s)
 print(len(S2s))
       
 def download_xml(product, out_path):
