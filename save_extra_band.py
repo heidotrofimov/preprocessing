@@ -9,7 +9,7 @@ import argparse
 
 safe=sys.argv[1]+".SAFE"
 product=sys.argv[1]
-tiles=sys.argv[2]
+tiles=sys.argv[2].split(",")[0:-1]
 
 print(tiles)
 
