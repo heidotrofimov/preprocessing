@@ -8,7 +8,7 @@ def S21(str):
 
 def S22(str):
   p=str.split("_")
-  return(p[7]+"*"+p[10].split("T")[11])
+  return(p[10]+"*"+p[11].split("T")[0])
 
 for S1 in os.listdir("/home/users/biomass/extra_historical/S1"):
   AOI=S1.split("_")[-5]
