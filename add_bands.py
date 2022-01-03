@@ -85,34 +85,9 @@ for product in products:
           tiles.append(tile)
     print(S1s)
     print(tiles)
-    for folder in os.listdir(product+'.SAFE/GRANULE/'):
-      if("L2" in folder):
-        for filename in os.listdir(product+'.SAFE/GRANULE/'+folder+'/IMG_DATA/R10m/'):
-            if('B04_10m.jp2' in filename):
-                red=product+'.SAFE/GRANULE/'+folder+'/IMG_DATA/R10m/'+filename
-            if('B08_10m.jp2' in filename):
-                NIR=product+'.SAFE/GRANULE/'+folder+'/IMG_DATA/R10m/'+filename
-    os.system("/snap/snap8/bin/gpt save_band.xml -PS2=\""+red+"\" -PSRC=\"band_1\" -POUT=\""+product+"_B4"+"\"")
-    os.system("/snap/snap8/bin/gpt save_band.xml -PS2=\""+NIR+"\" -PSRC=\"band_1\" -POUT=\""+product+"_B8"+"\"")
-    im_B4 = Image.open(product+"_B4.png")
-    im_B8 = Image.open(product+"_B8.png")
-    for tile in tiles:
-      i=int(tile.split("_")[0])
-      j=int(tile.split("_")[1])
-      if(im_B4.width>i*tile_size and im_B4.height<j*tile_size):
-        im_B4_tile=im_B4.crop((im_B4.width-tile_size,j*tile_size,im_B4.width,tile_size*(j+1)))
-        im_B8_tile=im_B8.crop((im_B4.width-tile_size,j*tile_size,im_B4.width,tile_size*(j+1)))
-      elif(im_B4.height>i*tile_size and im_B4.width<i*tile_size):
-        im_B4_tile=im_B4.crop((i*tile_size,im_B4.height-tile_size,tile_size*(i+1),im_B4.height))
-        im_B8_tile=im_B8.crop((i*tile_size,im_B4.height-tile_size,tile_size*(i+1),im_B4.height))
-      elif(im_B4.width>i*tile_size and im_B4.height>i*tile_size):
-        im_B4_tile=im_B4.crop((im_B4.width-tile_size,im_B4.height-tile_size,im_B4.width,im_B4.height))
-        im_B8_tile=im_B8.crop((im_B4.width-tile_size,im_B4.height-tile_size,im_B4.width,im_B4.height))
-      else:
-        im_B4_tile=im_B4.crop((i*tile_size,j*tile_size,tile_size*(i+1),tile_size*(j+1)))
-        im_B8_tile=im_B8.crop((i*tile_size,j*tile_size,tile_size*(i+1),tile_size*(j+1)))
-      im_B4_tile.save("extra_bands/"+product+"_B4_"+tile+".png")
-      im_B8_tile.save("extra_bands/"+product+"_B8_"+tile+".png")
+    os.system("~/miniconda3/envs/biomass/bin/python save_extra_band.py "+product+" "+str(tiles))
     os.system("rm -r "+product+"*")
+    os.system("rm *.png)
+              
 
   
