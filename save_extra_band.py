@@ -7,7 +7,8 @@ import shutil
 from datetime import datetime
 import argparse
 
-safe=sys.argv[1]
+safe=sys.argv[1]+".SAFE"
+product=sys.argv[1]
 tiles=sys.argv[2]
 
 for filename in os.listdir(safe+"/GRANULE"):
