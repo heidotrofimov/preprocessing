@@ -61,6 +61,7 @@ im_B4 = Image.open(product+"_B4.png")
 im_B8 = Image.open(product+"_B8.png")
 
 for tile in tiles:
+  print(tile)
   i=int(tile.split("_")[0])
   j=int(tile.split("_")[1])
   if(im_B4.width>i*tile_size and im_B4.height<j*tile_size):
