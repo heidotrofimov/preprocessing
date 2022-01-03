@@ -11,6 +11,11 @@ safe=sys.argv[1]+".SAFE"
 product=sys.argv[1]
 tiles=sys.argv[2]
 
+print(tiles)
+
+for tile in tiles:
+  print(tile)
+
 for filename in os.listdir(safe+"/GRANULE"):
   nodim=True
   if(".dim" in filename):
