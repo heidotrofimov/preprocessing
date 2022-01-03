@@ -88,7 +88,7 @@ for product in products:
         for filename in os.listdir(product+'.SAFE/GRANULE/'+folder+'/IMG_DATA/R10m/'):
             if('B04_10m.jp2' in filename):
                 red=product+'.SAFE/GRANULE/'+folder+'/IMG_DATA/R10m/'+filename
-              if('B08_10m.jp2' in filename):
+            if('B08_10m.jp2' in filename):
                 NIR=product+'.SAFE/GRANULE/'+folder+'/IMG_DATA/R10m/'+filename
     os.system("/snap/snap8/bin/gpt save_band.xml -PS2=\""+red+"\" -PSRC=\"B4\" -POUT=\""+product+"_B4"+"\"")
     os.system("/snap/snap8/bin/gpt save_band.xml -PS2=\""+NIR+"\" -PSRC=\"B8\" -POUT=\""+product+"_B4"+"\"")
