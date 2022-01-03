@@ -87,7 +87,7 @@ for product in products:
     print(tiles)
     os.system("~/miniconda3/envs/biomass/bin/python save_extra_band.py "+product+" "+str(tiles))
     os.system("rm -r "+product+"*")
-    os.system("rm *.png)
+    os.system("rm *.png")
               
 
   
