@@ -27,7 +27,8 @@ for S1 in os.listdir("/home/users/biomass/extra_historical/S1"):
       S2s.append(S2_1)
     if(S2_2 not in S2s):
       S2s.append(S2_2)
-      
+ 
+print(len(S2s))
       
 def download_xml(product, out_path):
     user_name = username
@@ -36,7 +37,7 @@ def download_xml(product, out_path):
     command = "wget --no-verbose --no-check-certificate --user={user} --password={pwd} --output-document={out}"\
                   " {url}".format(user=user_name, pwd=user_password, out=out_path, url="\""+scihub_url + product+"&rows=100\"")
 
-    print("Downloading product as " + command)
+    #print("Downloading product as " + command)
     os.system(command)
     time.sleep(1.5)  # scihub does not allow too frequent queries; therefore wait a bit before a new query
 
@@ -58,4 +59,5 @@ for S2 in S2s:
   os.system("rm scihub.xml")
   
 print(products)
+print(len(products))
   
