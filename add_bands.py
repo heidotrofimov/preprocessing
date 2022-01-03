@@ -1,6 +1,10 @@
 import os
 import time
 from pathlib import Path
+from PIL import Image
+
+tile_size=512
+
 '''
 f=open("../find_products/login.txt","r")
 lines=f.readlines()
@@ -65,7 +69,6 @@ print(len(products))
 products=['S2B_MSIL2A_20190530T094039_N0212_R036_T35VMF_20190530T123039', 'S2B_MSIL2A_20190517T093039_N0212_R136_T35VMF_20190517T121234', 'S2A_MSIL2A_20190604T094031_N0212_R036_T35VMF_20190604T123219', 'S2A_MSIL2A_20190601T093041_N0212_R136_T35VMF_20190601T114535', 'S2B_MSIL2A_20190616T093039_N0212_R136_T35VMF_20190616T122037', 'S2B_MSIL2A_20190828T094039_N0213_R036_T35VMF_20190828T122001', 'S2B_MSIL2A_20190818T094039_N0213_R036_T35VMF_20190818T123014', 'S2B_MSIL2A_20200819T093039_N0214_R136_T35VMF_20200819T120522', 'S2B_MSIL2A_20200726T095029_N0214_R079_T35VMF_20200726T123818', 'S2B_MSIL2A_20200613T094039_N0214_R036_T35VMF_20200613T123113', 'S2B_MSIL2A_20200531T093039_N0214_R136_T35VMF_20200531T113811', 'S2B_MSIL2A_20200623T094039_N0214_R036_T35VMF_20200623T123518', 'S2A_MSIL2A_20200718T094041_N0214_R036_T35VMF_20200718T111813', 'S2B_MSIL2A_20200809T093039_N0214_R136_T35VMF_20200809T112625', 'S2A_MSIL2A_20200625T093041_N0214_R136_T35VMF_20200625T121318', 'S2A_MSIL2A_20190515T094031_N0212_R036_T35VMF_20190515T111629', 'S2B_MSIL2A_20190729T094039_N0213_R036_T35VMF_20190729T123310', 'S2A_MSIL2A_20200522T095041_N0214_R079_T35VMF_20200522T123919']
 i=0
 for product in products:
-  if(i==0):
     f=open("products.dat","w")
     f.write(product)
     f.close()
@@ -91,6 +94,25 @@ for product in products:
                 NIR=product+'.SAFE/GRANULE/'+folder+'/IMG_DATA/R10m/'+filename
     os.system("/snap/snap8/bin/gpt save_band.xml -PS2=\""+red+"\" -PSRC=\"band_1\" -POUT=\""+product+"_B4"+"\"")
     os.system("/snap/snap8/bin/gpt save_band.xml -PS2=\""+NIR+"\" -PSRC=\"band_1\" -POUT=\""+product+"_B8"+"\"")
-    os.system("rm -r "+product+".SAFE")
-  i=i+1
+    im_B4 = Image.open(product+"_B4.png")
+    im_B8 = Image.open(product+"_B8.png")
+    for tile in tiles:
+      i=int(tile.split("_")[0])
+      j=int(tile.split("_")[1])
+      if(im_B4.width>i*tile_size and im_B4.height<j*tile_size):
+        im_B4_tile=im_B4.crop((im_B4.width-tile_size,j*tile_size,im_B4.width,tile_size*(j+1)))
+        im_B8_tile=im_B8.crop((im_B4.width-tile_size,j*tile_size,im_B4.width,tile_size*(j+1)))
+      elif(im_B4.height>i*tile_size and im_B4.width<i*tile_size):
+        im_B4_tile=im_B4.crop((i*tile_size,im_B4.height-tile_size,tile_size*(i+1),im_B4.height))
+        im_B8_tile=im_B8.crop((i*tile_size,im_B4.height-tile_size,tile_size*(i+1),im_B4.height))
+      elif(im_B4.width>i*tile_size and im_B4.height>i*tile_size):
+        im_B4_tile=im_B4.crop((im_B4.width-tile_size,im_B4.height-tile_size,im_B4.width,im_B4.height))
+        im_B8_tile=im_B8.crop((im_B4.width-tile_size,im_B4.height-tile_size,im_B4.width,im_B4.height))
+      else:
+        im_B4_tile=im_B4.crop((i*tile_size,j*tile_size,tile_size*(i+1),tile_size*(j+1)))
+        im_B8_tile=im_B8.crop((i*tile_size,j*tile_size,tile_size*(i+1),tile_size*(j+1)))
+      im_B4_tile.save("extra_bands/"+product+"_B4_"+tile+".png")
+      im_B8_tile.save("extra_bands/"+product+"_B8_"+tile+".png")
+    os.system("rm -r "+product+"*")
+
   
