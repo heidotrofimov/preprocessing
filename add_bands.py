@@ -90,12 +90,40 @@ for product in products:
     os.system("rm -r "+product+"*")
     os.system("rm *.png")
  
-'''
+
 
 for png in os.listdir("extra_bands"):
   img=Image.open("extra_bands/"+png)
   new_img=ImageOps.grayscale(img)
   new_img.save("extra_bands/"+png)
+'''  
+
+import gdal
+from gdalconst import GA_ReadOnly
+import os
+import sys
+
+EPSG="32635"
+
+for png in os.listdir("extra_bands"):
+  input_png="extra_bands/"+png
+  tile="_"+png.split("_")[-2]+"_"+png.split("_")[-1]
+  tile=tile.replace("png","tif")
+  for filename in os.listdir("/home/users/biomass/extra_historical/S1"):
+    if("T35VMF" in filename and tile in filename):
+      input_tif="/home/users/biomass/extra_historical/S1/"+filename
+      break
+  data = gdal.Open(input_tif, GA_ReadOnly)
+  geoTransform = data.GetGeoTransform()
+  minx = geoTransform[0]
+  maxy = geoTransform[3]
+  maxx = minx + geoTransform[1] * data.RasterXSize
+  miny = maxy + geoTransform[5] * data.RasterYSize
+  os.system("gdal_translate -of Gtiff -a_ullr "+str(minx)+" "+str(maxy)+" "+str(maxx)+" "+str(miny)+" -a_srs EPSG:"+EPSG+" "+input_png+" extra_bands_tif/"+png.replace("png","tif"))
   
+
+
+
+
 
   
