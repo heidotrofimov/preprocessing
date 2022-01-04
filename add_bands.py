@@ -107,12 +107,14 @@ EPSG="32635"
 
 for png in os.listdir("extra_bands"):
   input_png="extra_bands/"+png
+  print(input_png)
   tile="_"+png.split("_")[-2]+"_"+png.split("_")[-1]
   tile=tile.replace("png","tif")
   for filename in os.listdir("/home/users/biomass/extra_historical/S1"):
     if("T35VMF" in filename and tile in filename):
       input_tif="/home/users/biomass/extra_historical/S1/"+filename
       break
+  print(input_tif)
   data = gdal.Open(input_tif, GA_ReadOnly)
   geoTransform = data.GetGeoTransform()
   minx = geoTransform[0]
