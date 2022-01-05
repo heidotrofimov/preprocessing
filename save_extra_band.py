@@ -71,24 +71,18 @@ for tile in tiles:
   print(tile)
   i=int(tile.split("_")[0])
   j=int(tile.split("_")[1])
-  if(im_B4.width>i*tile_size and im_B4.height<j*tile_size):
-    print("condition1")
+  if((i+1)*tile_size>im_B4.width and (j+1)*tile_size<im_B4.height):
+    
     im_B4_tile=im_B4.crop((im_B4.width-tile_size,j*tile_size,im_B4.width,tile_size*(j+1)))
     im_B8_tile=im_B8.crop((im_B4.width-tile_size,j*tile_size,im_B4.width,tile_size*(j+1)))
-  elif(im_B4.height>j*tile_size and im_B4.width<i*tile_size):
-    print("condition2")
+  elif((j+1)*tile_size>im_B4.height and (i+1)*tile_size<im_B4.width):
+    
     im_B4_tile=im_B4.crop((i*tile_size,im_B4.height-tile_size,tile_size*(i+1),im_B4.height))
     im_B8_tile=im_B8.crop((i*tile_size,im_B4.height-tile_size,tile_size*(i+1),im_B4.height))
-  elif(im_B4.width>i*tile_size and im_B4.height>j*tile_size):
-    print("condition3")
-    print(i)
-    print(j)
-    print(im_B4.width)
-    print(im_B4.height)
+  elif((i+1)*tile_size>im_B4.width and (j+1)*tile_size>im_B4.height):
     im_B4_tile=im_B4.crop((im_B4.width-tile_size,im_B4.height-tile_size,im_B4.width,im_B4.height))
     im_B8_tile=im_B8.crop((im_B4.width-tile_size,im_B4.height-tile_size,im_B4.width,im_B4.height))
   else:
-    print("condition4")
     im_B4_tile=im_B4.crop((i*tile_size,j*tile_size,tile_size*(i+1),tile_size*(j+1)))
     im_B8_tile=im_B8.crop((i*tile_size,j*tile_size,tile_size*(i+1),tile_size*(j+1)))
   im_B4_tile.save("extra_bands/"+product+"_B4_"+tile+".png")
