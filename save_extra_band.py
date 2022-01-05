@@ -81,6 +81,10 @@ for tile in tiles:
     im_B8_tile=im_B8.crop((i*tile_size,im_B4.height-tile_size,tile_size*(i+1),im_B4.height))
   elif(im_B4.width>i*tile_size and im_B4.height>j*tile_size):
     print("condition3")
+    print(i)
+    print(j)
+    print(im_B4.width)
+    print(im_B4.height)
     im_B4_tile=im_B4.crop((im_B4.width-tile_size,im_B4.height-tile_size,im_B4.width,im_B4.height))
     im_B8_tile=im_B8.crop((im_B4.width-tile_size,im_B4.height-tile_size,im_B4.width,im_B4.height))
   else:
