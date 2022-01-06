@@ -65,7 +65,7 @@ for S2 in S2s:
   
 print(products)
 print(len(products))
-'''
+
 products=['S2B_MSIL2A_20190530T094039_N0212_R036_T35VMF_20190530T123039', 'S2B_MSIL2A_20190517T093039_N0212_R136_T35VMF_20190517T121234', 'S2A_MSIL2A_20190604T094031_N0212_R036_T35VMF_20190604T123219', 'S2A_MSIL2A_20190601T093041_N0212_R136_T35VMF_20190601T114535', 'S2B_MSIL2A_20190616T093039_N0212_R136_T35VMF_20190616T122037', 'S2B_MSIL2A_20190828T094039_N0213_R036_T35VMF_20190828T122001', 'S2B_MSIL2A_20190818T094039_N0213_R036_T35VMF_20190818T123014', 'S2B_MSIL2A_20200819T093039_N0214_R136_T35VMF_20200819T120522', 'S2B_MSIL2A_20200726T095029_N0214_R079_T35VMF_20200726T123818', 'S2B_MSIL2A_20200613T094039_N0214_R036_T35VMF_20200613T123113', 'S2B_MSIL2A_20200531T093039_N0214_R136_T35VMF_20200531T113811', 'S2B_MSIL2A_20200623T094039_N0214_R036_T35VMF_20200623T123518', 'S2A_MSIL2A_20200718T094041_N0214_R036_T35VMF_20200718T111813', 'S2B_MSIL2A_20200809T093039_N0214_R136_T35VMF_20200809T112625', 'S2A_MSIL2A_20200625T093041_N0214_R136_T35VMF_20200625T121318', 'S2A_MSIL2A_20190515T094031_N0212_R036_T35VMF_20190515T111629', 'S2B_MSIL2A_20190729T094039_N0213_R036_T35VMF_20190729T123310', 'S2A_MSIL2A_20200522T095041_N0214_R079_T35VMF_20200522T123919']
 i=0
 for product in products:
@@ -122,7 +122,30 @@ for png in os.listdir("extra_bands"):
   maxx = minx + geoTransform[1] * data.RasterXSize
   miny = maxy + geoTransform[5] * data.RasterYSize
   os.system("gdal_translate -of Gtiff -a_ullr "+str(minx)+" "+str(maxy)+" "+str(maxx)+" "+str(miny)+" -a_srs EPSG:"+EPSG+" "+input_png+" extra_bands_tif/"+png.replace("png","tif"))
+
+  '''
   
+  for tif in os.listdir("/home/users/biomass/extra_historical/S1"):
+    if("T35VMF" in tif):
+      tile="_"+tif.split("_")[-2]+"_"+tif.split("_")[-1]
+      c=tif.split("colwith_")[1].split("_T35VMF")[0].split("_")[1]
+      h=tif.split("T35VMF_")[1].split(tile)[0].split("_")[1]
+      for filename in os.listdir("extra_bands_tif"):
+        if(tile in filename):
+          if(c in filename and "_B4_" in filename):
+            cb4=filename
+          if(c in filename and "_B8_" in filename):
+            cb8=filename
+          if(h in filename and "_B4_" in filename):
+            hb4=filename
+          if(h in filename and "_B8_" in filename):
+            hb8=filename  
+      print(tif)
+      print("Current b4: "+cb4)
+      print("Current b8: "+cb8)
+      print("Historical b4: "+hb4)
+      print("Historical b8: "+hb8)
+            
 
 
 
