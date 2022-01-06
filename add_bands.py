@@ -123,32 +123,32 @@ for png in os.listdir("extra_bands"):
   miny = maxy + geoTransform[5] * data.RasterYSize
   os.system("gdal_translate -of Gtiff -a_ullr "+str(minx)+" "+str(maxy)+" "+str(maxx)+" "+str(miny)+" -a_srs EPSG:"+EPSG+" "+input_png+" extra_bands_tif/"+png.replace("png","tif"))
 
-  '''
+'''
   
-  for tif in os.listdir("/home/users/biomass/extra_historical/S1"):
-    if("T35VMF" in tif):
-      tile="_"+tif.split("_")[-2]+"_"+tif.split("_")[-1]
-      c=tif.split("colwith_")[1].split("_T35VMF")[0].split("_")[1]
-      h=tif.split("T35VMF_")[1].split(tile)[0].split("_")[1]
-      cb4="NOTFOUND"
-      cb8="NOTFOUND"
-      hb4="NOTFOUND"
-      hb8="NOTFOUND"
-      for filename in os.listdir("extra_bands_tif"):
-        if(tile in filename):
-          if(c in filename and "_B4_" in filename):
-            cb4=filename
-          if(c in filename and "_B8_" in filename):
-            cb8=filename
-          if(h in filename and "_B4_" in filename):
-            hb4=filename
-          if(h in filename and "_B8_" in filename):
-            hb8=filename  
-      print(tif)
-      print("Current b4: "+cb4)
-      print("Current b8: "+cb8)
-      print("Historical b4: "+hb4)
-      print("Historical b8: "+hb8)
+for tif in os.listdir("/home/users/biomass/extra_historical/S1"):
+  if("T35VMF" in tif):
+    tile="_"+tif.split("_")[-2]+"_"+tif.split("_")[-1]
+    c=tif.split("colwith_")[1].split("_T35VMF")[0].split("_")[1]
+    h=tif.split("T35VMF_")[1].split(tile)[0].split("_")[1]
+    cb4="NOTFOUND"
+    cb8="NOTFOUND"
+    hb4="NOTFOUND"
+    hb8="NOTFOUND"
+    for filename in os.listdir("extra_bands_tif"):
+      if(tile in filename):
+        if(c in filename and "_B4_" in filename):
+          cb4=filename
+        if(c in filename and "_B8_" in filename):
+          cb8=filename
+        if(h in filename and "_B4_" in filename):
+          hb4=filename
+        if(h in filename and "_B8_" in filename):
+          hb8=filename  
+    print(tif)
+    print("Current b4: "+cb4)
+    print("Current b8: "+cb8)
+    print("Historical b4: "+hb4)
+    print("Historical b8: "+hb8)
             
 
 
