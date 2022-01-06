@@ -137,18 +137,19 @@ for tif in os.listdir("/home/users/biomass/extra_historical/S1"):
     for filename in os.listdir("extra_bands_tif"):
       if(tile in filename):
         if(c in filename and "_B4_" in filename):
-          cb4=filename
+          cb4="extra_bands_tif/"+filename
         if(c in filename and "_B8_" in filename):
-          cb8=filename
+          cb8="extra_bands_tif/"+filename
         if(h in filename and "_B4_" in filename):
-          hb4=filename
+          hb4="extra_bands_tif/"+filename
         if(h in filename and "_B8_" in filename):
-          hb8=filename  
+          hb8="extra_bands_tif/"+filename  
     print(tif)
     print("Current b4: "+cb4)
     print("Current b8: "+cb8)
     print("Historical b4: "+hb4)
     print("Historical b8: "+hb8)
+    os.system("gdal_merge.py -separate -ot Float32 -of GTiff -o new_data/"+tif+" /home/users/biomass/extra_historical/S1/"+tif+" "+cb4+" "+cb8+" "+hb4+" "+hb8)
             
 
 
