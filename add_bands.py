@@ -130,6 +130,10 @@ for png in os.listdir("extra_bands"):
       tile="_"+tif.split("_")[-2]+"_"+tif.split("_")[-1]
       c=tif.split("colwith_")[1].split("_T35VMF")[0].split("_")[1]
       h=tif.split("T35VMF_")[1].split(tile)[0].split("_")[1]
+      cb4="NOTFOUND"
+      cb8="NOTFOUND"
+      hb4="NOTFOUND"
+      hb8="NOTFOUND"
       for filename in os.listdir("extra_bands_tif"):
         if(tile in filename):
           if(c in filename and "_B4_" in filename):
