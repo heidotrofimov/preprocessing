@@ -9,7 +9,7 @@ import sys
 
 tile_size=512
 
-AOIs=["T35VME","T35VLE","T35VLF","T35VMC"]
+AOIs=["T35VLF","T35VMC"]
 
 
 f=open("../find_products/login.txt","r")
