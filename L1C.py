@@ -50,7 +50,7 @@ for line in lines:
       f2.write(line+"\n")
       continue
     else:
-      f3=open("products/products.dat")
+      f3=open("products/products.dat","w")
       f3.write(found[0])
       f3.close()
       os.system("python cvat-vsm/dias_old/main_engine.py -d products")
