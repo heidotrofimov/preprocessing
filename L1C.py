@@ -25,7 +25,7 @@ def read_xml(out_path):
     products=txt.split("<title>")
     for i in range(2,len(products)):
         product=products[i].split("</title>")[0]
-        product_list.append(product)
+        current_list.append(product)
     return current_list
 
 f=open("data.txt","r")
