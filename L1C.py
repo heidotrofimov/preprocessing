@@ -60,7 +60,8 @@ for line in lines:
         os.system("mv products/"+found[0]+".CVAT/tile_"+tile+"/*nc L1C_data/"+found[0]+".CVAT/tile_"+tile+"/")
         os.system("mv products/"+found[0]+".CVAT/tile_"+tile+"/*TCI*.png L1C_data/"+found[0]+".CVAT/tile_"+tile+"/")
       os.system("rm -r products/"+found[0]+"*")
-  except:
+  except Exception as e:
+    print(e)
     f2.write(line+"\n")
       
 f2.close()
