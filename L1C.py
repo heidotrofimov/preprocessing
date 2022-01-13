@@ -30,6 +30,8 @@ def read_xml(out_path):
 
 f=open("data.txt","r")
 
+f2=open("try_again.txt","w")
+
 lines=f.readlines()
 
 for line in lines:
@@ -38,8 +40,25 @@ for line in lines:
   
   #Otsime L1C
   search=L2A.split("_")[0]+"_"+L2A.split("_")[1].replace("2A","1C")+"_"+L2A.split("_")[2]+"*"+L2A.split("_")[5]+"*"
-  download_xml(search,"tmp.xml")
-  found=read_xml("tmp.xml")
-  print(found)
-  
+  try:
+    download_xml(search,"tmp.xml")
+    found=read_xml("tmp.xml")
+    if(len(found)!=1):
+      f2.write(line+"\n")
+      continue
+    else:
+      f3=open("products/products.dat")
+      f3.write(found[0])
+      f3.close()
+      os.system("python cvat-vsm/dias_old/main_engine.py -d products")
+      os.system("mkdir L1C_data/"+found[0]+".CVAT")
+      for tile in tiles:
+        os.system("mkdir L1C_data/"+found[0]+".CVAT/tile_"+tile)
+        os.system("mv products/"+found[0]+".CVAT/tile_"+tile+"/*nc L1C_data/"+found[0]+".CVAT/tile_"+tile+"/")
+        os.system("mv products/"+found[0]+".CVAT/tile_"+tile+"/*TCI*.png L1C_data/"+found[0]+".CVAT/tile_"+tile+"/")
+      os.system("rm -r products/"+found[0]+"*")
+  except:
+    f2.write(line+"\n")
+      
+f2.close()
 f.close()
