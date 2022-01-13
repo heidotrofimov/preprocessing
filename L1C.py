@@ -36,13 +36,16 @@ lines=f.readlines()
 
 for line in lines:
   L2A=line.split(" ")[0]
-  tiles=line.split(" ")[1].split(",")
+  tiles=line.split(" ")[1].split(",")[0:-1]
   
   #Otsime L1C
+  
   search=L2A.split("_")[0]+"_"+L2A.split("_")[1].replace("2A","1C")+"_"+L2A.split("_")[2]+"*"+L2A.split("_")[5]+"*"
   try:
     download_xml(search,"tmp.xml")
     found=read_xml("tmp.xml")
+    print(found)
+    print(len(found))
     if(len(found)!=1):
       f2.write(line+"\n")
       continue
