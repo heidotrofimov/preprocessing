@@ -9,7 +9,7 @@ import sys
 
 tile_size=512
 
-AOIs=["T35VLF","T35VMC"]
+AOIs=["T35VLF"]
 
 
 f=open("../find_products/login.txt","r")
@@ -56,7 +56,7 @@ for AOI in AOIs:
 
   S2s=[]
 
-  for S1 in os.listdir("/home/users/biomass/extra_historical/S1"):
+  for S1 in os.listdir("/home/users/biomass_test_data/extra_historical/S1"):
     AOIc=S1.split("_")[-5]
     if(AOIc==AOI):
       S2_1=S21(S1)+"*"+AOI+"*"
@@ -83,7 +83,7 @@ for AOI in AOIs:
       os.system("rm products.dat")
       S1s=[]
       tiles=[]
-      for S1 in os.listdir("/home/users/biomass/extra_historical/S1"):
+      for S1 in os.listdir("/home/users/biomass_test_data/extra_historical/S1"):
         AOIc=S1.split("_")[-5]
         if(AOIc==AOI and ((S1.split("_")[7]==product.split("_")[0] and S1.split("_")[8].split("T")[0]==product.split("_")[2].split("T")[0])  or (S1.split("_")[10]==product.split("_")[0] and S1.split("_")[11].split("T")[0]==product.split("_")[2].split("T")[0])  )):
           S1s.append(S1)
@@ -112,9 +112,9 @@ for AOI in AOIs:
     print(input_png)
     tile="_"+png.split("_")[-2]+"_"+png.split("_")[-1]
     tile=tile.replace("png","tif")
-    for filename in os.listdir("/home/users/biomass/extra_historical/S1"):
+    for filename in os.listdir("/home/users/biomass_test_data/extra_historical/S1"):
       if(AOI in filename and tile in filename):
-        input_tif="/home/users/biomass/extra_historical/S1/"+filename
+        input_tif="/home/users/biomass_test_data/extra_historical/S1/"+filename
         break
     print(input_tif)
     data = gdal.Open(input_tif, GA_ReadOnly)
@@ -125,7 +125,7 @@ for AOI in AOIs:
     miny = maxy + geoTransform[5] * data.RasterYSize
     os.system("gdal_translate -of Gtiff -a_ullr "+str(minx)+" "+str(maxy)+" "+str(maxx)+" "+str(miny)+" -a_srs EPSG:"+EPSG+" "+input_png+" extra_bands_tif/"+png.replace("png","tif"))
 
-  for tif in os.listdir("/home/users/biomass/extra_historical/S1"):
+  for tif in os.listdir("/home/users/biomass_test_data/extra_historical/S1"):
     if(AOI in tif):
       tile="_"+tif.split("_")[-2]+"_"+tif.split("_")[-1]
       c=tif.split("colwith_")[1].split("_"+AOI)[0].split("_")[1]
@@ -149,7 +149,7 @@ for AOI in AOIs:
       print("Current b8: "+cb8)
       print("Historical b4: "+hb4)
       print("Historical b8: "+hb8)
-      os.system("gdal_merge.py -separate -ot Float32 -of GTiff -o new_data/"+tif+" /home/users/biomass/extra_historical/S1/"+tif+" "+cb4+" "+cb8+" "+hb4+" "+hb8)
+      os.system("gdal_merge.py -separate -ot Float32 -of GTiff -o new_data/"+tif+" /home/users/biomass_test_data/extra_historical/S1/"+tif+" "+cb4+" "+cb8+" "+hb4+" "+hb8)
 
       
       
