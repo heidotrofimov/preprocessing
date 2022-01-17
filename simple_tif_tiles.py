@@ -23,7 +23,7 @@ yRange = (inputTiff.RasterYSize // tile_height) + 1
 
 for y_tiles in range(yRange):
     for x_tiles in range(xRange):
-      outputPath="out/"+str(xOffset)+"_"+str(yOffset)
+      outputPath="out/"+str(x_tiles)+"_"+str(y_tiles)
       com_string = "gdal_translate -of GTIFF -srcwin " + str(xOffset)+ ", " + str(yOffset) + ", " + str(tile_width) + ", " + str(tile_height) + " " + str(inputPath) + " " + str(outputPath) + ".tif"
       os.system(com_string)
       if inputTiff.RasterXSize - xOffset > 512:
