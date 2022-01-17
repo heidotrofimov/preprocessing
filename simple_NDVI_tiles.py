@@ -51,7 +51,14 @@ for safe in os.listdir("products"):
             os.system(line_for_gpt)
             
             
-for S2_SAFE in os.listdir('products'):                   
+for S2_SAFE in os.listdir('products'):     
+    
+    write_image(red, S2_SAFE.split(".")[0]+"_B4.png", 'png')
+    write_image(NIR, S2_SAFE.split(".")[0]+"_B8.png", 'png')
+    write_image(blue, S2_SAFE.split(".")[0]+"_B2.png", 'png')
+    
+    
+    #NDVI:
     NDVI_im=S2_SAFE.split(".")[0]+"_NDVI"
     os.system('mkdir checked_products/'+NDVI_im)
     S2_product=ProductIO.readProduct('products/'+S2_SAFE+'/GRANULE/output.dim')
@@ -86,6 +93,9 @@ for S2_SAFE in os.listdir('products'):
     shutil.rmtree('NDVI.data')
     s2name=S2_short(NDVI_im+".png")
     im_S2 = Image.open(NDVI_im+".png")
+    im_B2 = Image.open(S2_SAFE.split(".")[0]+"_B2.png")
+    im_B4 = Image.open(S2_SAFE.split(".")[0]+"_B4.png")
+    im_B8 = Image.open(S2_SAFE.split(".")[0]+"_B8.png")
     tiles_x=int(im_S2.width/tile_size)
                           
     tiles_y=int(im_S2.height/tile_size)
@@ -96,6 +106,12 @@ for S2_SAFE in os.listdir('products'):
             if(os.path.isfile(rgb)):
                 NDVI_tile=im_S2.crop((i*tile_size,j*tile_size,tile_size*(i+1),tile_size*(j+1)))
                 NDVI_tile.save('checked_products/'+NDVI_im+"/"+s2name+"_"+str(i)+"_"+str(j)+".png")
+                B2_tile=im_B2.crop((i*tile_size,j*tile_size,tile_size*(i+1),tile_size*(j+1)))
+                B2_tile.save('extra_bands/'+S2_SAFE.split(".")[0]+'_B2_'+str(i)+"_"+str(j)+".png")
+                B4_tile=im_B4.crop((i*tile_size,j*tile_size,tile_size*(i+1),tile_size*(j+1)))
+                B4_tile.save('extra_bands/'+S2_SAFE.split(".")[0]+'_B4_'+str(i)+"_"+str(j)+".png")
+                B8_tile=im_B8.crop((i*tile_size,j*tile_size,tile_size*(i+1),tile_size*(j+1)))
+                B8_tile.save('extra_bands/'+S2_SAFE.split(".")[0]+'_B8_'+str(i)+"_"+str(j)+".png")
 
     if(im_S2.width>tiles_x*tile_size):
         for j in range(0,tiles_y):
@@ -103,17 +119,35 @@ for S2_SAFE in os.listdir('products'):
             if(os.path.isfile(rgb)):
                 NDVI_tile=im_S2.crop((im_S2.width-tile_size,j*tile_size,im_S2.width,tile_size*(j+1)))
                 NDVI_tile.save('checked_products/'+NDVI_im+"/"+s2name+"_"+str(tiles_x)+"_"+str(j)+".png")
+                B2_tile=im_B2.crop((im_S2.width-tile_size,j*tile_size,im_S2.width,tile_size*(j+1)))
+                B2_tile.save('extra_bands/'+S2_SAFE.split(".")[0]+'_B2_'+str(i)+"_"+str(j)+".png")
+                B4_tile=im_B4.crop((im_S2.width-tile_size,j*tile_size,im_S2.width,tile_size*(j+1)))
+                B4_tile.save('extra_bands/'+S2_SAFE.split(".")[0]+'_B4_'+str(i)+"_"+str(j)+".png")
+                B8_tile=im_B8.crop((im_S2.width-tile_size,j*tile_size,im_S2.width,tile_size*(j+1)))
+                B8_tile.save('extra_bands/'+S2_SAFE.split(".")[0]+'_B8_'+str(i)+"_"+str(j)+".png")
     if(im_S2.height>tiles_y*tile_size):
         for i in range(0,tiles_x):
             rgb="checked_products/"+S2_SAFE.split(".")[0]+"/"+str(i)+"_"+str(tiles_y)+".png"
             if(os.path.isfile(rgb)):
                 NDVI_tile=im_S2.crop((i*tile_size,im_S2.height-tile_size,tile_size*(i+1),im_S2.height))
                 NDVI_tile.save('checked_products/'+NDVI_im+"/"+s2name+"_"+str(i)+"_"+str(tiles_y)+".png")
+                B2_tile=im_B2.crop((i*tile_size,im_S2.height-tile_size,tile_size*(i+1),im_S2.height))
+                B2_tile.save('extra_bands/'+S2_SAFE.split(".")[0]+'_B2_'+str(i)+"_"+str(j)+".png")
+                B4_tile=im_B4.crop((i*tile_size,im_S2.height-tile_size,tile_size*(i+1),im_S2.height))
+                B4_tile.save('extra_bands/'+S2_SAFE.split(".")[0]+'_B4_'+str(i)+"_"+str(j)+".png")
+                B8_tile=im_B8.crop((i*tile_size,im_S2.height-tile_size,tile_size*(i+1),im_S2.height))
+                B8_tile.save('extra_bands/'+S2_SAFE.split(".")[0]+'_B8_'+str(i)+"_"+str(j)+".png")
     if(im_S2.height>tiles_y*tile_size and im_S2.width>tiles_x*tile_size):
         rgb="checked_products/"+S2_SAFE.split(".")[0]+"/"+str(tiles_x)+"_"+str(tiles_y)+".png"
         if(os.path.isfile(rgb)):
             NDVI_tile=im_S2.crop((im_S2.width-tile_size,im_S2.height-tile_size,im_S2.width,im_S2.height))
             NDVI_tile.save('checked_products/'+NDVI_im+"/"+s2name+"_"+str(tiles_x)+"_"+str(tiles_y)+".png")
+            B2_tile=im_B2.crop((im_S2.width-tile_size,im_S2.height-tile_size,im_S2.width,im_S2.height))
+            B2_tile.save('extra_bands/'+S2_SAFE.split(".")[0]+'_B2_'+str(i)+"_"+str(j)+".png")
+            B4_tile=im_B4.crop((im_S2.width-tile_size,im_S2.height-tile_size,im_S2.width,im_S2.height))
+            B4_tile.save('extra_bands/'+S2_SAFE.split(".")[0]+'_B4_'+str(i)+"_"+str(j)+".png")
+            B8_tile=im_B8.crop((im_S2.width-tile_size,im_S2.height-tile_size,im_S2.width,im_S2.height))
+            B8_tile.save('extra_bands/'+S2_SAFE.split(".")[0]+'_B8_'+str(i)+"_"+str(j)+".png")
             
 print("Rewriting filenames, don't abort just yet!")
 for RGB in os.listdir("checked_products"):
