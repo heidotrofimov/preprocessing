@@ -18,6 +18,7 @@ from snappy import GPF
 from snappy import HashMap
 from snappy import ProductData
 
+Image.MAX_IMAGE_PIXELS = None
 
 jpy = snappy.jpy
 ImageManager = jpy.get_type('org.esa.snap.core.image.ImageManager')
@@ -156,3 +157,8 @@ for RGB in os.listdir("checked_products"):
         for filename in os.listdir("checked_products/"+RGB):
             new_name=s2name+"_"+filename
             os.system("mv checked_products/"+RGB+"/"+filename+" checked_products/"+RGB+"/"+new_name)
+            
+for png in os.listdir("extra_bands"):
+    img=Image.open("extra_bands/"+png)
+    new_img=ImageOps.grayscale(img)
+    new_img.save("extra_bands/"+png)
