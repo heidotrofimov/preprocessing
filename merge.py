@@ -53,7 +53,7 @@ for filename in os.listdir("data/S2/"):
     date_time_obj1 = datetime(int(date_str1[0:4]),int(date_str1[4:6]),int(date_str1[6:8]))
     tile_nr1=filename.split(AOI1+"_")[1].split(".")[0]
     list_of_suitables=[]
-    max_days=32
+    max_days=25
     for filename2 in os.listdir("s2_NDVI/"):
         AOI2=filename2.split("_")[2]
         date_str2=filename2.split("_")[1].split("T")[0]
