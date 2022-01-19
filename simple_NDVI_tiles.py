@@ -54,9 +54,7 @@ for safe in os.listdir("products"):
             
 for S2_SAFE in os.listdir('products'):     
     
-    write_image(red, S2_SAFE.split(".")[0]+"_B4.png", 'png')
-    write_image(NIR, S2_SAFE.split(".")[0]+"_B8.png", 'png')
-    write_image(blue, S2_SAFE.split(".")[0]+"_B2.png", 'png')
+
     
     
     #NDVI:
@@ -66,9 +64,14 @@ for S2_SAFE in os.listdir('products'):
     band_names = S2_product.getBandNames()
     width = S2_product.getSceneRasterWidth()
     height = S2_product.getSceneRasterHeight()
-
+    
+    b2 = S2_product.getBand('B2')
     b4 = S2_product.getBand('B4')
     b8 = S2_product.getBand('B8')
+    
+    write_image(b4, S2_SAFE.split(".")[0]+"_B4.png", 'png')
+    write_image(b8, S2_SAFE.split(".")[0]+"_B8.png", 'png')
+    write_image(b2, S2_SAFE.split(".")[0]+"_B2.png", 'png')
 
     newProduct = Product('NDVI', 'NDVI', width, height)
                           
