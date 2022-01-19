@@ -1,7 +1,7 @@
 import sys
 import numpy as np
 import matplotlib.pyplot as plt
-from PIL import Image
+from PIL import Image, ImageOps
 import os
 import shutil
 from datetime import datetime
@@ -38,7 +38,7 @@ def S2_short(S2_full):
     S2=S2_full.split(".")[0].split("_")
     return S2[0]+"_"+S2[2]+"_"+S2[5]
 tile_size=512    
-
+'''
 for safe in os.listdir("products"):
     if("SAFE" in safe):
         nodim=True
@@ -160,7 +160,7 @@ for RGB in os.listdir("checked_products"):
         for filename in os.listdir("checked_products/"+RGB):
             new_name=s2name+"_"+filename
             os.system("mv checked_products/"+RGB+"/"+filename+" checked_products/"+RGB+"/"+new_name)
-            
+'''            
 for png in os.listdir("extra_bands"):
     img=Image.open("extra_bands/"+png)
     new_img=ImageOps.grayscale(img)
