@@ -57,7 +57,7 @@ for AOI in AOIs:
 
   S2s=[]
 
-  for S1 in os.listdir("/home/users/biomass_test_data/extra_historical/S1"):
+  for S1 in os.listdir("/home/users/biomass/extra_historical/S1"):
     AOIc=S1.split("_")[-5]
     if(AOIc==AOI):
       S2_1=S21(S1)+"*"+AOI+"*"
@@ -84,7 +84,7 @@ for AOI in AOIs:
       os.system("rm products.dat")
       S1s=[]
       tiles=[]
-      for S1 in os.listdir("/home/users/biomass_test_data/extra_historical/S1"):
+      for S1 in os.listdir("/home/users/biomass/extra_historical/S1"):
         AOIc=S1.split("_")[-5]
         if(AOIc==AOI and ((S1.split("_")[7]==product.split("_")[0] and S1.split("_")[8].split("T")[0]==product.split("_")[2].split("T")[0])  or (S1.split("_")[10]==product.split("_")[0] and S1.split("_")[11].split("T")[0]==product.split("_")[2].split("T")[0])  )):
           S1s.append(S1)
