@@ -56,12 +56,19 @@ def write_image(band, filename, format):
 
 S2_product=ProductIO.readProduct(safe+'/GRANULE/output.dim')
 band_names = S2_product.getBandNames()
+blue = S2_product.getBand('B2')
+green = S2_product.getBand('B3')
 red = S2_product.getBand('B4')
 NIR = S2_product.getBand('B8')
 
+write_image(blue, product+"_B2.png", 'png')
+write_image(green, product+"_B3.png", 'png')
 write_image(red, product+"_B4.png", 'png')
 write_image(NIR, product+"_B8.png", 'png')
 
+
+im_B2 = Image.open(product+"_B2.png")
+im_B3 = Image.open(product+"_B3.png")
 im_B4 = Image.open(product+"_B4.png")
 im_B8 = Image.open(product+"_B8.png")
 print(im_B4.width)
@@ -72,18 +79,26 @@ for tile in tiles:
   i=int(tile.split("_")[0])
   j=int(tile.split("_")[1])
   if((i+1)*tile_size>im_B4.width and (j+1)*tile_size<im_B4.height):
-    
+    im_B2_tile=im_B2.crop((im_B2.width-tile_size,j*tile_size,im_B2.width,tile_size*(j+1)))
+    im_B3_tile=im_B3.crop((im_B3.width-tile_size,j*tile_size,im_B3.width,tile_size*(j+1)))
     im_B4_tile=im_B4.crop((im_B4.width-tile_size,j*tile_size,im_B4.width,tile_size*(j+1)))
     im_B8_tile=im_B8.crop((im_B4.width-tile_size,j*tile_size,im_B4.width,tile_size*(j+1)))
   elif((j+1)*tile_size>im_B4.height and (i+1)*tile_size<im_B4.width):
-    
+    im_B2_tile=im_B2.crop((i*tile_size,im_B2.height-tile_size,tile_size*(i+1),im_B4.height))
+    im_B3_tile=im_B3.crop((i*tile_size,im_B3.height-tile_size,tile_size*(i+1),im_B4.height))
     im_B4_tile=im_B4.crop((i*tile_size,im_B4.height-tile_size,tile_size*(i+1),im_B4.height))
     im_B8_tile=im_B8.crop((i*tile_size,im_B4.height-tile_size,tile_size*(i+1),im_B4.height))
   elif((i+1)*tile_size>im_B4.width and (j+1)*tile_size>im_B4.height):
+    im_B2_tile=im_B2.crop((im_B4.width-tile_size,im_B4.height-tile_size,im_B4.width,im_B4.height))
+    im_B3_tile=im_B3.crop((im_B4.width-tile_size,im_B4.height-tile_size,im_B4.width,im_B4.height))
     im_B4_tile=im_B4.crop((im_B4.width-tile_size,im_B4.height-tile_size,im_B4.width,im_B4.height))
     im_B8_tile=im_B8.crop((im_B4.width-tile_size,im_B4.height-tile_size,im_B4.width,im_B4.height))
   else:
+    im_B2_tile=im_B2.crop((i*tile_size,j*tile_size,tile_size*(i+1),tile_size*(j+1)))
+    im_B3_tile=im_B3.crop((i*tile_size,j*tile_size,tile_size*(i+1),tile_size*(j+1)))
     im_B4_tile=im_B4.crop((i*tile_size,j*tile_size,tile_size*(i+1),tile_size*(j+1)))
     im_B8_tile=im_B8.crop((i*tile_size,j*tile_size,tile_size*(i+1),tile_size*(j+1)))
+  im_B2_tile.save("extra_bands/"+product+"_B2_"+tile+".png")
+  im_B3_tile.save("extra_bands/"+product+"_B3_"+tile+".png")
   im_B4_tile.save("extra_bands/"+product+"_B4_"+tile+".png")
   im_B8_tile.save("extra_bands/"+product+"_B8_"+tile+".png")
