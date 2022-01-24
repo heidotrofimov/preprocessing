@@ -9,9 +9,9 @@ import sys
 
 tile_size=512
 
-AOIs=["T35VLH"]
+AOIs=["T35VMF","T35VME","T35VLE"]
 
-AOI="T35VLH"
+#AOI="T35VLH"
 
 f=open("../find_products/login.txt","r")
 lines=f.readlines()
@@ -49,7 +49,7 @@ def read_xml(out_path):
         product=products[i].split("</title>")[0]
         current_list.append(product)
     return current_list
-'''
+
 for AOI in AOIs:
   
   os.system("rm extra_bands/*")
@@ -105,7 +105,7 @@ for AOI in AOIs:
     new_img=ImageOps.grayscale(img)
     new_img.save("extra_bands/"+png)
 
-'''
+
 EPSG="32635"
 
 for png in os.listdir("extra_bands"):
@@ -114,9 +114,9 @@ for png in os.listdir("extra_bands"):
   tile="_"+png.split("_")[-2]+"_"+png.split("_")[-1]
   tile=tile.replace("png","tif")
   input_tif="NOTFOUND"
-  for filename in os.listdir("data/extra_historical/S1"):
+  for filename in os.listdir("/home/users/biomass/extra_historical/S1"):
     if(AOI in filename and tile in filename):
-      input_tif="data/extra_historical/S1/"+filename
+      input_tif="/home/users/biomass/extra_historical/S1/"+filename
       break
   if(input_tif!="NOTFOUND"):
     data = gdal.Open(input_tif, GA_ReadOnly)
@@ -127,21 +127,25 @@ for png in os.listdir("extra_bands"):
     miny = maxy + geoTransform[5] * data.RasterYSize
     os.system("gdal_translate -of Gtiff -a_ullr "+str(minx)+" "+str(maxy)+" "+str(maxx)+" "+str(miny)+" -a_srs EPSG:"+EPSG+" "+input_png+" extra_bands_tif/"+png.replace("png","tif"))
 
-for tif in os.listdir("data/extra_historical/S1"):
+for tif in os.listdir("/home/users/biomass/extra_historical/S1"):
   if(AOI in tif):
     tile="_"+tif.split("_")[-2]+"_"+tif.split("_")[-1]
     c=tif.split("colwith_")[1].split("_"+AOI)[0].split("_")[1]
     h=tif.split(AOI+"_")[1].split(tile)[0].split("_")[1]
     cb2="NOTFOUND"
+    cb3="NOTFOUND"
     cb4="NOTFOUND"
     cb8="NOTFOUND"
     hb2="NOTFOUND"
+    hb3="NOTFOUND"
     hb4="NOTFOUND"
     hb8="NOTFOUND"
     for filename in os.listdir("extra_bands_tif"):
       if(tile in filename):
         if(c in filename and "_B2_" in filename):
           cb2="extra_bands_tif/"+filename
+        if(c in filename and "_B3_" in filename):
+          cb3="extra_bands_tif/"+filename
         if(c in filename and "_B4_" in filename):
           cb4="extra_bands_tif/"+filename
         if(c in filename and "_B8_" in filename):
@@ -152,6 +156,8 @@ for tif in os.listdir("data/extra_historical/S1"):
           hb8="extra_bands_tif/"+filename  
         if(h in filename and "_B2_" in filename):
           hb2="extra_bands_tif/"+filename  
+        if(h in filename and "_B3_" in filename):
+          hb3="extra_bands_tif/"+filename  
     print(tif)
     print("Current b2: "+cb2)
     print("Current b4: "+cb4)
@@ -159,7 +165,7 @@ for tif in os.listdir("data/extra_historical/S1"):
     print("Historical b2: "+hb2)
     print("Historical b4: "+hb4)
     print("Historical b8: "+hb8)
-    os.system("gdal_merge.py -separate -ot Float32 -of GTiff -o new_data/"+tif+" data/extra_historical/S1/"+tif+" "+cb2+" "+cb4+" "+cb8+" "+hb2+" "+hb4+" "+hb8)
+    os.system("gdal_merge.py -separate -ot Float32 -of GTiff -o new_data/"+tif+" data/extra_historical/S1/"+tif+" "+cb2+" "+cb3+" "+cb4+" "+cb8+" "+hb2+" "+hb3+" "+hb4+" "+hb8)
 
 
       
