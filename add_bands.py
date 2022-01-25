@@ -9,7 +9,7 @@ import sys
 
 tile_size=512
 
-AOIs=["T35VMF","T35VME","T35VLE"]
+AOIs=["T35VMF","T35VME","T35VMC"]
 
 #AOI="T35VLH"
 
@@ -52,8 +52,8 @@ def read_xml(out_path):
 
 for AOI in AOIs:
   
-  os.system("rm extra_bands/*")
-  os.system("rm extra_bands_tif/*")
+  #os.system("rm extra_bands/*")
+  #os.system("rm extra_bands_tif/*")
 
   S2s=[]
 
