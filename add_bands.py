@@ -9,7 +9,7 @@ import sys
 
 tile_size=512
 
-AOIs=["T35VMF","T35VME","T35VMC"]
+AOIs=["T35VMF","T35VME","T35VMC","T35VLE"]
 
 #AOI="T35VLH"
 
@@ -107,26 +107,28 @@ for AOI in AOIs:
 
 
 EPSG="32635"
-
-for png in os.listdir("extra_bands"):
-  input_png="extra_bands/"+png
-  print(input_png)
-  tile="_"+png.split("_")[-2]+"_"+png.split("_")[-1]
-  tile=tile.replace("png","tif")
-  input_tif="NOTFOUND"
-  for filename in os.listdir("/home/users/biomass/extra_historical/S1"):
-    if(AOI in filename and tile in filename):
-      input_tif="/home/users/biomass/extra_historical/S1/"+filename
-      break
-  if(input_tif!="NOTFOUND"):
-    data = gdal.Open(input_tif, GA_ReadOnly)
-    geoTransform = data.GetGeoTransform()
-    minx = geoTransform[0]
-    maxy = geoTransform[3]
-    maxx = minx + geoTransform[1] * data.RasterXSize
-    miny = maxy + geoTransform[5] * data.RasterYSize
-    os.system("gdal_translate -of Gtiff -a_ullr "+str(minx)+" "+str(maxy)+" "+str(maxx)+" "+str(miny)+" -a_srs EPSG:"+EPSG+" "+input_png+" extra_bands_tif/"+png.replace("png","tif"))
 '''
+
+for AOI in AOIs:
+  for png in os.listdir("extra_bands"):
+    input_png="extra_bands/"+png
+    print(input_png)
+    tile="_"+png.split("_")[-2]+"_"+png.split("_")[-1]
+    tile=tile.replace("png","tif")
+    input_tif="NOTFOUND"
+    for filename in os.listdir("/home/users/biomass/extra_historical/S1"):
+      if(AOI in filename and tile in filename):
+        input_tif="/home/users/biomass/extra_historical/S1/"+filename
+        break
+    if(input_tif!="NOTFOUND"):
+      data = gdal.Open(input_tif, GA_ReadOnly)
+      geoTransform = data.GetGeoTransform()
+      minx = geoTransform[0]
+      maxy = geoTransform[3]
+      maxx = minx + geoTransform[1] * data.RasterXSize
+      miny = maxy + geoTransform[5] * data.RasterYSize
+      os.system("gdal_translate -of Gtiff -a_ullr "+str(minx)+" "+str(maxy)+" "+str(maxx)+" "+str(miny)+" -a_srs EPSG:"+EPSG+" "+input_png+" extra_bands_tif/"+png.replace("png","tif"))
+
 
 
 for AOI in AOIs:
