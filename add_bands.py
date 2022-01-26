@@ -106,9 +106,9 @@ for AOI in AOIs:
     new_img.save("extra_bands/"+png)
 
 
-EPSG="32635"
-'''
 
+'''
+EPSG="32635"
 for AOI in AOIs:
   for png in os.listdir("extra_bands"):
     input_png="extra_bands/"+png
