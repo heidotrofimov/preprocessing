@@ -162,13 +162,14 @@ for AOI in AOIs:
           if(h in filename and "_B3_" in filename):
             hb3="extra_bands_tif/"+filename  
       print(tif)
-      print("Current b2: "+cb2)
-      print("Current b4: "+cb4)
-      print("Current b8: "+cb8)
-      print("Historical b2: "+hb2)
-      print("Historical b4: "+hb4)
-      print("Historical b8: "+hb8)
-      os.system("gdal_merge.py -separate -ot Float32 -of GTiff -o new_data/"+tif+" data/extra_historical/S1/"+tif+" "+cb2+" "+cb3+" "+cb4+" "+cb8+" "+hb2+" "+hb3+" "+hb4+" "+hb8)
+      #print("Current b2: "+cb2)
+      #print("Current b4: "+cb4)
+      #print("Current b8: "+cb8)
+      #print("Historical b2: "+hb2)
+      #print("Historical b4: "+hb4)
+      #print("Historical b8: "+hb8)
+      if(hb2!="NOTFOUND")
+        os.system("gdal_merge.py -separate -ot Float32 -of GTiff -o new_data/"+tif+" /home/users/biomass/extra_historical/S1/"+tif+" "+cb2+" "+cb3+" "+cb4+" "+cb8+" "+hb2+" "+hb3+" "+hb4+" "+hb8)
 
 
       
