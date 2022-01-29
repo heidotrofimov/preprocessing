@@ -107,7 +107,7 @@ for AOI in AOIs:
 
 
 
-'''
+
 EPSG="32635"
 for AOI in AOIs:
   for png in os.listdir("extra_bands"):
@@ -128,7 +128,7 @@ for AOI in AOIs:
       maxx = minx + geoTransform[1] * data.RasterXSize
       miny = maxy + geoTransform[5] * data.RasterYSize
       os.system("gdal_translate -of Gtiff -a_ullr "+str(minx)+" "+str(maxy)+" "+str(maxx)+" "+str(miny)+" -a_srs EPSG:"+EPSG+" "+input_png+" extra_bands_tif/"+png.replace("png","tif"))
-
+'''
 
 
 for AOI in AOIs:
@@ -163,7 +163,7 @@ for AOI in AOIs:
             hb2="extra_bands_tif/"+filename  
           if(h in filename and "_B3_" in filename):
             hb3="extra_bands_tif/"+filename  
-      print(tif)
+      #print(tif)
       #print("Current b2: "+cb2)
       #print("Current b4: "+cb4)
       #print("Current b8: "+cb8)
@@ -171,8 +171,9 @@ for AOI in AOIs:
       #print("Historical b4: "+hb4)
       #print("Historical b8: "+hb8)
       if(hb2!="NOTFOUND"):
-        os.system("gdal_merge.py -separate -ot Float32 -of GTiff -o new_data/"+tif+" /home/users/biomass/extra_historical/S1/"+tif+" "+cb2+" "+cb3+" "+cb4+" "+cb8+" "+hb2+" "+hb3+" "+hb4+" "+hb8)
-
+        if(AOI=="T35VMC" and tile=="_11_17"):
+          os.system("gdal_merge.py -separate -ot Float32 -of GTiff -o new_data/"+tif+" /home/users/biomass/extra_historical/S1/"+tif+" "+cb2+" "+cb3+" "+cb4+" "+cb8+" "+hb2+" "+hb3+" "+hb4+" "+hb8)
+          print("gdal_merge.py -separate -ot Float32 -of GTiff -o new_data/"+tif+" /home/users/biomass/extra_historical/S1/"+tif+" "+cb2+" "+cb3+" "+cb4+" "+cb8+" "+hb2+" "+hb3+" "+hb4+" "+hb8)
 
       
       
