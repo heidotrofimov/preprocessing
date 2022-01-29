@@ -19,5 +19,7 @@ for tiff in os.listdir("new_data"):
   rast_open = gdal.Open(rast_src, GA_ReadOnly)
   x=rast_open.RasterXSize
   y=rast_open.RasterYSize
-  print(str(x)+" "+str(y))
-  
+  result=str(x)+" "+str(y)
+  if(result!="512 512"):
+    print(tiff+" "+result)
+
