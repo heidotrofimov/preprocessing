@@ -105,7 +105,7 @@ for AOI in AOIs:
     new_img=ImageOps.grayscale(img)
     new_img.save("extra_bands/"+png)
 
-'''
+
 
 
 EPSG="32635"
@@ -129,6 +129,7 @@ for AOI in AOIs:
         maxx = minx + geoTransform[1] * data.RasterXSize
         miny = maxy + geoTransform[5] * data.RasterYSize
         os.system("gdal_translate -of Gtiff -a_ullr "+str(minx)+" "+str(maxy)+" "+str(maxx)+" "+str(miny)+" -a_srs EPSG:"+EPSG+" "+input_png+" extra_bands_tif/"+png.replace("png","tif"))
+'''
 
 for AOI in AOIs:
   for tif in os.listdir("/home/users/biomass/extra_historical/S1"):
@@ -145,7 +146,7 @@ for AOI in AOIs:
       hb4="NOTFOUND"
       hb8="NOTFOUND"
       for filename in os.listdir("extra_bands_tif"):
-        if(tile in filename):
+        if(AOI in filename and tile in filename):
           if(c in filename and "_B2_" in filename):
             cb2="extra_bands_tif/"+filename
           if(c in filename and "_B3_" in filename):
