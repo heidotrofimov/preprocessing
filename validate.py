@@ -12,20 +12,7 @@ for tiff in os.listdir("new_data"):
   src_ds = gdal.Open("new_data/"+tiff)
   x=src_ds.RasterXSize
   y=src_ds.RasterYSize
-  result=str(x)+" "+str(y)
-  print(str(src_ds.RasterCount)+" "+result)
-  '''
-  if(str(src_ds.RasterCount)!="18"):
-    print(tiff)
-    print ("band count: " + str(src_ds.RasterCount))
-    
-  
-  rast_src = "new_data/"+tiff
-  rast_open = gdal.Open(rast_src, GA_ReadOnly)
-  x=rast_open.RasterXSize
-  y=rast_open.RasterYSize
-  result=str(x)+" "+str(y)
-  if(result!="512 512"):
+  result=str(src_ds.RasterCount)+" "+str(x)+" "+str(y)
+  if(result!="18 512 512"):
     print(tiff+" "+result)
-  '''
 
