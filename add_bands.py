@@ -113,7 +113,6 @@ for AOI in AOIs:
   for png in os.listdir("extra_bands"):
     if(AOI in png):
       input_png="extra_bands/"+png
-      print(input_png)
       tile="_"+png.split("_")[-2]+"_"+png.split("_")[-1]
       tile=tile.replace("png","tif")
       input_tif="NOTFOUND"
@@ -121,19 +120,16 @@ for AOI in AOIs:
         if(AOI in filename and tile in filename):
           input_tif="/home/users/biomass/extra_historical/S1/"+filename
           break
-      print(input_tif)
-    '''
-    if(input_tif!="NOTFOUND"):
-      data = gdal.Open(input_tif, GA_ReadOnly)
-      geoTransform = data.GetGeoTransform()
-      minx = geoTransform[0]
-      maxy = geoTransform[3]
-      maxx = minx + geoTransform[1] * data.RasterXSize
-      miny = maxy + geoTransform[5] * data.RasterYSize
-      os.system("gdal_translate -of Gtiff -a_ullr "+str(minx)+" "+str(maxy)+" "+str(maxx)+" "+str(miny)+" -a_srs EPSG:"+EPSG+" "+input_png+" extra_bands_tif/"+png.replace("png","tif"))
-    '''
+    
+      if(input_tif!="NOTFOUND"):
+        data = gdal.Open(input_tif, GA_ReadOnly)
+        geoTransform = data.GetGeoTransform()
+        minx = geoTransform[0]
+        maxy = geoTransform[3]
+        maxx = minx + geoTransform[1] * data.RasterXSize
+        miny = maxy + geoTransform[5] * data.RasterYSize
+        os.system("gdal_translate -of Gtiff -a_ullr "+str(minx)+" "+str(maxy)+" "+str(maxx)+" "+str(miny)+" -a_srs EPSG:"+EPSG+" "+input_png+" extra_bands_tif/"+png.replace("png","tif"))
 
-'''
 for AOI in AOIs:
   for tif in os.listdir("/home/users/biomass/extra_historical/S1"):
     if(AOI in tif):
@@ -176,7 +172,7 @@ for AOI in AOIs:
       if(hb2!="NOTFOUND"):
           os.system("gdal_merge.py -separate -ot Float32 -of GTiff -o new_data/"+tif+" /home/users/biomass/extra_historical/S1/"+tif+" "+cb2+" "+cb3+" "+cb4+" "+cb8+" "+hb2+" "+hb3+" "+hb4+" "+hb8)
           #print("gdal_merge.py -separate -ot Float32 -of GTiff -o new_data/"+tif+" /home/users/biomass/extra_historical/S1/"+tif+" "+cb2+" "+cb3+" "+cb4+" "+cb8+" "+hb2+" "+hb3+" "+hb4+" "+hb8)
-'''
+
       
       
       
