@@ -10,4 +10,6 @@ for tiff in os.listdir("new_data"):
   '''
   #print(tiff)
   src_ds = gdal.Open("new_data/"+tiff)
-  print ("band count: " + str(src_ds.RasterCount))
+  if(str(src_ds.RasterCount)!="18"):
+    print(tiff)
+    print ("band count: " + str(src_ds.RasterCount))
