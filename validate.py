@@ -13,3 +13,13 @@ for tiff in os.listdir("new_data"):
   if(str(src_ds.RasterCount)!="18"):
     print(tiff)
     print ("band count: " + str(src_ds.RasterCount))
+    
+    
+  rast_src = new_data/"+tiff
+  rast_open = gdal.Open(rast_src, GA_ReadOnly)
+
+  
+  rast_info = rast_open.GetGeoTransform()
+  res_x = rast_info[1]
+  res_y = rast_info[5]
+  print(str(res_x)+" "+str(res_y))
