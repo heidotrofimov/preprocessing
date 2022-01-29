@@ -111,17 +111,17 @@ for AOI in AOIs:
 EPSG="32635"
 for AOI in AOIs:
   for png in os.listdir("extra_bands"):
-    input_png="extra_bands/"+png
-    print(input_png)
-    print(input_png)
-    tile="_"+png.split("_")[-2]+"_"+png.split("_")[-1]
-    tile=tile.replace("png","tif")
-    input_tif="NOTFOUND"
-    for filename in os.listdir("/home/users/biomass/extra_historical/S1"):
-      if(AOI in filename and tile in filename):
-        input_tif="/home/users/biomass/extra_historical/S1/"+filename
-        break
-    print(input_tif)
+    if(AOI in png):
+      input_png="extra_bands/"+png
+      print(input_png)
+      tile="_"+png.split("_")[-2]+"_"+png.split("_")[-1]
+      tile=tile.replace("png","tif")
+      input_tif="NOTFOUND"
+      for filename in os.listdir("/home/users/biomass/extra_historical/S1"):
+        if(AOI in filename and tile in filename):
+          input_tif="/home/users/biomass/extra_historical/S1/"+filename
+          break
+      print(input_tif)
     '''
     if(input_tif!="NOTFOUND"):
       data = gdal.Open(input_tif, GA_ReadOnly)
