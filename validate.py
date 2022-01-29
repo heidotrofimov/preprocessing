@@ -17,11 +17,7 @@ for tiff in os.listdir("new_data"):
   
   rast_src = "new_data/"+tiff
   rast_open = gdal.Open(rast_src, GA_ReadOnly)
-
-  
-  rast_info = rast_open.GetGeoTransform()
-  print(rast_info)
-  #res_x = rast_info[1]
-  #res_y = rast_info[5]
-  #print(str(res_x)+" "+str(res_y))
+  x=rast_open.RasterXSize
+  y=rast_open.RasterYSize
+  print(str(x)+" "+str(y))
   
