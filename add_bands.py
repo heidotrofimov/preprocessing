@@ -171,7 +171,7 @@ for AOI in AOIs:
       #print("Historical b4: "+hb4)
       #print("Historical b8: "+hb8)
       if(hb2!="NOTFOUND"):
-        if(AOI=="T35VMC" and tile=="_11_17"):
+        if(AOI=="T35VMC" and "_11_17" in tile):
           os.system("gdal_merge.py -separate -ot Float32 -of GTiff -o new_data/"+tif+" /home/users/biomass/extra_historical/S1/"+tif+" "+cb2+" "+cb3+" "+cb4+" "+cb8+" "+hb2+" "+hb3+" "+hb4+" "+hb8)
           print("gdal_merge.py -separate -ot Float32 -of GTiff -o new_data/"+tif+" /home/users/biomass/extra_historical/S1/"+tif+" "+cb2+" "+cb3+" "+cb4+" "+cb8+" "+hb2+" "+hb3+" "+hb4+" "+hb8)
 
