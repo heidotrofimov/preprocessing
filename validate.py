@@ -8,6 +8,6 @@ for tiff in os.listdir("new_data"):
   imarray = np.array(im)
   print(imarray.shape)
   '''
-  print(tiff)
+  #print(tiff)
   src_ds = gdal.Open("new_data/"+tiff)
   print ("band count: " + str(src_ds.RasterCount))
