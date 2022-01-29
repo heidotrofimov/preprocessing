@@ -15,7 +15,7 @@ for tiff in os.listdir("new_data"):
     print ("band count: " + str(src_ds.RasterCount))
     
     
-  rast_src = new_data/"+tiff
+  rast_src = "new_data/"+tiff
   rast_open = gdal.Open(rast_src, GA_ReadOnly)
 
   
