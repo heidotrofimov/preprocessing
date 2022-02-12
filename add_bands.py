@@ -9,7 +9,7 @@ import sys
 
 tile_size=512
 
-AOIs=["T35VMF","T35VME","T35VMC","T35VLE"]
+AOIs=["T35VLF"]
 
 #AOI="T35VLH"
 
@@ -49,7 +49,7 @@ def read_xml(out_path):
         product=products[i].split("</title>")[0]
         current_list.append(product)
     return current_list
-'''
+
 for AOI in AOIs:
   
   #os.system("rm extra_bands/*")
@@ -57,7 +57,7 @@ for AOI in AOIs:
 
   S2s=[]
 
-  for S1 in os.listdir("/home/users/biomass/extra_historical/S1"):
+  for S1 in os.listdir("/home/users/biomass_test_data/extra_historical/S1"):
     AOIc=S1.split("_")[-5]
     if(AOIc==AOI):
       S2_1=S21(S1)+"*"+AOI+"*"
@@ -84,7 +84,7 @@ for AOI in AOIs:
       os.system("rm products.dat")
       S1s=[]
       tiles=[]
-      for S1 in os.listdir("/home/users/biomass/extra_historical/S1"):
+      for S1 in os.listdir("/home/users/biomass_test_data/extra_historical/S1"):
         AOIc=S1.split("_")[-5]
         if(AOIc==AOI and ((S1.split("_")[7]==product.split("_")[0] and S1.split("_")[8].split("T")[0]==product.split("_")[2].split("T")[0])  or (S1.split("_")[10]==product.split("_")[0] and S1.split("_")[11].split("T")[0]==product.split("_")[2].split("T")[0])  )):
           S1s.append(S1)
@@ -116,9 +116,9 @@ for AOI in AOIs:
       tile="_"+png.split("_")[-2]+"_"+png.split("_")[-1]
       tile=tile.replace("png","tif")
       input_tif="NOTFOUND"
-      for filename in os.listdir("/home/users/biomass/extra_historical/S1"):
+      for filename in os.listdir("/home/users/biomass_test_data/extra_historical/S1"):
         if(AOI in filename and tile in filename):
-          input_tif="/home/users/biomass/extra_historical/S1/"+filename
+          input_tif="/home/users/biomass_test_data/extra_historical/S1/"+filename
           break
     
       if(input_tif!="NOTFOUND"):
@@ -129,10 +129,10 @@ for AOI in AOIs:
         maxx = minx + geoTransform[1] * data.RasterXSize
         miny = maxy + geoTransform[5] * data.RasterYSize
         os.system("gdal_translate -of Gtiff -a_ullr "+str(minx)+" "+str(maxy)+" "+str(maxx)+" "+str(miny)+" -a_srs EPSG:"+EPSG+" "+input_png+" extra_bands_tif/"+png.replace("png","tif"))
-'''
+
 
 for AOI in AOIs:
-  for tif in os.listdir("/home/users/biomass/extra_historical/S1"):
+  for tif in os.listdir("/home/users/biomass_test_data/extra_historical/S1"):
     if(AOI in tif):
       tile="_"+tif.split("_")[-2]+"_"+tif.split("_")[-1]
       c=tif.split("colwith_")[1].split("_"+AOI)[0].split("_")[1]
@@ -171,7 +171,7 @@ for AOI in AOIs:
       #print("Historical b4: "+hb4)
       #print("Historical b8: "+hb8)
       if(hb2!="NOTFOUND"):
-          os.system("gdal_merge.py -separate -ot Float32 -of GTiff -o new_data/"+tif+" /home/users/biomass/extra_historical/S1/"+tif+" "+cb2+" "+cb3+" "+cb4+" "+cb8+" "+hb2+" "+hb3+" "+hb4+" "+hb8)
+          os.system("gdal_merge.py -separate -ot Float32 -of GTiff -o new_data/"+tif+" /home/users/biomass_test_data/extra_historical/S1/"+tif+" "+cb2+" "+cb3+" "+cb4+" "+cb8+" "+hb2+" "+hb3+" "+hb4+" "+hb8)
           #print("gdal_merge.py -separate -ot Float32 -of GTiff -o new_data/"+tif+" /home/users/biomass/extra_historical/S1/"+tif+" "+cb2+" "+cb3+" "+cb4+" "+cb8+" "+hb2+" "+hb3+" "+hb4+" "+hb8)
 
       
