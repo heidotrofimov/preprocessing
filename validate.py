@@ -17,6 +17,6 @@ for tiff in os.listdir("/home/users/est_data_with_extra_bands/S1"):
     print(tiff+" "+result)
   '''
   src_ds = gdal.Open("/home/users/est_data_with_extra_bands/S1/"+tiff)
-  band = src_ds.GetRasterBand(0)
+  band = src_ds.GetRasterBand(1)
   print(tiff)
   print(band)
