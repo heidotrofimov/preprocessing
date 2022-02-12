@@ -16,8 +16,11 @@ for tiff in os.listdir("/home/users/est_data_with_extra_bands/S1"):
   if(result!="18 512 512"):
     print(tiff+" "+result)
   '''
-  src_ds = gdal.Open("/home/users/est_data_with_extra_bands/S1/"+tiff)
-  band = src_ds.GetRasterBand(1)
-  arr = band.ReadAsArray()
-  print(tiff)
-  print(arr)
+  if("T35VMF" in tiff and "_18_18.tif" in tiff):
+    print(tiff)
+    src_ds = gdal.Open("/home/users/est_data_with_extra_bands/S1/"+tiff)
+    bands=[15,16,17,18]
+    for b in bands:
+      band = src_ds.GetRasterBand(b)
+      arr = band.ReadAsArray()
+      print(arr)
