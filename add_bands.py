@@ -49,7 +49,7 @@ def read_xml(out_path):
         product=products[i].split("</title>")[0]
         current_list.append(product)
     return current_list
-
+'''
 for AOI in AOIs:
   
   #os.system("rm extra_bands/*")
@@ -97,13 +97,14 @@ for AOI in AOIs:
       os.system("~/miniconda3/envs/biomass/bin/python save_extra_band.py "+product+" "+tiles_str)
       os.system("rm -r "+product+"*")
       os.system("rm *.png")
-
+'''
 
 
   for png in os.listdir("extra_bands"):
-    img=Image.open("extra_bands/"+png)
-    new_img=ImageOps.grayscale(img)
-    new_img.save("extra_bands/"+png)
+    if("T35VLF" in png:)
+      img=Image.open("extra_bands/"+png)
+      new_img=ImageOps.grayscale(img)
+      new_img.save("extra_bands/"+png)
 
 
 
