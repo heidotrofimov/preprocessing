@@ -101,7 +101,7 @@ for AOI in AOIs:
 
 
   for png in os.listdir("extra_bands"):
-    if("T35VLF" in png:)
+    if("T35VLF" in png):
       img=Image.open("extra_bands/"+png)
       new_img=ImageOps.grayscale(img)
       new_img.save("extra_bands/"+png)
