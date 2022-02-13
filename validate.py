@@ -2,9 +2,8 @@ import os
 import gdal
 from gdalconst import GA_ReadOnly
 
-for tiff in os.listdir("/home/users/est_data_with_extra_bands/S1"):
-  '''
-  im=Image.open("/home/users/est_data_with_extra_bands/S1/"+tiff)
+for tiff in os.listdir("new_data"):
+  im=Image.open("new_data/"+tiff)
   imarray = np.array(im)
   print(imarray.shape)
   
@@ -24,3 +23,4 @@ for tiff in os.listdir("/home/users/est_data_with_extra_bands/S1"):
       band = src_ds.GetRasterBand(b)
       arr = band.ReadAsArray()
       print(arr)
+  '''
