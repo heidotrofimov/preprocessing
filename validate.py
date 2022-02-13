@@ -3,10 +3,11 @@ import gdal
 from gdalconst import GA_ReadOnly
 
 for tiff in os.listdir("new_data"):
+  '''
   im=Image.open("new_data/"+tiff)
   imarray = np.array(im)
   print(imarray.shape)
-  
+  '''
   #print(tiff)
   src_ds = gdal.Open("new_data/"+tiff)
   x=src_ds.RasterXSize
