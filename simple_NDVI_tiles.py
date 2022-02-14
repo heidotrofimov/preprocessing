@@ -38,7 +38,7 @@ def S2_short(S2_full):
     S2=S2_full.split(".")[0].split("_")
     return S2[0]+"_"+S2[2]+"_"+S2[5]
 tile_size=512    
-'''
+
 for safe in os.listdir("products"):
     if("SAFE" in safe):
         nodim=True
@@ -53,25 +53,17 @@ for safe in os.listdir("products"):
             
             
 for S2_SAFE in os.listdir('products'):     
-    
-
-    
-    
     #NDVI:
     NDVI_im=S2_SAFE.split(".")[0]+"_NDVI"
+    NIR_im=S2_SAFE.split(".")[0]+"_NIR"
     os.system('mkdir checked_products/'+NDVI_im)
+    os.system('mkdir checked_products/'+NIR_im)
     S2_product=ProductIO.readProduct('products/'+S2_SAFE+'/GRANULE/output.dim')
     band_names = S2_product.getBandNames()
     width = S2_product.getSceneRasterWidth()
     height = S2_product.getSceneRasterHeight()
     
-    b2 = S2_product.getBand('B2')
-    b4 = S2_product.getBand('B4')
     b8 = S2_product.getBand('B8')
-    
-    write_image(b4, S2_SAFE.split(".")[0]+"_B4.png", 'png')
-    write_image(b8, S2_SAFE.split(".")[0]+"_B8.png", 'png')
-    write_image(b2, S2_SAFE.split(".")[0]+"_B2.png", 'png')
 
     newProduct = Product('NDVI', 'NDVI', width, height)
                           
@@ -93,13 +85,12 @@ for S2_SAFE in os.listdir('products'):
     ndvi_band=product2.getBand('ndvi')
     image_format = 'PNG'
     write_image(ndvi_band, NDVI_im+".png", image_format)
+    write_image(b8, NIR_im+".png", image_format)
     os.remove('NDVI.dim')
     shutil.rmtree('NDVI.data')
     s2name=S2_short(NDVI_im+".png")
     im_S2 = Image.open(NDVI_im+".png")
-    im_B2 = Image.open(S2_SAFE.split(".")[0]+"_B2.png")
-    im_B4 = Image.open(S2_SAFE.split(".")[0]+"_B4.png")
-    im_B8 = Image.open(S2_SAFE.split(".")[0]+"_B8.png")
+    im_B8 = Image.open(NIR_im+".png")
     tiles_x=int(im_S2.width/tile_size)
                           
     tiles_y=int(im_S2.height/tile_size)
@@ -110,12 +101,8 @@ for S2_SAFE in os.listdir('products'):
             if(os.path.isfile(rgb)):
                 NDVI_tile=im_S2.crop((i*tile_size,j*tile_size,tile_size*(i+1),tile_size*(j+1)))
                 NDVI_tile.save('checked_products/'+NDVI_im+"/"+s2name+"_"+str(i)+"_"+str(j)+".png")
-                B2_tile=im_B2.crop((i*tile_size,j*tile_size,tile_size*(i+1),tile_size*(j+1)))
-                B2_tile.save('extra_bands/'+S2_SAFE.split(".")[0]+'_B2_'+str(i)+"_"+str(j)+".png")
-                B4_tile=im_B4.crop((i*tile_size,j*tile_size,tile_size*(i+1),tile_size*(j+1)))
-                B4_tile.save('extra_bands/'+S2_SAFE.split(".")[0]+'_B4_'+str(i)+"_"+str(j)+".png")
                 B8_tile=im_B8.crop((i*tile_size,j*tile_size,tile_size*(i+1),tile_size*(j+1)))
-                B8_tile.save('extra_bands/'+S2_SAFE.split(".")[0]+'_B8_'+str(i)+"_"+str(j)+".png")
+                B8_tile.save('checked_products/'+NIR_im+"/"+s2name+"_"+str(i)+"_"+str(j)+".png")
 
     if(im_S2.width>tiles_x*tile_size):
         for j in range(0,tiles_y):
@@ -123,35 +110,24 @@ for S2_SAFE in os.listdir('products'):
             if(os.path.isfile(rgb)):
                 NDVI_tile=im_S2.crop((im_S2.width-tile_size,j*tile_size,im_S2.width,tile_size*(j+1)))
                 NDVI_tile.save('checked_products/'+NDVI_im+"/"+s2name+"_"+str(tiles_x)+"_"+str(j)+".png")
-                B2_tile=im_B2.crop((im_S2.width-tile_size,j*tile_size,im_S2.width,tile_size*(j+1)))
-                B2_tile.save('extra_bands/'+S2_SAFE.split(".")[0]+'_B2_'+str(i)+"_"+str(j)+".png")
-                B4_tile=im_B4.crop((im_S2.width-tile_size,j*tile_size,im_S2.width,tile_size*(j+1)))
-                B4_tile.save('extra_bands/'+S2_SAFE.split(".")[0]+'_B4_'+str(i)+"_"+str(j)+".png")
                 B8_tile=im_B8.crop((im_S2.width-tile_size,j*tile_size,im_S2.width,tile_size*(j+1)))
-                B8_tile.save('extra_bands/'+S2_SAFE.split(".")[0]+'_B8_'+str(i)+"_"+str(j)+".png")
+                B8_tile.save('checked_products/'+NIR_im+"/"+s2name+"_"+str(tiles_x)+"_"+str(j)+".png")
     if(im_S2.height>tiles_y*tile_size):
         for i in range(0,tiles_x):
             rgb="checked_products/"+S2_SAFE.split(".")[0]+"/"+str(i)+"_"+str(tiles_y)+".png"
             if(os.path.isfile(rgb)):
                 NDVI_tile=im_S2.crop((i*tile_size,im_S2.height-tile_size,tile_size*(i+1),im_S2.height))
                 NDVI_tile.save('checked_products/'+NDVI_im+"/"+s2name+"_"+str(i)+"_"+str(tiles_y)+".png")
-                B2_tile=im_B2.crop((i*tile_size,im_S2.height-tile_size,tile_size*(i+1),im_S2.height))
-                B2_tile.save('extra_bands/'+S2_SAFE.split(".")[0]+'_B2_'+str(i)+"_"+str(j)+".png")
-                B4_tile=im_B4.crop((i*tile_size,im_S2.height-tile_size,tile_size*(i+1),im_S2.height))
-                B4_tile.save('extra_bands/'+S2_SAFE.split(".")[0]+'_B4_'+str(i)+"_"+str(j)+".png")
+              
                 B8_tile=im_B8.crop((i*tile_size,im_S2.height-tile_size,tile_size*(i+1),im_S2.height))
-                B8_tile.save('extra_bands/'+S2_SAFE.split(".")[0]+'_B8_'+str(i)+"_"+str(j)+".png")
+                B8_tile.save('checked_products/'+NIR_im+"/"+s2name+"_"+str(i)+"_"+str(tiles_y)+".png")
     if(im_S2.height>tiles_y*tile_size and im_S2.width>tiles_x*tile_size):
         rgb="checked_products/"+S2_SAFE.split(".")[0]+"/"+str(tiles_x)+"_"+str(tiles_y)+".png"
         if(os.path.isfile(rgb)):
             NDVI_tile=im_S2.crop((im_S2.width-tile_size,im_S2.height-tile_size,im_S2.width,im_S2.height))
             NDVI_tile.save('checked_products/'+NDVI_im+"/"+s2name+"_"+str(tiles_x)+"_"+str(tiles_y)+".png")
-            B2_tile=im_B2.crop((im_S2.width-tile_size,im_S2.height-tile_size,im_S2.width,im_S2.height))
-            B2_tile.save('extra_bands/'+S2_SAFE.split(".")[0]+'_B2_'+str(i)+"_"+str(j)+".png")
-            B4_tile=im_B4.crop((im_S2.width-tile_size,im_S2.height-tile_size,im_S2.width,im_S2.height))
-            B4_tile.save('extra_bands/'+S2_SAFE.split(".")[0]+'_B4_'+str(i)+"_"+str(j)+".png")
             B8_tile=im_B8.crop((im_S2.width-tile_size,im_S2.height-tile_size,im_S2.width,im_S2.height))
-            B8_tile.save('extra_bands/'+S2_SAFE.split(".")[0]+'_B8_'+str(i)+"_"+str(j)+".png")
+            B8_tile.save('checked_products/'+NIR_im+"/"+s2name+"_"+str(tiles_x)+"_"+str(tiles_y)+".png")
             
 print("Rewriting filenames, don't abort just yet!")
 for RGB in os.listdir("checked_products"):
@@ -160,8 +136,4 @@ for RGB in os.listdir("checked_products"):
         for filename in os.listdir("checked_products/"+RGB):
             new_name=s2name+"_"+filename
             os.system("mv checked_products/"+RGB+"/"+filename+" checked_products/"+RGB+"/"+new_name)
-'''            
-for png in os.listdir("extra_bands"):
-    img=Image.open("extra_bands/"+png)
-    new_img=ImageOps.grayscale(img)
-    new_img.save("extra_bands/"+png)
+
