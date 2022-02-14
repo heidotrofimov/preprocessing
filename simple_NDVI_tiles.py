@@ -62,7 +62,7 @@ for S2_SAFE in os.listdir('products'):
     band_names = S2_product.getBandNames()
     width = S2_product.getSceneRasterWidth()
     height = S2_product.getSceneRasterHeight()
-    
+    b4 = S2_product.getBand('B4')
     b8 = S2_product.getBand('B8')
 
     newProduct = Product('NDVI', 'NDVI', width, height)
