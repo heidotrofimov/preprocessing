@@ -178,7 +178,7 @@ for n in nr:
         inputTiff = gdal.Open(inputPath)
 
         S1_im=TIFF.open(inputPath)
-        imarray=S1_im.read_image()
+        #imarray=S1_im.read_image()
 
 
         tile_width = 512
