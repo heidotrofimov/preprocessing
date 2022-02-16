@@ -13,4 +13,4 @@ for filename in os.listdir("s1_tiles"):
       path="s1_tiles/"+filename
       S1_im=TIFF.open(path)
       imarray=S1_im.read_image()
-      print(imarray)
+      print(imarray.shape)
