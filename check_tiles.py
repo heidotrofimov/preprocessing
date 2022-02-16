@@ -14,5 +14,5 @@ for filename in os.listdir("s1_tiles"):
       S1_im=TIFF.open(path)
       a=S1_im.read_image()
       print(a)
-      c=np.any(a!=0 or a!=1 or a!=-32678)
+      c=np.any(a.any()!=0 or a.any()!=1 or a.any()!=-32678)
       print(c)
