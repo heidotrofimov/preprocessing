@@ -13,6 +13,5 @@ for filename in os.listdir("s1_tiles"):
       path="s1_tiles/"+filename
       S1_im=TIFF.open(path)
       a=S1_im.read_image()
-      print(a)
       if(np.all(a==0)==False):
             print(a)
