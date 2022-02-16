@@ -13,5 +13,5 @@ for filename in os.listdir("s1_tiles"):
       path="s1_tiles/"+filename
       S1_im=TIFF.open(path)
       a=S1_im.read_image()
-      print(a[1:][:][:])
-      print(a[1:][:][:].shape)
+      print(a[:][1:][:])
+      print(a[:][1:][:].shape)
