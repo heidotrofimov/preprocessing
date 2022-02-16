@@ -170,7 +170,7 @@ for n in nr:
 
     #Tile the tif files:
     #Here the "part" part shouldn't matter anymore
-    '''
+    
     inputdir="collocated_tifs"
     for filename in os.listdir(inputdir):
         print(filename)
@@ -215,10 +215,7 @@ for n in nr:
 
 
                     
-                    '''
-                    if(imarray[0][j][i]==0 or (imarray[1][j][i]>0 and imarray[2][j][i]>0 and imarray[3][j][i]==-32768 and imarray[4][j][i]==-32768)):
-                        tifOK=False
-                    '''
+                  
                     if(tifOK==True):
                         print("Olen siin 2")
 
@@ -257,27 +254,22 @@ for n in nr:
 
     #os.system("rm -r collocated_tifs/*")
     
-
-    #Delete the tif tiles that have no data at all:
     '''
+    #Delete the tif tiles that have no data at all:
+    
     for filename in os.listdir("s1_tiles"):
-      print(filename)
+      os.system("gdal_translate -b 2 -b 3 -b 4 -b 5 s1_tiles/"+filename+" s1_tiles/"+filename.split(".")[0]+"_new.tif")
+      os.system("mv s1_tiles/"+filename.split(".")[0]+"_new.tif s1_tiles/"+filename)
+    for filename in os.listdir("s1_tiles"):
       path="s1_tiles/"+filename
       S1_im=TIFF.open(path)
-      imarray=S1_im.read_image()
-      completelyfalse=True
-      for j in range(len(imarray)):
-        for i in range(len(imarray[j])):
-          if((imarray[j][i][1]==0 and imarray[j][i][2]==0 and imarray[j][i][3]==0 and imarray[j][i][4]==0) or (imarray[j][i][1]==-32768 and imarray[j][i][2]==-32768 and imarray[j][i][3]==-32768 and imarray[j][i][4]==-32768)):
-            pass
-          else:
-            completelyfalse=False        
-        if(completelyfalse==False):
-          break
-    if(completelyfalse==True):
-        os.system("rm ")
+      a=S1_im.read_image()
+      if(np.all(a==0)==False and np.all(a==-32768)==False):
+        print(filename)
+      else:
+        os.system("rm s1_tiles/"+filename)
     os.system("~/miniconda3/envs/biomass/bin/python merge.py")
-    os.system("rm s1_tiles/*")
-    '''
+    #os.system("rm s1_tiles/*")
+    
 
     
