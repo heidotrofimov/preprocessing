@@ -14,5 +14,4 @@ for filename in os.listdir("s1_tiles"):
       S1_im=TIFF.open(path)
       a=S1_im.read_image()
       print(a)
-      c=(a==0 or a==-32768).all()
-      print(c)
+      print(a.shape)
