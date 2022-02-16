@@ -51,6 +51,7 @@ count=0
 
 #for n in nr:
 for n in nr:
+    '''
     while(os.path.isfile("senpy_ready.txt")==False):
         time.sleep(300)
         print("Waiting for senpy")
@@ -169,7 +170,7 @@ for n in nr:
 
     #Tile the tif files:
     #Here the "part" part shouldn't matter anymore
-
+    '''
     inputdir="collocated_tifs"
     for filename in os.listdir(inputdir):
         print(filename)
@@ -210,10 +211,11 @@ for n in nr:
                     tifOK=True
 
 
-                    i=xOffset+10
-                    j=yOffset+10
-                    if(imarray[0][j][i]==0 or (imarray[1][j][i]==-32768 and imarray[2][j][i]==-32768 and imarray[3][j][i]==-32768 and imarray[4][j][i]==-32768)):
+                    
+                    '''
+                    if(imarray[0][j][i]==0 or (imarray[1][j][i]>0 and imarray[2][j][i]>0 and imarray[3][j][i]==-32768 and imarray[4][j][i]==-32768)):
                         tifOK=False
+                    '''
                     if(tifOK==True):
 
                         datecondition=True    
@@ -247,26 +249,29 @@ for n in nr:
             else:
                 yOffset  = inputTiff.RasterYSize - 512
 
-    os.system("rm -r collocated_tifs/*")
+    #os.system("rm -r collocated_tifs/*")
     
 
-    #Delete the tif tiles that have regions of no data:
-    
+    #Delete the tif tiles that have no data at all:
+    '''
     for filename in os.listdir("s1_tiles"):
       print(filename)
       path="s1_tiles/"+filename
       S1_im=TIFF.open(path)
       imarray=S1_im.read_image()
-      condition=True
+      completelyfalse=True
       for j in range(len(imarray)):
         for i in range(len(imarray[j])):
-          if(imarray[j][i][0]==0 or (imarray[j][i][1]==-32768 and imarray[j][i][2]==-32768 and imarray[j][i][3]==-32768 and imarray[j][i][4]==-32768)):
-            condition=False
-            os.remove(path)
-            break
-        if(condition==False):
+          if((imarray[j][i][1]==0 and imarray[j][i][2]==0 and imarray[j][i][3]==0 and imarray[j][i][4]==0) or (imarray[j][i][1]==-32768 and imarray[j][i][2]==-32768 and imarray[j][i][3]==-32768 and imarray[j][i][4]==-32768)):
+            pass
+          else:
+            completelyfalse=False        
+        if(completelyfalse==False):
           break
+    if(completelyfalse==True):
+        os.system("rm ")
     os.system("~/miniconda3/envs/biomass/bin/python merge.py")
     os.system("rm s1_tiles/*")
+    '''
 
     
