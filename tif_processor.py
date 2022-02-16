@@ -236,7 +236,7 @@ for n in nr:
                                 if(np.abs((other_date_obj-S2_date_obj).days)<np.abs((S1_date_obj-S2_date_obj).days)):
                                     datecondition=False
                                     break
-                        if(datecondition==True):
+                        if(True):
                             print("Olen siin 3")
 
                             com_string = "gdal_translate -of GTIFF -srcwin " + str(xOffset)+ ", " + str(yOffset) + ", " + str(tile_width) + ", " + str(tile_height) + " " + str(inputPath) + " " + str(outputPath) + ".tif"
