@@ -12,6 +12,7 @@ for filename in os.listdir("s1_tiles"):
       print(filename)
       path="s1_tiles/"+filename
       S1_im=TIFF.open(path)
-      imarray=S1_im.read_image()
-      print(imarray[0][:][:])
-      print(imarray[0][:][:].shape)
+      a=S1_im.read_image()
+      print(a)
+      c=(a==0 or a==-32768).all()
+      print(c)
