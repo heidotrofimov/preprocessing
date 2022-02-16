@@ -193,6 +193,8 @@ for n in nr:
         images_created = list()
         for y_tiles in range(yRange):
             for x_tiles in range(xRange):
+                print(y_tiles)
+                print(x_tiles)
                 part1=filename.split("_p")[0]
                 part2=filename.split("colwith_")[1]
                 name_save=part1+"_colwith_"+part2
@@ -208,6 +210,7 @@ for n in nr:
 
 
                 if(s2_tile_exists==True and os.path.isfile(str(outputPath)+".tif")==False):
+                    print("Olen siin")
                     tifOK=True
 
 
@@ -217,6 +220,7 @@ for n in nr:
                         tifOK=False
                     '''
                     if(tifOK==True):
+                        print("Olen siin 2")
 
                         datecondition=True    
                         S1_date=filename.split("_")[1].split("T")[0]
@@ -233,8 +237,10 @@ for n in nr:
                                     datecondition=False
                                     break
                         if(datecondition==True):
+                            print("Olen siin 3")
 
                             com_string = "gdal_translate -of GTIFF -srcwin " + str(xOffset)+ ", " + str(yOffset) + ", " + str(tile_width) + ", " + str(tile_height) + " " + str(inputPath) + " " + str(outputPath) + ".tif"
+                            print(com_string))
                             os.system(com_string)
 
                 if inputTiff.RasterXSize - xOffset > 512:
