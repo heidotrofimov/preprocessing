@@ -19,6 +19,14 @@ mv ../heido_test/s1_iq ./
 rm s1_tiles/*
 '''
 
+tiles_of_interest=[]
+
+tiles_file=open("T35VLH_tiles_with_fields.txt","r")
+lines=tiles_file.readlines()
+for line in lines:
+    tiles_of_interest.append(line.rstrip())
+tiles_file.close()
+
 #Use senpy environment for executing this script!
 
 #Rename the tiffs and delete unnecessary tifs before executing this script
@@ -51,7 +59,6 @@ count=0
 
 #for n in nr:
 for n in nr:
-    '''
     while(os.path.isfile("senpy_ready.txt")==False):
         time.sleep(300)
         print("Waiting for senpy")
@@ -209,7 +216,8 @@ for n in nr:
 
 
 
-                if(s2_tile_exists==True and os.path.isfile(str(outputPath)+".tif")==False):
+                if(str(x_tiles)+"_"+str(y_tiles) in tiles_of_interest and os.path.isfile(str(outputPath)+".tif")==False):
+                
                     print("Olen siin")
                     tifOK=True
 
@@ -252,9 +260,9 @@ for n in nr:
             else:
                 yOffset  = inputTiff.RasterYSize - 512
 
-    #os.system("rm -r collocated_tifs/*")
+    os.system("rm -r collocated_tifs/*")
     
-    '''
+    
     #Delete the tif tiles that have no data at all:
     
     for filename in os.listdir("s1_tiles"):
@@ -268,8 +276,9 @@ for n in nr:
         print(filename)
       else:
         os.system("rm s1_tiles/"+filename)
-    os.system("~/miniconda3/envs/biomass/bin/python merge.py")
-    #os.system("rm s1_tiles/*")
+    #os.system("~/miniconda3/envs/biomass/bin/python merge.py")
+    os.system("mv s1_tiles/* s1_tiles_all/")
+    os.system("cp preprocessing_ready.txt ../heido_test/")
     
 
     
