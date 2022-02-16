@@ -9,6 +9,7 @@ for filename in os.listdir(inputdir):
     inputPath = inputdir+"/"+filename
     inputTiff = gdal.Open(inputPath)
     S1_im=TIFF.open(inputPath)
+    imarray=S1_im.read_image()
 
 
 
