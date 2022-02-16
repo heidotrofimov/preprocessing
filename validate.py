@@ -8,6 +8,8 @@ for filename in os.listdir(inputdir):
     print(filename)
     inputPath = inputdir+"/"+filename
     inputTiff = gdal.Open(inputPath)
+    S1_im=TIFF.open(inputPath)
+
 
 
 for tiff in os.listdir("new_data"):
