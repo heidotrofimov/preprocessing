@@ -240,7 +240,7 @@ for n in nr:
                             print("Olen siin 3")
 
                             com_string = "gdal_translate -of GTIFF -srcwin " + str(xOffset)+ ", " + str(yOffset) + ", " + str(tile_width) + ", " + str(tile_height) + " " + str(inputPath) + " " + str(outputPath) + ".tif"
-                            print(com_string))
+                            print(com_string)
                             os.system(com_string)
 
                 if inputTiff.RasterXSize - xOffset > 512:
