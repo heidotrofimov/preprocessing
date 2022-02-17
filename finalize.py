@@ -24,9 +24,13 @@ for s1_tile in os.listdir("s1_tiles_all"):
     maxx = minx + geoTransform[1] * data.RasterXSize
     miny = maxy + geoTransform[5] * data.RasterYSize
     os.system("gdal_translate -of Gtiff -a_ullr "+str(minx)+" "+str(maxy)+" "+str(maxx)+" "+str(miny)+" -a_srs EPSG:"+EPSG+" "+target_S2+" "+s2_name+".tif")
+    os.system("gdal_translate -b 1 "+s2_name+".tif"+" "s2_name+"_new.tif")
+    os.system("mv "+s2_name+"_new.tif "+s2_name+".tif")
     #print("gdal_translate -of Gtiff -a_ullr "+str(minx)+" "+str(maxy)+" "+str(maxx)+" "+str(miny)+" -a_srs EPSG:"+EPSG+" "+target_S2+" "+s2_name+".tif")
     NDVI=s2_name+".tif"
     os.system("gdal_translate -of Gtiff -a_ullr "+str(minx)+" "+str(maxy)+" "+str(maxx)+" "+str(miny)+" -a_srs EPSG:"+EPSG+" "+target_RGB+" "+s2_name+"_RGB.tif")
+    os.system("gdal_translate -b 1 -b 2 -b 3 "+s2_name+"_RGB.tif"+" "s2_name+"_RGB_new.tif")
+    os.system("mv "+s2_name+"_RGB_new.tif "+s2_name+"_RGB.tif")
     #print("gdal_translate -of Gtiff -a_ullr "+str(minx)+" "+str(maxy)+" "+str(maxx)+" "+str(miny)+" -a_srs EPSG:"+EPSG+" "+target_RGB+" "+s2_name+"_RGB.tif")
     RGB=s2_name+"_RGB.tif"
     B8=""
@@ -37,6 +41,8 @@ for s1_tile in os.listdir("s1_tiles_all"):
             B8="b8/"+dir+"/"+filename
     if(B8!=""):
       os.system("gdal_translate -of Gtiff -a_ullr "+str(minx)+" "+str(maxy)+" "+str(maxx)+" "+str(miny)+" -a_srs EPSG:"+EPSG+" "+B8+" "+s2_name+"_B8.tif")
+      os.system("gdal_translate -b 1 "+s2_name+"_B8.tif"+" "s2_name+"_B8_new.tif")
+      os.system("mv "+s2_name+"_B8_new.tif "+s2_name+"_B8.tif")
       #print("gdal_translate -of Gtiff -a_ullr "+str(minx)+" "+str(maxy)+" "+str(maxx)+" "+str(miny)+" -a_srs EPSG:"+EPSG+" "+B8+" "+s2_name+"_B8.tif")
       B8t=s2_name+"_B8.tif"
       os.system("gdal_merge.py -separate -ot Float32 -of GTiff -o T35VLH_data/"+s1_tile+" s1_tiles_all/"+s1_tile+" "+NDVI+" "+RGB+" "+B8t)
