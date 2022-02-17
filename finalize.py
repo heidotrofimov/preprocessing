@@ -1,4 +1,6 @@
 import os
+import gdal
+from gdalconst import GA_ReadOnly
 
 EPSG="32635"
 
