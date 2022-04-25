@@ -8,7 +8,9 @@ It will work in senpy environment with the command
 The code uses kappamask, which is called out as a subprocess. It is assumed that the user has saved the cm_predict as separate repository, created the cm_predict environment and verified that it is working. The first 10 parameters in the config.json are kappamask parameters. The product name need not be specified, but the "level_product" should be "L2A".
 
 The explanation of the rest of the parameters follows. The parameters that the user should probably change are:
-        "s3cfg_path" : "/home/heido/.s3cfg_creo",
+
+        "s3cfg_path" : "/home/heido/.s3cfg_creo"
+
 "s3_loc" : The location on S3 where the S1 rasters are stored, eg "s3://ard/ard-demo-de/s1/"
 "esa_credentials_file" : Path to the file that includes your scihub login info (username on first line and password on second line). This info will not be logged by the code in any way.
 "input_shp" : Path to the shapefile of the AOI. Make sure it corresponds exactly to the S1 rasters.
