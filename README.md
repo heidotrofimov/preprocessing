@@ -6,7 +6,8 @@ The purpose of this repository is to prepare data for sNDVI raster creation (pre
 The S1 rasters for which no cloudfree S2 product was available will be saved at in the folder "collocated_S1".
 
 The S1 rasters for which S2 products were available will be saved in the folder "data". The band order is following:
-                1: Backscatter VV
+
+        1: Backscatter VV
                 2: Backscatter VH
                 3: Coherence VV
                 4: Coherence VH
