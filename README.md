@@ -8,15 +8,15 @@ The S1 rasters for which no cloudfree S2 product was available will be saved at 
 The S1 rasters for which S2 products were available will be saved in the folder "data". The band order is following:
 
         1: Backscatter VV
-                2: Backscatter VH
-                3: Coherence VV
-                4: Coherence VH
-                5: NDVI
-                6: B2 (blue)
-                7: B3 (green)
-                8: B4 (red)
-                9: B8 (near-infrared)
-                10: kappamask (66 - clear, 129 - cloud shadow, 192 - semitransparent cloud, 255 - cloud, 0 - invalid)
+        2: Backscatter VH
+        3: Coherence VV
+        4: Coherence VH
+        5: NDVI
+        6: B2 (blue)
+        7: B3 (green)
+        8: B4 (red)
+        9: B8 (near-infrared)
+        10: kappamask (66 - clear, 129 - cloud shadow, 192 - semitransparent cloud, 255 - cloud, 0 - invalid)
 
 For the rasters in "collocated_S1", only the four first bands are available.
 
