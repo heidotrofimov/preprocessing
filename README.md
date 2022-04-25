@@ -1,10 +1,25 @@
 # Biomass data preparation
-The purpose of this repository is to prepare data for sNDVI raster creation (prediction) pipeline. It assumes that the S1 rasters have been already created and stored in S3 in a location that is defined in the config file. It will download the S1 rasters from given location, collocate them with suitable S2 products and in case cloudfree S2 products are found from +/- 2 days from S1 date, will add B2,B3,B4,B8 and NDVI values along with kappamask prediction mask as separate bands to the collocated S1 raster. The final rasters that include S2 data will be saved in the folder "data", while the collocated S1 rasters for which no cloudfree S2 products exist will be saved in the folder "collocated_S1".
-
+The purpose of this repository is to prepare data for sNDVI raster creation (prediction) pipeline. It assumes that the S1 rasters have been already created and stored in S3 in a location that is defined in the config file. It will download the S1 rasters from given location, collocate them with suitable S2 products and in case cloudfree S2 products are found from +/- 2 days from S1 date, will add B2,B3,B4,B8 and NDVI values along with kappamask prediction mask as separate bands to the collocated S1 raster.
 It will work in senpy environment with the command
 
         python main_engine.py -c config.json
  
+The S1 rasters for which no cloudfree S2 product was available will be saved at in the folder "collocated_S1".
+
+The S1 rasters for which S2 products were available will be saved in the folder "data". The band order is following:
+        1: Backscatter VV
+        2: Backscatter VH
+        3: Coherence VV
+        4: Coherence VH
+        5: NDVI
+        6: B2 (blue)
+        7: B3 (green)
+        8: B4 (red)
+        9: B8 (near-infrared)
+        10: kappamask (66 - clear, 129 - cloud shadow, 192 - semitransparent cloud, 255 - cloud, 0 - invalid)
+
+For the rasters in "collocated_S1", only the four first bands are available.
+
 The code uses kappamask, which is called out as a subprocess. It is assumed that the user has saved the cm_predict as separate repository, created the cm_predict environment and verified that it is working. The first 10 parameters in the config.json are kappamask parameters. The product name need not be specified, but the "level_product" should be "L2A".
 
 The explanation of the rest of the parameters follows. The parameters that the user should probably change are:
